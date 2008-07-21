@@ -299,7 +299,7 @@
 							<real>225</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>311 86 903 738 0 0 1440 878 </string>
+						<string>282 96 903 738 0 0 1440 878 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -329,7 +329,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>65D059D00E34D2A100CF7495</string>
+										<string>65B218380E353DB70052603D</string>
 										<key>history</key>
 										<array>
 											<string>65BB92BC0CB2FC4F00344843</string>
@@ -411,13 +411,13 @@
 											<string>65811F9D0E34AA45003FA04D</string>
 											<string>65811F9E0E34AA45003FA04D</string>
 											<string>65811F9F0E34AA45003FA04D</string>
-											<string>65811FA00E34AA45003FA04D</string>
-											<string>65811FA40E34AA45003FA04D</string>
-											<string>65D0599D0E34D16800CF7495</string>
-											<string>65D0599E0E34D16800CF7495</string>
 											<string>65D059C30E34D27100CF7495</string>
 											<string>65D059C40E34D27100CF7495</string>
-											<string>65D059C50E34D27100CF7495</string>
+											<string>65B2182D0E353DB70052603D</string>
+											<string>65B2182E0E353DB70052603D</string>
+											<string>65B2182F0E353DB70052603D</string>
+											<string>65B218300E353DB70052603D</string>
+											<string>65B218310E353DB70052603D</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -507,17 +507,12 @@
 											<string>6574C0B80E06AB8A003F1C9E</string>
 											<string>65811FAA0E34AA45003FA04D</string>
 											<string>65811FAB0E34AA45003FA04D</string>
-											<string>65D059A00E34D16800CF7495</string>
-											<string>65D059A10E34D16800CF7495</string>
-											<string>65D059A20E34D16800CF7495</string>
-											<string>65D059A30E34D16800CF7495</string>
-											<string>65D059B60E34D1BE00CF7495</string>
-											<string>65D059B70E34D1BE00CF7495</string>
-											<string>65D059B80E34D1BE00CF7495</string>
-											<string>65D059C60E34D27100CF7495</string>
-											<string>65D059C70E34D27100CF7495</string>
-											<string>65D059C80E34D27100CF7495</string>
-											<string>65D059C90E34D27100CF7495</string>
+											<string>65B218320E353DB70052603D</string>
+											<string>65B218330E353DB70052603D</string>
+											<string>65B218340E353DB70052603D</string>
+											<string>65B218350E353DB70052603D</string>
+											<string>65B218360E353DB70052603D</string>
+											<string>65B218370E353DB70052603D</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -531,7 +526,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {656, 692}}</string>
 								<key>RubberWindowFrame</key>
-								<string>311 86 903 738 0 0 1440 878 </string>
+								<string>282 96 903 738 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -551,7 +546,7 @@
 								<key>Frame</key>
 								<string>{{0, 697}, {656, 0}}</string>
 								<key>RubberWindowFrame</key>
-								<string>311 86 903 738 0 0 1440 878 </string>
+								<string>282 96 903 738 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
@@ -575,9 +570,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>65D0599A0E34D13B00CF7495</string>
+				<string>65B218390E353DB70052603D</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>65D0599B0E34D13B00CF7495</string>
+				<string>65B2183A0E353DB70052603D</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -709,13 +704,10 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>1CD10A99069EF8BA00B06720</string>
-		<string>65FBE1840CD81A7900958672</string>
-		<string>1C78EAAD065D492600B07095</string>
 		<string>/Users/andre/RLP/stellaai/src/macosx/stella.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>311 86 903 738 0 0 1440 878 </string>
+	<string>282 96 903 738 0 0 1440 878 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>
