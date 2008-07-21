@@ -27,7 +27,7 @@ srcdir      ?= .
 
 DEFINES     :=
 LDFLAGS     :=
-INCLUDES    :=
+INCLUDES    := -Isrc/ai -Isrc/macosx -I/usr/include
 LIBS	    :=
 OBJS	    :=
 PROF        :=
