@@ -1,10 +1,18 @@
 /*
- *  AIBase.cpp
- *  stella
+ * StellaAI is the legal property of its developers.
  *
- *  Created by Andre Cohen on 10/2/07.
+ * This program is free software; you can redistribute it and/or modify it under the terms of the GNU
+ * General Public License as published by the Free Software Foundation; either version 2 of the License,
+ * or (at your option) any later version.
  *
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+ * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General
+ * Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with this program; if not,
+ * write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
+
 #include <iostream>
 #include <vector>
 #include <time.h>
@@ -14,10 +22,6 @@ using namespace std;
 
 #include "AIGlobal.h"
 #include "AIBase.h"
-#include "AIKmeans.h"
-#include "AIBasicCluster.h"
-#include "AICluster.h"
-#include "FastCluster.h"
 
 #include <SDL/SDL_Events.h>
 #include "FrameBuffer.hxx"
@@ -58,6 +62,7 @@ void AIBase::update(Debugger *d, EventHandler *e, FrameBuffer *f){
 	}
 }
 
+// Called once per game cycle, interprets commands until the NEXT command is received
 void AIBase::commands() {
 	while(comm){
 		string command = comm->receive();
@@ -81,6 +86,7 @@ void AIBase::commands() {
 	}
 }
 
+// Sends entire screen
 void AIBase::sendFullScreen(){
 	int h = getScreenHeight();
 	int w = getScreenWidth();
@@ -94,6 +100,7 @@ void AIBase::sendFullScreen(){
 	screen = current;
 }
 
+// Sends the difference of pixels from the last full screen sent and now
 void AIBase::sendDiffScreen(){
 	int h = getScreenHeight();
 	int w = getScreenWidth();
@@ -112,11 +119,14 @@ void AIBase::sendDiffScreen(){
 		}
 	}
 	
+	// Once all differences has been send -1 is sent
 	comm->sendPacket(-1);
 	
+	// Saves new the current screen for next time
 	screen = current;
 }
 
+// Does the actual getting of the screen from Stella (without scaling)
 Matrix AIBase::getScreen(){
 	int h = getScreenHeight();
 	int w = getScreenWidth();
@@ -141,9 +151,12 @@ Matrix AIBase::getScreen(){
 	return current;
 }
 
+// Gets the screen height without scaling
 int AIBase::getScreenHeight(){
 	return frameBuffer->baseHeight()*2;
 }
+
+// Gets the screen width without scaling
 int AIBase::getScreenWidth(){
 	return frameBuffer->baseWidth()*2;
 }
@@ -193,19 +206,19 @@ bool AIBase::getKeys(){
 	Some utility functions
 ******************************************************************/
 
-void AIBase::putRectangle(int x, int y, int h, int w, Uint32 pixel)
+void AIBase::drawRectangle(int x, int y, int h, int w, Uint32 pixel)
 {
 	for(int x1=x;x1<x+w;x1++){
-		putPixel(x1,y,pixel);
-		putPixel(x1,y+h,pixel);
+		drawPixel(x1,y,pixel);
+		drawPixel(x1,y+h,pixel);
 	}
 	for(int y1=y;y1<y+h;y1++){
-		putPixel(x,y1,pixel);
-		putPixel(x+w,y1,pixel);
+		drawPixel(x,y1,pixel);
+		drawPixel(x+w,y1,pixel);
 	}
 }
 
-void AIBase::putLine(int x1, int y1, int x2, int y2, Uint32 pixel)
+void AIBase::drawLine(int x1, int y1, int x2, int y2, Uint32 pixel)
 {
 	int dx = x2 - x1;
 	int dy = y2 - y1;
@@ -213,7 +226,7 @@ void AIBase::putLine(int x1, int y1, int x2, int y2, Uint32 pixel)
 	double derror = dy / dx;
 	int y = y1;
 	for(int x=x1;x<x2;x++){
-		putPixel(x,y,pixel);
+		drawPixel(x,y,pixel);
 		error = error + derror;
 		if(.5<fabs(error)){
 			y++; 
@@ -222,7 +235,7 @@ void AIBase::putLine(int x1, int y1, int x2, int y2, Uint32 pixel)
 	}
 }
 
-void AIBase::putPixel(int x, int y, Uint32 pixel)
+void AIBase::drawPixel(int x, int y, Uint32 pixel)
 {
 	if(x>(int)frameBuffer->imageWidth() || y>(int)frameBuffer->imageHeight() || x<0 || y<0)
 		return;
