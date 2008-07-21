@@ -23,7 +23,7 @@ using namespace std;
 #include "AIGlobal.h"
 #include "AIBase.h"
 
-#include <SDL/SDL_Events.h>
+#include <SDL/SDL_events.h>
 #include "FrameBuffer.hxx"
 #include "EventHandler.hxx"
 #include "Event.hxx"
