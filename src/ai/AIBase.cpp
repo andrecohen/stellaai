@@ -31,8 +31,12 @@ using namespace std;
 
 AIBase::AIBase(EventHandler *e, FrameBuffer *f){
 	// Are we talking doing any sort of AI
-	comm = new AIComm();
-
+	try{
+		comm = new AIComm();
+	}catch(exception e){
+		comm = NULL;
+	}
+	
 	// Reset connections to the outside world
 	frameBuffer = NULL;
 	eventHandler = NULL;
@@ -45,6 +49,10 @@ AIBase::~AIBase(){
 
 // Called at every frame
 void AIBase::update(Debugger *d, EventHandler *e, FrameBuffer *f){
+	// If connection is closed, then there is nothing to do
+	if(comm==NULL)
+		return;
+	
 	// Connect to the world if we haven't yet
 	if(!frameBuffer || !eventHandler || !debugger){
 		frameBuffer = f;
