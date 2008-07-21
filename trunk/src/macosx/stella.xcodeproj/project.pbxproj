@@ -274,25 +274,11 @@
 		2DEFB40C09C3386F00754289 /* Cart.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2DEFB40B09C3386F00754289 /* Cart.icns */; };
 		6574C0AF0E06AB60003F1C9E /* AISocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 6574C0AD0E06AB60003F1C9E /* AISocket.h */; };
 		6574C0B00E06AB61003F1C9E /* AISocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6574C0AE0E06AB60003F1C9E /* AISocket.cpp */; };
-		65C141C40D25454A00E596D4 /* Classify.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65C141C00D25454A00E596D4 /* Classify.cpp */; };
-		65C141C50D25454A00E596D4 /* Classify.h in Headers */ = {isa = PBXBuildFile; fileRef = 65C141C10D25454A00E596D4 /* Classify.h */; };
-		65C141C60D25454A00E596D4 /* Pitfall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65C141C20D25454A00E596D4 /* Pitfall.cpp */; };
-		65C141C70D25454A00E596D4 /* Pitfall.h in Headers */ = {isa = PBXBuildFile; fileRef = 65C141C30D25454A00E596D4 /* Pitfall.h */; };
 		65C141CD0D25456600E596D4 /* AIBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65C141C80D25456600E596D4 /* AIBase.cpp */; };
 		65C141CE0D25456600E596D4 /* AIBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 65C141C90D25456600E596D4 /* AIBase.h */; };
 		65C141CF0D25456600E596D4 /* AIComm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65C141CA0D25456600E596D4 /* AIComm.cpp */; };
 		65C141D00D25456600E596D4 /* AIComm.h in Headers */ = {isa = PBXBuildFile; fileRef = 65C141CB0D25456600E596D4 /* AIComm.h */; };
 		65C141D10D25456600E596D4 /* AIGlobal.h in Headers */ = {isa = PBXBuildFile; fileRef = 65C141CC0D25456600E596D4 /* AIGlobal.h */; };
-		65C141DC0D25458000E596D4 /* AIBasicCluster.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65C141D20D25458000E596D4 /* AIBasicCluster.cpp */; };
-		65C141DD0D25458000E596D4 /* AIBasicCluster.h in Headers */ = {isa = PBXBuildFile; fileRef = 65C141D30D25458000E596D4 /* AIBasicCluster.h */; };
-		65C141DE0D25458000E596D4 /* AICentroid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65C141D40D25458000E596D4 /* AICentroid.cpp */; };
-		65C141DF0D25458000E596D4 /* AICentroid.h in Headers */ = {isa = PBXBuildFile; fileRef = 65C141D50D25458000E596D4 /* AICentroid.h */; };
-		65C141E00D25458000E596D4 /* AICluster.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65C141D60D25458000E596D4 /* AICluster.cpp */; };
-		65C141E10D25458000E596D4 /* AICluster.h in Headers */ = {isa = PBXBuildFile; fileRef = 65C141D70D25458000E596D4 /* AICluster.h */; };
-		65C141E20D25458000E596D4 /* AIKmeans.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65C141D80D25458000E596D4 /* AIKmeans.cpp */; };
-		65C141E30D25458000E596D4 /* AIKmeans.h in Headers */ = {isa = PBXBuildFile; fileRef = 65C141D90D25458000E596D4 /* AIKmeans.h */; };
-		65C141E40D25458000E596D4 /* FastCluster.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65C141DA0D25458000E596D4 /* FastCluster.cpp */; };
-		65C141E50D25458000E596D4 /* FastCluster.h in Headers */ = {isa = PBXBuildFile; fileRef = 65C141DB0D25458000E596D4 /* FastCluster.h */; };
 		DC47455509C34BFA00EDDA3A /* BankRomCheat.cxx in Sources */ = {isa = PBXBuildFile; fileRef = DC47454A09C34BFA00EDDA3A /* BankRomCheat.cxx */; };
 		DC47455609C34BFA00EDDA3A /* BankRomCheat.hxx in Headers */ = {isa = PBXBuildFile; fileRef = DC47454B09C34BFA00EDDA3A /* BankRomCheat.hxx */; };
 		DC47455709C34BFA00EDDA3A /* Cheat.hxx in Headers */ = {isa = PBXBuildFile; fileRef = DC47454C09C34BFA00EDDA3A /* Cheat.hxx */; };
@@ -634,25 +620,11 @@
 		2DF971DF0892CEA400F64D23 /* Expression.hxx */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.h; name = Expression.hxx; path = ../debugger/Expression.hxx; sourceTree = SOURCE_ROOT; };
 		6574C0AD0E06AB60003F1C9E /* AISocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AISocket.h; sourceTree = "<group>"; };
 		6574C0AE0E06AB60003F1C9E /* AISocket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AISocket.cpp; sourceTree = "<group>"; };
-		65C141C00D25454A00E596D4 /* Classify.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Classify.cpp; path = ../ai/Classify.cpp; sourceTree = SOURCE_ROOT; };
-		65C141C10D25454A00E596D4 /* Classify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Classify.h; path = ../ai/Classify.h; sourceTree = SOURCE_ROOT; };
-		65C141C20D25454A00E596D4 /* Pitfall.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Pitfall.cpp; path = ../ai/Pitfall.cpp; sourceTree = SOURCE_ROOT; };
-		65C141C30D25454A00E596D4 /* Pitfall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Pitfall.h; path = ../ai/Pitfall.h; sourceTree = SOURCE_ROOT; };
 		65C141C80D25456600E596D4 /* AIBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AIBase.cpp; path = ../ai/AIBase.cpp; sourceTree = SOURCE_ROOT; };
 		65C141C90D25456600E596D4 /* AIBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIBase.h; path = ../ai/AIBase.h; sourceTree = SOURCE_ROOT; };
 		65C141CA0D25456600E596D4 /* AIComm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AIComm.cpp; path = ../ai/AIComm.cpp; sourceTree = SOURCE_ROOT; };
 		65C141CB0D25456600E596D4 /* AIComm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIComm.h; path = ../ai/AIComm.h; sourceTree = SOURCE_ROOT; };
 		65C141CC0D25456600E596D4 /* AIGlobal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIGlobal.h; path = ../ai/AIGlobal.h; sourceTree = SOURCE_ROOT; };
-		65C141D20D25458000E596D4 /* AIBasicCluster.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AIBasicCluster.cpp; path = ../ai/AIBasicCluster.cpp; sourceTree = SOURCE_ROOT; };
-		65C141D30D25458000E596D4 /* AIBasicCluster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIBasicCluster.h; path = ../ai/AIBasicCluster.h; sourceTree = SOURCE_ROOT; };
-		65C141D40D25458000E596D4 /* AICentroid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AICentroid.cpp; path = ../ai/AICentroid.cpp; sourceTree = SOURCE_ROOT; };
-		65C141D50D25458000E596D4 /* AICentroid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AICentroid.h; path = ../ai/AICentroid.h; sourceTree = SOURCE_ROOT; };
-		65C141D60D25458000E596D4 /* AICluster.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AICluster.cpp; path = ../ai/AICluster.cpp; sourceTree = SOURCE_ROOT; };
-		65C141D70D25458000E596D4 /* AICluster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AICluster.h; path = ../ai/AICluster.h; sourceTree = SOURCE_ROOT; };
-		65C141D80D25458000E596D4 /* AIKmeans.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AIKmeans.cpp; path = ../ai/AIKmeans.cpp; sourceTree = SOURCE_ROOT; };
-		65C141D90D25458000E596D4 /* AIKmeans.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIKmeans.h; path = ../ai/AIKmeans.h; sourceTree = SOURCE_ROOT; };
-		65C141DA0D25458000E596D4 /* FastCluster.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FastCluster.cpp; path = ../ai/FastCluster.cpp; sourceTree = SOURCE_ROOT; };
-		65C141DB0D25458000E596D4 /* FastCluster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FastCluster.h; path = ../ai/FastCluster.h; sourceTree = SOURCE_ROOT; };
 		B2F367C504C7ADC700A80002 /* SDLMain.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = SDLMain.nib; sourceTree = "<group>"; };
 		DC47454A09C34BFA00EDDA3A /* BankRomCheat.cxx */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = BankRomCheat.cxx; path = ../cheat/BankRomCheat.cxx; sourceTree = SOURCE_ROOT; };
 		DC47454B09C34BFA00EDDA3A /* BankRomCheat.hxx */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.h; name = BankRomCheat.hxx; path = ../cheat/BankRomCheat.hxx; sourceTree = SOURCE_ROOT; };
@@ -1114,7 +1086,6 @@
 		65A69C9A0CCFDB6200D5599E /* AI */ = {
 			isa = PBXGroup;
 			children = (
-				65A69C9B0CCFDB7D00D5599E /* Clustering */,
 				65C141C80D25456600E596D4 /* AIBase.cpp */,
 				65C141C90D25456600E596D4 /* AIBase.h */,
 				65C141CA0D25456600E596D4 /* AIComm.cpp */,
@@ -1124,35 +1095,6 @@
 				6574C0AE0E06AB60003F1C9E /* AISocket.cpp */,
 			);
 			name = AI;
-			sourceTree = "<group>";
-		};
-		65A69C9B0CCFDB7D00D5599E /* Clustering */ = {
-			isa = PBXGroup;
-			children = (
-				65C141D20D25458000E596D4 /* AIBasicCluster.cpp */,
-				65C141D30D25458000E596D4 /* AIBasicCluster.h */,
-				65C141D40D25458000E596D4 /* AICentroid.cpp */,
-				65C141D50D25458000E596D4 /* AICentroid.h */,
-				65C141D60D25458000E596D4 /* AICluster.cpp */,
-				65C141D70D25458000E596D4 /* AICluster.h */,
-				65C141D80D25458000E596D4 /* AIKmeans.cpp */,
-				65C141D90D25458000E596D4 /* AIKmeans.h */,
-				65C141DA0D25458000E596D4 /* FastCluster.cpp */,
-				65C141DB0D25458000E596D4 /* FastCluster.h */,
-				65BC6B7D0D2075F100406FD3 /* Games */,
-			);
-			name = Clustering;
-			sourceTree = "<group>";
-		};
-		65BC6B7D0D2075F100406FD3 /* Games */ = {
-			isa = PBXGroup;
-			children = (
-				65C141C00D25454A00E596D4 /* Classify.cpp */,
-				65C141C10D25454A00E596D4 /* Classify.h */,
-				65C141C20D25454A00E596D4 /* Pitfall.cpp */,
-				65C141C30D25454A00E596D4 /* Pitfall.h */,
-			);
-			name = Games;
 			sourceTree = "<group>";
 		};
 		DCCC0C9109C3541E0088BFF1 /* cheat */ = {
@@ -1322,16 +1264,9 @@
 				DC8078E90B4BD697005E9305 /* FileSnapDialog.hxx in Headers */,
 				DC8078EB0B4BD697005E9305 /* UIDialog.hxx in Headers */,
 				DCEECE570B5E5E540021D754 /* Cart0840.hxx in Headers */,
-				65C141C50D25454A00E596D4 /* Classify.h in Headers */,
-				65C141C70D25454A00E596D4 /* Pitfall.h in Headers */,
 				65C141CE0D25456600E596D4 /* AIBase.h in Headers */,
 				65C141D00D25456600E596D4 /* AIComm.h in Headers */,
 				65C141D10D25456600E596D4 /* AIGlobal.h in Headers */,
-				65C141DD0D25458000E596D4 /* AIBasicCluster.h in Headers */,
-				65C141DF0D25458000E596D4 /* AICentroid.h in Headers */,
-				65C141E10D25458000E596D4 /* AICluster.h in Headers */,
-				65C141E30D25458000E596D4 /* AIKmeans.h in Headers */,
-				65C141E50D25458000E596D4 /* FastCluster.h in Headers */,
 				6574C0AF0E06AB60003F1C9E /* AISocket.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1566,15 +1501,8 @@
 				DC8078E80B4BD697005E9305 /* FileSnapDialog.cxx in Sources */,
 				DC8078EA0B4BD697005E9305 /* UIDialog.cxx in Sources */,
 				DCEECE560B5E5E540021D754 /* Cart0840.cxx in Sources */,
-				65C141C40D25454A00E596D4 /* Classify.cpp in Sources */,
-				65C141C60D25454A00E596D4 /* Pitfall.cpp in Sources */,
 				65C141CD0D25456600E596D4 /* AIBase.cpp in Sources */,
 				65C141CF0D25456600E596D4 /* AIComm.cpp in Sources */,
-				65C141DC0D25458000E596D4 /* AIBasicCluster.cpp in Sources */,
-				65C141DE0D25458000E596D4 /* AICentroid.cpp in Sources */,
-				65C141E00D25458000E596D4 /* AICluster.cpp in Sources */,
-				65C141E20D25458000E596D4 /* AIKmeans.cpp in Sources */,
-				65C141E40D25458000E596D4 /* FastCluster.cpp in Sources */,
 				6574C0B00E06AB61003F1C9E /* AISocket.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

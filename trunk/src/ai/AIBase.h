@@ -10,8 +10,6 @@
 
 class Debugger;
 
-#include "AICluster.h"
-#include "AIKmeans.h"
 #include "AIComm.h"
 #include "EventHandler.hxx"
 #include "FrameBuffer.hxx"
@@ -32,9 +30,9 @@ public:
 	bool getKeys();
 	
 	int getPixel(int,int);
-	void putPixel(int,int,Uint32);	
-	void putRectangle(int,int,int,int,Uint32);
-	void putLine(int,int,int,int,Uint32);
+	void drawPixel(int,int,Uint32);	
+	void drawRectangle(int,int,int,int,Uint32);
+	void drawLine(int,int,int,int,Uint32);
 	
 	FrameBuffer *frameBuffer;
 	EventHandler *eventHandler;
