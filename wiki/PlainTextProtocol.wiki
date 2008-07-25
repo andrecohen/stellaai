@@ -10,6 +10,8 @@ All communication uses the same format of packets: {{{[counter][data type][lengt
   *The _data type_ indicates what type of data the packet carries. A character (char) is used to represent the type  of data being sent: {{{s}}} for string, {{{i}}} for integer, {{{r}}} for 2D matrix.  
   * Depending on the type the _length_ (integer) is different. Strings send the length of the string being sent, integers send sizeof(int), and matrixes send two integers corresponding to the number of rows and columns.
 
+=== Packet Summary ===
+
   * *Integer:* {{{[counter][i][4][value]}}}
   * *String:* {{{[counter][s][length][value]}}}
   * *Matrix:* {{{[counter][r][columns][rows][value]}}}
