@@ -4,7 +4,11 @@ The plain text protocol is the most generic and versatile way to control StellaA
 
 == The Protocol ==
 
-All communication uses the same format of packets: {{{[counter][data type][length][data]}}}. The counter is used to make sure that no command is dropped or delayed. It is an integer incremented by the client and begins at {{{1}}}. The data type indicates what type of data the packet carries. A character (char) is used to represent the type  of data being sent: {{{s}}} for string, {{{i}}} for integer, {{{r}}} for 2D matrix.  Depending on the type the length (integer) is different. Strings send the length of the string being sent, integers send sizeof(int), and matrixes send two integers corresponding to the number of rows and columns.
+All communication uses the same format of packets: {{{[counter][data type][length][data]}}}. 
+
+  *  The _counter_ is used to make sure that no command is dropped or delayed. It is an integer incremented by the client and begins at {{{1}}}. 
+  *The _data type_ indicates what type of data the packet carries. A character (char) is used to represent the type  of data being sent: {{{s}}} for string, {{{i}}} for integer, {{{r}}} for 2D matrix.  
+  * Depending on the type the _length_ (integer) is different. Strings send the length of the string being sent, integers send sizeof(int), and matrixes send two integers corresponding to the number of rows and columns.
 
   * *Integer:* {{{[counter][i][4][value]}}}
   * *String:* {{{[counter][s][length][value]}}}
