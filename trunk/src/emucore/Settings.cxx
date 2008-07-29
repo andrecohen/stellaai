@@ -155,6 +155,7 @@ string Settings::loadCommandLine(int argc, char** argv)
     if(key[0] == '-')
     {
       key = key.substr(1, key.length());
+		cout<<key;
 
       // Take care of the arguments which are meant to be executed immediately
       // (and then Stella should exit)

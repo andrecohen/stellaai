@@ -44,7 +44,14 @@ string AIComm::receive(){
 		cerr<<"Packet lost from ["<<counter<<"-"<<id<<"]"<<endl;
 	}
 	counter = id;
+	cerr<<"Counter: "<<hex<<id<<endl;
+	
+	char type = getChar();
+	cerr<<"Type: "<<hex<<type<<endl;
+	
 	int size = getInt();
+	cerr<<"Size: "<<hex<<size<<endl;
+	
 	string data = getString(size);
 	
 	sendPacket(id);
@@ -71,11 +78,14 @@ void AIComm::sendPacket(int num){
  
 // Sends integer matrix packet
 void AIComm::sendPacket(Matrix array){
+	if(array.size()<0)
+		return;
+	
 	sendInt(counter);
 	sendChar('r');
 	size_t h = array.size();
 	size_t w = array[0].size();
-	cerr<<h<<","<<w<<endl;
+	
 	sendInt(h);
 	sendInt(w);
 	for(size_t y=0;y<h;y++)
@@ -94,11 +104,19 @@ void AIComm::sendChar(char ch){
 	socket->send(&ch,sizeof(char));
 }
 
-// Gets integer packet
+// Gets integer 
 int AIComm::getInt(){
 	int temp=0;
 	socket->recv(&temp, sizeof(int));
 	temp = (temp>>24) | (temp << 8 & 0x00FF0000) | (temp >> 8 & 0x000FF00) | (temp<<24);
+	return temp;
+}
+
+// Gets character
+char AIComm::getChar(){
+	int temp=0;
+	socket->recv(&temp, 2);
+	temp = temp>>8 | temp<<8;
 	return temp;
 }
 
