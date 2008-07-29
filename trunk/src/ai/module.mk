@@ -3,7 +3,8 @@ MODULE := src/ai
 MODULE_OBJS := \
 	src/ai/AIBase.o \
 	src/ai/AIComm.o \
-	src/macosx/AISocket.o
+	src/ai/AISocket.o \
+	src/ai/AIRewards.o
 
 # removed src/ai/AIBasicCluster.o \
 #         src/ai/AICentroid.o \
