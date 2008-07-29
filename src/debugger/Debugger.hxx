@@ -287,6 +287,13 @@ class Debugger : public DialogContainer
 
     void lockState();
     void unlockState();
+	
+	/**
+	 Return a formatted string containing the contents of the specified
+	 device.
+	 */
+    const string dumpRAM();
+    const string dumpTIA();
 
   private:
     /**
@@ -320,13 +327,6 @@ class Debugger : public DialogContainer
     void clearAllTraps();
 
     void reloadROM();
-
-    /**
-      Return a formatted string containing the contents of the specified
-      device.
-    */
-    const string dumpRAM();
-    const string dumpTIA();
 
     // set a bunch of RAM locations at once
     const string setRAM(IntArray& args);

@@ -14,59 +14,57 @@
  */
 
 #include <iostream>
+#include <sstream>
 #include <vector>
 #include <time.h>
 #include <ctime>
 #include <math.h>
+#include <SDL/SDL_events.h>
 using namespace std;
 
 #include "AIGlobal.h"
 #include "AIBase.h"
+#include "AIRewards.h"
 
-#include <SDL/SDL_events.h>
+#include "OSystem.hxx"
 #include "FrameBuffer.hxx"
 #include "EventHandler.hxx"
 #include "Event.hxx"
 #include "Debugger.hxx"
 
-AIBase::AIBase(EventHandler *e, FrameBuffer *f){
+AIBase::AIBase(OSystem *system){
 	// Are we talking doing any sort of AI
 	try{
 		comm = new AIComm();
 	}catch(exception e){
+		cerr<<"No connection found..."<<endl;
 		comm = NULL;
 	}
 	
-	// Reset connections to the outside world
-	frameBuffer = NULL;
-	eventHandler = NULL;
+	rewards = new AIRewards(system);
+	this->system = system;
+	saveStack = 0;
 }
 
 AIBase::~AIBase(){
 	if(comm)		
 		delete comm;
+	if(rewards)
+		delete rewards;
 }
 
 // Called at every frame
-void AIBase::update(Debugger *d, EventHandler *e, FrameBuffer *f){
-	// If connection is closed, then there is nothing to do
-	if(comm==NULL)
-		return;
-	
-	// Connect to the world if we haven't yet
-	if(!frameBuffer || !eventHandler || !debugger){
-		frameBuffer = f;
-		eventHandler = e;
-		debugger = d;
-	}	
-	
+void AIBase::update(){
 	// Check if there is anything on the screen 
-	if(getPixel(200,200)){
+	if(true){//getPixel(200,200)){
 		// Update screen (not really needed)
-		f->refresh();
+		system->frameBuffer().refresh();
+		
+		//rewards->getReward("Pitfall.rom",Score);
 		
 		// Get commands for next frame
-		commands();
+		if(comm)
+			commands();
 	}
 }
 
@@ -86,9 +84,9 @@ void AIBase::commands() {
 		else if(command == "RESET")	resetKeys();
 		else if(command == "FULL_SCREEN")	sendFullScreen(); 
 		else if(command == "DIFF_SCREEN")	sendDiffScreen();
-		else if(command == "SAVE"){}
-		else if(command == "PREV"){}
-		else if(command == "DUMP"){}
+		else if(command == "SAVE")	saveState();
+		else if(command == "PREV")	loadState();
+		else if(command == "DUMP")	sendRam();
 		else
 			printf("Command '%s' not understood\n",command.c_str());
 	}
@@ -110,25 +108,30 @@ void AIBase::sendFullScreen(){
 
 // Sends the difference of pixels from the last full screen sent and now
 void AIBase::sendDiffScreen(){
-	int h = getScreenHeight();
-	int w = getScreenWidth();
 	Matrix current = getScreen();
+	Matrix diff;
 	
-	if(current.size()!=screen.size() &&  current[0].size()!=screen[0].size())
+	// If the last screen is not available, then we can't do a diff
+	if(current.size()!=screen.size() &&  current[0].size()!=screen[0].size()){
+		screen = current;
 		return;
-	 
-	for(int y=0;y<h;y++){
-		for(int x=0;x<w;x++){
+	}
+	
+	// Generate diff matrix
+	for(size_t y=0;y<current.size();y++){
+		for(size_t x=0;x<current[y].size();x++){
 			if(current[y][x] != screen[y][x]){
-				comm->sendPacket(x);
-				comm->sendPacket(y);
-				comm->sendPacket(current[y][x]);
+				MatrixRow row;
+				row.push_back(x);
+				row.push_back(y);
+				row.push_back(current[y][x]);
+				diff.push_back(row);
 			}
 		}
 	}
 	
-	// Once all differences has been send -1 is sent
-	comm->sendPacket(-1);
+	// Send diff matrix
+	comm->sendPacket(diff);
 	
 	// Saves new the current screen for next time
 	screen = current;
@@ -143,12 +146,12 @@ Matrix AIBase::getScreen(){
 	for(int y=0;y<h;y++){
 		MatrixRow row;
 		int dx=0,dy=y;
-		frameBuffer->translateCoords(dx, dy);
+		system->frameBuffer().translateCoords(dx, dy);
 		if(dy==(int)current.size()){
 			for(int x=0;x<w;x++){
 				dx = x;
 				dy = y;
-				frameBuffer->translateCoords(dx, dy);
+				system->frameBuffer().translateCoords(dx, dy);
 				if(dx==(int)row.size())
 					row.push_back(getPixel(x, y));
 			}
@@ -159,14 +162,79 @@ Matrix AIBase::getScreen(){
 	return current;
 }
 
+// Sends RAM as an 1x64 integer matrix
+void AIBase::sendRam(){
+	string ram = system->debugger().dumpRAM();
+	stringstream ss(ram);
+	
+	Matrix dump;
+	MatrixRow row;
+	
+	char c;
+	string tmp;
+	
+	for(int y=0;y<8;y++){
+		// The first block is the address
+		ss>>tmp;
+		for(int x=0;x<8;x++){
+			ss>>c;
+			row.push_back(c);
+		}
+	}
+	
+	dump.push_back(row);
+	comm->sendPacket(dump);
+	
+}
+
+// Saves current game state in a stack
+void AIBase::saveState(){
+	system->debugger().saveState(saveStack++);
+}
+
+// Loads current game from the stack
+void AIBase::loadState(){
+	system->debugger().loadState(--saveStack);
+}
+
 // Gets the screen height without scaling
 int AIBase::getScreenHeight(){
-	return frameBuffer->baseHeight()*2;
+	return system->frameBuffer().baseHeight()*2;
 }
 
 // Gets the screen width without scaling
 int AIBase::getScreenWidth(){
-	return frameBuffer->baseWidth()*2;
+	return system->frameBuffer().baseWidth()*2;
+}
+
+// Wrapper for pressing key down
+void AIBase::pressKey(SDLKey key){
+	sendKey(key,true);
+}
+
+// Unpresses all keys
+void AIBase::resetKeys(){
+	sendKey(SDLK_UP,false);
+	sendKey(SDLK_DOWN,false);
+	sendKey(SDLK_RIGHT,false);
+	sendKey(SDLK_LEFT,false);
+	sendKey(SDLK_SPACE,false);
+}
+
+// Auxilary function that interacts with the system to press keys
+void AIBase::sendKey(SDLKey key, bool press){
+	SDL_Event event;
+	if(press){
+		event.type = SDL_KEYDOWN;
+		event.key.type = SDL_KEYDOWN;
+		event.key.state = SDL_PRESSED;
+	}else{
+		event.type = SDL_KEYUP;
+		event.key.type = SDL_KEYUP;
+		event.key.state = SDL_RELEASED;	
+	}
+	event.key.keysym.sym = key;
+	SDL_PushEvent(&event);
 }
 
 // Gets the current keys being pressed (format: "Down-Up-Left-Right-Space")
@@ -186,7 +254,7 @@ bool AIBase::getKeys(){
 		
 		// Pop event from queue
 		SDL_PeepEvents(&e,1,SDL_GETEVENT,SDL_ALLEVENTS);
-	
+		
 		string key = SDL_GetKeyName(e.key.keysym.sym);
 		if(!key.find("down",0))
 			down = e.key.type==SDL_KEYDOWN;
@@ -203,90 +271,23 @@ bool AIBase::getKeys(){
 		SDL_PeepEvents(&e,1,SDL_ADDEVENT,0);
 		
 	}
-
+	
 	// Send current keys
-	printf("action %d%d%d%d%d\n",down,up,left,right,space);
+	//printf("action %d%d%d%d%d\n",down,up,left,right,space);
 	
 	return count>0;
 }
 
-/******************************************************************
-	Some utility functions
-******************************************************************/
-
-void AIBase::drawRectangle(int x, int y, int h, int w, Uint32 pixel)
-{
-	for(int x1=x;x1<x+w;x1++){
-		drawPixel(x1,y,pixel);
-		drawPixel(x1,y+h,pixel);
-	}
-	for(int y1=y;y1<y+h;y1++){
-		drawPixel(x,y1,pixel);
-		drawPixel(x+w,y1,pixel);
-	}
-}
-
-void AIBase::drawLine(int x1, int y1, int x2, int y2, Uint32 pixel)
-{
-	int dx = x2 - x1;
-	int dy = y2 - y1;
-	double error = 0;
-	double derror = dy / dx;
-	int y = y1;
-	for(int x=x1;x<x2;x++){
-		drawPixel(x,y,pixel);
-		error = error + derror;
-		if(.5<fabs(error)){
-			y++; 
-			error=-1;
-		}
-	}
-}
-
-void AIBase::drawPixel(int x, int y, Uint32 pixel)
-{
-	if(x>(int)frameBuffer->imageWidth() || y>(int)frameBuffer->imageHeight() || x<0 || y<0)
-		return;
-	
-	SDL_Surface *surface = frameBuffer->getCurrentScreen();//SDL_GetVideoSurface();
-	
-    int bpp = surface->format->BytesPerPixel;
-	Uint8 *p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
-	
-    switch(bpp) {
-		case 1:
-			*p = pixel;
-			break;
-			
-		case 2:
-			*(Uint16 *)p = pixel;
-			break;
-			
-		case 3:
-			if(SDL_BYTEORDER == SDL_BIG_ENDIAN) {
-				p[0] = (pixel >> 16) & 0xff;
-				p[1] = (pixel >> 8) & 0xff;
-				p[2] = pixel & 0xff;
-			} else {
-				p[0] = pixel & 0xff;
-				p[1] = (pixel >> 8) & 0xff;
-				p[2] = (pixel >> 16) & 0xff;
-			}
-			break;
-			
-		case 4:
-			*(Uint32 *)p = pixel;
-			break;
-    }
-}
-
+// Returns RGB value for particular position on the screen (with upscaling)
 int AIBase::getPixel(int x, int y) {
-	if(x>(int)frameBuffer->imageWidth() || y>(int)frameBuffer->imageHeight() || x<0 || y<0)
+	if(x>(int)system->frameBuffer().imageWidth() ||
+	   y>(int)system->frameBuffer().imageHeight() || 
+	   x<0 || y<0)
 		return 0;
-		
+	
 	SDL_Surface *surface = SDL_GetVideoSurface();
-
-	Uint8 *p = (Uint8 *)surface->pixels + y * surface->pitch + x * surface->format->BytesPerPixel;	
+	
+	Uint8 *p = (Uint8 *)surface->pixels + y * surface->pitch + x * surface->format->BytesPerPixel;  
 
     switch(surface->format->BytesPerPixel){
 		case 1:
@@ -303,35 +304,8 @@ int AIBase::getPixel(int x, int y) {
 			
 		case 4:
 			return *(Uint32 *)p;
-
+		
 		default:
 			return 0;
     }
-}
-
-void AIBase::pressKey(SDLKey key){
-	sendKey(key,true);
-}
-
-void AIBase::resetKeys(){
-	sendKey(SDLK_UP,false);
-	sendKey(SDLK_DOWN,false);
-	sendKey(SDLK_RIGHT,false);
-	sendKey(SDLK_LEFT,false);
-	sendKey(SDLK_SPACE,false);
-}
-
-void AIBase::sendKey(SDLKey key, bool press){
-	SDL_Event event;
-	if(press){
-		event.type = SDL_KEYDOWN;
-		event.key.type = SDL_KEYDOWN;
-		event.key.state = SDL_PRESSED;
-	}else{
-		event.type = SDL_KEYUP;
-		event.key.type = SDL_KEYUP;
-		event.key.state = SDL_RELEASED;	
-	}
-	event.key.keysym.sym = key;
-	SDL_PushEvent(&event);
 }

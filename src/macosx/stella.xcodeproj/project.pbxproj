@@ -274,6 +274,8 @@
 		2DEFB40C09C3386F00754289 /* Cart.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2DEFB40B09C3386F00754289 /* Cart.icns */; };
 		6574C0AF0E06AB60003F1C9E /* AISocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 6574C0AD0E06AB60003F1C9E /* AISocket.h */; };
 		6574C0B00E06AB61003F1C9E /* AISocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6574C0AE0E06AB60003F1C9E /* AISocket.cpp */; };
+		65BF58950E3698EF00AAF760 /* AIRewards.h in Headers */ = {isa = PBXBuildFile; fileRef = 65BF58930E3698EF00AAF760 /* AIRewards.h */; };
+		65BF58960E3698EF00AAF760 /* AIRewards.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65BF58940E3698EF00AAF760 /* AIRewards.cpp */; };
 		65C141CD0D25456600E596D4 /* AIBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65C141C80D25456600E596D4 /* AIBase.cpp */; };
 		65C141CE0D25456600E596D4 /* AIBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 65C141C90D25456600E596D4 /* AIBase.h */; };
 		65C141CF0D25456600E596D4 /* AIComm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65C141CA0D25456600E596D4 /* AIComm.cpp */; };
@@ -620,6 +622,8 @@
 		2DF971DF0892CEA400F64D23 /* Expression.hxx */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.h; name = Expression.hxx; path = ../debugger/Expression.hxx; sourceTree = SOURCE_ROOT; };
 		6574C0AD0E06AB60003F1C9E /* AISocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AISocket.h; sourceTree = "<group>"; };
 		6574C0AE0E06AB60003F1C9E /* AISocket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AISocket.cpp; sourceTree = "<group>"; };
+		65BF58930E3698EF00AAF760 /* AIRewards.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRewards.h; sourceTree = "<group>"; };
+		65BF58940E3698EF00AAF760 /* AIRewards.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AIRewards.cpp; sourceTree = "<group>"; };
 		65C141C80D25456600E596D4 /* AIBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AIBase.cpp; path = ../ai/AIBase.cpp; sourceTree = SOURCE_ROOT; };
 		65C141C90D25456600E596D4 /* AIBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIBase.h; path = ../ai/AIBase.h; sourceTree = SOURCE_ROOT; };
 		65C141CA0D25456600E596D4 /* AIComm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AIComm.cpp; path = ../ai/AIComm.cpp; sourceTree = SOURCE_ROOT; };
@@ -1093,6 +1097,8 @@
 				65C141CC0D25456600E596D4 /* AIGlobal.h */,
 				6574C0AD0E06AB60003F1C9E /* AISocket.h */,
 				6574C0AE0E06AB60003F1C9E /* AISocket.cpp */,
+				65BF58930E3698EF00AAF760 /* AIRewards.h */,
+				65BF58940E3698EF00AAF760 /* AIRewards.cpp */,
 			);
 			name = AI;
 			sourceTree = "<group>";
@@ -1268,6 +1274,7 @@
 				65C141D00D25456600E596D4 /* AIComm.h in Headers */,
 				65C141D10D25456600E596D4 /* AIGlobal.h in Headers */,
 				6574C0AF0E06AB60003F1C9E /* AISocket.h in Headers */,
+				65BF58950E3698EF00AAF760 /* AIRewards.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1504,6 +1511,7 @@
 				65C141CD0D25456600E596D4 /* AIBase.cpp in Sources */,
 				65C141CF0D25456600E596D4 /* AIComm.cpp in Sources */,
 				6574C0B00E06AB61003F1C9E /* AISocket.cpp in Sources */,
+				65BF58960E3698EF00AAF760 /* AIRewards.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

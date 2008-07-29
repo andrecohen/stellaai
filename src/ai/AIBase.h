@@ -16,21 +16,28 @@
 #ifndef AIBASE_H
 #define AIBASE_H
 
-class Debugger;
-
 #include "AIComm.h"
+#include "AIRewards.h"
+#include "OSystem.hxx"
 #include "EventHandler.hxx"
 #include "FrameBuffer.hxx"
 
+class AIRewards;
+
 class AIBase {
 public:
-	AIBase(EventHandler*, FrameBuffer*);
+	AIBase(OSystem*);
 	~AIBase();
-	void update(Debugger*,EventHandler*, FrameBuffer*);
+	void update();
 	void commands();
 	
 	void sendFullScreen();
 	void sendDiffScreen();
+	
+	void sendRam();
+	
+	void saveState();
+	void loadState();
 	
 	void pressKey(SDLKey);
 	void resetKeys();
@@ -38,19 +45,19 @@ public:
 	bool getKeys();
 	
 	int getPixel(int,int);
-	void drawPixel(int,int,Uint32);	
-	void drawRectangle(int,int,int,int,Uint32);
-	void drawLine(int,int,int,int,Uint32);
 	
-	FrameBuffer *frameBuffer;
-	EventHandler *eventHandler;
-	Debugger *debugger;
+	OSystem *getOSystem();
+	
 private:
 	Matrix getScreen();
 	int getScreenHeight();
 	int getScreenWidth();
+	int	saveStack;
+	
+	OSystem *system;
 	
 	AIComm *comm;
+	AIRewards *rewards;
 	Matrix screen;
 };
 

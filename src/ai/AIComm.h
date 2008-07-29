@@ -36,6 +36,7 @@ private:
 	int counter;
 	
 	int getInt();
+	char getChar();
 	string getString(int);
 	
 	void sendInt(int);

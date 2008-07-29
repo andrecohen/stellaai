@@ -190,7 +190,7 @@ bool OSystem::create()
   // that only have a single sound device (no hardware mixing)
   createSound();
   
-  aiBase = new AIBase(myEventHandler,myFrameBuffer);
+  aiBase = new AIBase(this);
 
   return true;
 }
@@ -716,7 +716,7 @@ void OSystem::mainLoop()
 {
   for(;;)
   {
-	aiBase->update(myDebugger,myEventHandler,myFrameBuffer);  
+	aiBase->update();  
 
 	myTimingInfo.start = getTicks();
 	myEventHandler->poll(myTimingInfo.start);
