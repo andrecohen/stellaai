@@ -38,6 +38,7 @@ void AIRewards::loadData(){
 	
 	if(!file.is_open()){
 		cerr<<"Error opening rewards file.\n";
+		return;
 	}
 	
 	while(!file.eof()){

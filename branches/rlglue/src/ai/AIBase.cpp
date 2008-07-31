@@ -25,6 +25,8 @@ using namespace std;
 #include "AIGlobal.h"
 #include "AIBase.h"
 #include "AIRewards.h"
+#include "AIPlainText.h"
+#include "AIGlue.h"
 
 #include "OSystem.hxx"
 #include "FrameBuffer.hxx"
@@ -32,10 +34,19 @@ using namespace std;
 #include "Event.hxx"
 #include "Debugger.hxx"
 
+#define PLAIN_TEXT	0
+#define	RL_GLUE		1
+
 AIBase::AIBase(OSystem *system){
 	// Are we talking doing any sort of AI
 	try{
-		comm = new AIComm();
+#if PLAIN_TEXT
+		comm = new AIPlainText();
+		comm->connect();
+#else
+		comm = new AIGlue();
+		comm->connect();
+#endif
 	}catch(exception e){
 		cerr<<"No connection found..."<<endl;
 		comm = NULL;
@@ -56,7 +67,7 @@ AIBase::~AIBase(){
 // Called at every frame
 void AIBase::update(){
 	// Check if there is anything on the screen 
-	if(true){//getPixel(200,200)){
+	if(true){
 		// Update screen (not really needed)
 		system->frameBuffer().refresh();
 		
@@ -64,77 +75,31 @@ void AIBase::update(){
 		
 		// Get commands for next frame
 		if(comm)
-			commands();
+			comm->runEventLoop(this);
 	}
 }
 
-// Called once per game cycle, interprets commands until the NEXT command is received
-void AIBase::commands() {
-	while(comm){
-		string command = comm->receive();
-		cerr<<"Command: "<<command<<endl;
-		
-		if(command == "NEXT")		return;
-		else if(command == "QUIT")	exit(0);
-		else if(command == "UP")	pressKey(SDLK_UP);
-		else if(command == "DOWN")	pressKey(SDLK_DOWN);
-		else if(command == "LEFT")	pressKey(SDLK_LEFT);
-		else if(command == "RIGHT")	pressKey(SDLK_RIGHT);
-		else if(command == "SPACE")	pressKey(SDLK_SPACE);
-		else if(command == "RESET")	resetKeys();
-		else if(command == "FULL_SCREEN")	sendFullScreen(); 
-		else if(command == "DIFF_SCREEN")	sendDiffScreen();
-		else if(command == "SAVE")	saveState();
-		else if(command == "PREV")	loadState();
-		else if(command == "DUMP")	sendRam();
-		else
-			printf("Command '%s' not understood\n",command.c_str());
-	}
-}
-
-// Sends entire screen
-void AIBase::sendFullScreen(){
-	int h = getScreenHeight();
-	int w = getScreenWidth();
+Matrix AIBase::getRam(){
+	string ram = system->debugger().dumpRAM();
+	stringstream ss(ram);
 	
-	comm->sendPacket(h);
-	comm->sendPacket(w);
+	Matrix dump;
+	MatrixRow row;
 	
-	Matrix current = getScreen();
+	char c;
+	string tmp;
 	
-	comm->sendPacket(current);	
-	screen = current;
-}
-
-// Sends the difference of pixels from the last full screen sent and now
-void AIBase::sendDiffScreen(){
-	Matrix current = getScreen();
-	Matrix diff;
-	
-	// If the last screen is not available, then we can't do a diff
-	if(current.size()!=screen.size() &&  current[0].size()!=screen[0].size()){
-		screen = current;
-		return;
-	}
-	
-	// Generate diff matrix
-	for(size_t y=0;y<current.size();y++){
-		for(size_t x=0;x<current[y].size();x++){
-			if(current[y][x] != screen[y][x]){
-				MatrixRow row;
-				row.push_back(x);
-				row.push_back(y);
-				row.push_back(current[y][x]);
-				diff.push_back(row);
-			}
+	for(int y=0;y<8;y++){
+		// The first block is the address
+		ss>>tmp;
+		for(int x=0;x<8;x++){
+			ss>>c;
+			row.push_back(c);
 		}
 	}
 	
-	// Send diff matrix
-	comm->sendPacket(diff);
-	
-	// Saves new the current screen for next time
-	screen = current;
+	dump.push_back(row);
+	return dump;
 }
 
 // Does the actual getting of the screen from Stella (without scaling)
@@ -159,32 +124,14 @@ Matrix AIBase::getScreen(){
 		}
 	}
 	
+	// Save the current screen
+	screen = current;
+	
 	return current;
 }
 
-// Sends RAM as an 1x64 integer matrix
-void AIBase::sendRam(){
-	string ram = system->debugger().dumpRAM();
-	stringstream ss(ram);
-	
-	Matrix dump;
-	MatrixRow row;
-	
-	char c;
-	string tmp;
-	
-	for(int y=0;y<8;y++){
-		// The first block is the address
-		ss>>tmp;
-		for(int x=0;x<8;x++){
-			ss>>c;
-			row.push_back(c);
-		}
-	}
-	
-	dump.push_back(row);
-	comm->sendPacket(dump);
-	
+Matrix AIBase::getPrevScreen(){
+	return screen;
 }
 
 // Saves current game state in a stack

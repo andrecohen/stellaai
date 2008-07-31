@@ -9,6 +9,8 @@
 #ifndef AIFINDSCORE_H
 #define AIFINDSCORE_H
 
+#include <vector>
+#include <string>
 #include <time.h>
 #include <ctime>
 using namespace std;

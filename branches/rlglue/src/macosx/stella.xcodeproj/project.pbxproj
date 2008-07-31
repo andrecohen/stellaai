@@ -272,14 +272,20 @@
 		2D91751409BA90380026E9FF /* SDL.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2D4764C806683C5F00F63D87 /* SDL.framework */; };
 		2D91753809BA91BC0026E9FF /* StellaOSX.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2D91753709BA91BC0026E9FF /* StellaOSX.xcconfig */; };
 		2DEFB40C09C3386F00754289 /* Cart.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2DEFB40B09C3386F00754289 /* Cart.icns */; };
+		6567EBC40E3F58AE0053C51B /* AIPlainText.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6567EBC20E3F58AE0053C51B /* AIPlainText.cpp */; };
+		6567EBC50E3F58AE0053C51B /* AIPlainText.h in Headers */ = {isa = PBXBuildFile; fileRef = 6567EBC30E3F58AE0053C51B /* AIPlainText.h */; };
+		6567EBC80E3F58D20053C51B /* AISocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6567EBC60E3F58D20053C51B /* AISocket.cpp */; };
+		6567EBC90E3F58D20053C51B /* AISocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 6567EBC70E3F58D20053C51B /* AISocket.h */; };
+		6567EBCE0E3F59D70053C51B /* AIProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 6567EBCC0E3F59D70053C51B /* AIProtocol.h */; };
+		6567ECF80E3F6B1F0053C51B /* AIGlue.h in Headers */ = {isa = PBXBuildFile; fileRef = 6567ECF60E3F6B1F0053C51B /* AIGlue.h */; };
+		6567ECF90E3F6B1F0053C51B /* AIGlue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6567ECF70E3F6B1F0053C51B /* AIGlue.cpp */; };
+		657903BC0E409C4C00885466 /* RL_client_environment.c in Sources */ = {isa = PBXBuildFile; fileRef = 6567ECCA0E3F69040053C51B /* RL_client_environment.c */; };
+		657903BD0E409C4C00885466 /* RL_network.c in Sources */ = {isa = PBXBuildFile; fileRef = 6567ECCC0E3F69040053C51B /* RL_network.c */; };
+		657903BE0E409C4C00885466 /* AI_environment.c in Sources */ = {isa = PBXBuildFile; fileRef = 6567ECE10E3F69A20053C51B /* AI_environment.c */; };
 		657D89C40E3F4FF60025E898 /* AIRewards.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 657D89C00E3F4FF60025E898 /* AIRewards.cpp */; };
 		657D89C50E3F4FF60025E898 /* AIRewards.h in Headers */ = {isa = PBXBuildFile; fileRef = 657D89C10E3F4FF60025E898 /* AIRewards.h */; };
-		657D89C60E3F4FF60025E898 /* AISocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 657D89C20E3F4FF60025E898 /* AISocket.cpp */; };
-		657D89C70E3F4FF60025E898 /* AISocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 657D89C30E3F4FF60025E898 /* AISocket.h */; };
 		65C141CD0D25456600E596D4 /* AIBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65C141C80D25456600E596D4 /* AIBase.cpp */; };
 		65C141CE0D25456600E596D4 /* AIBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 65C141C90D25456600E596D4 /* AIBase.h */; };
-		65C141CF0D25456600E596D4 /* AIComm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65C141CA0D25456600E596D4 /* AIComm.cpp */; };
-		65C141D00D25456600E596D4 /* AIComm.h in Headers */ = {isa = PBXBuildFile; fileRef = 65C141CB0D25456600E596D4 /* AIComm.h */; };
 		65C141D10D25456600E596D4 /* AIGlobal.h in Headers */ = {isa = PBXBuildFile; fileRef = 65C141CC0D25456600E596D4 /* AIGlobal.h */; };
 		DC47455509C34BFA00EDDA3A /* BankRomCheat.cxx in Sources */ = {isa = PBXBuildFile; fileRef = DC47454A09C34BFA00EDDA3A /* BankRomCheat.cxx */; };
 		DC47455609C34BFA00EDDA3A /* BankRomCheat.hxx in Headers */ = {isa = PBXBuildFile; fileRef = DC47454B09C34BFA00EDDA3A /* BankRomCheat.hxx */; };
@@ -620,14 +626,22 @@
 		2DF971D70892CEA400F64D23 /* DebuggerSystem.hxx */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.h; name = DebuggerSystem.hxx; path = ../debugger/DebuggerSystem.hxx; sourceTree = SOURCE_ROOT; };
 		2DF971DE0892CEA400F64D23 /* Expression.cxx */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = Expression.cxx; path = ../debugger/Expression.cxx; sourceTree = SOURCE_ROOT; };
 		2DF971DF0892CEA400F64D23 /* Expression.hxx */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.h; name = Expression.hxx; path = ../debugger/Expression.hxx; sourceTree = SOURCE_ROOT; };
+		6567EBC20E3F58AE0053C51B /* AIPlainText.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AIPlainText.cpp; path = ../ai/networking/AIPlainText.cpp; sourceTree = SOURCE_ROOT; };
+		6567EBC30E3F58AE0053C51B /* AIPlainText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIPlainText.h; path = ../ai/networking/AIPlainText.h; sourceTree = SOURCE_ROOT; };
+		6567EBC60E3F58D20053C51B /* AISocket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AISocket.cpp; path = ../ai/networking/AISocket.cpp; sourceTree = SOURCE_ROOT; };
+		6567EBC70E3F58D20053C51B /* AISocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AISocket.h; path = ../ai/networking/AISocket.h; sourceTree = SOURCE_ROOT; };
+		6567EBCC0E3F59D70053C51B /* AIProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIProtocol.h; path = ../ai/networking/AIProtocol.h; sourceTree = SOURCE_ROOT; };
+		6567ECCA0E3F69040053C51B /* RL_client_environment.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = RL_client_environment.c; path = "../ai/networking/rl-glue/RL_client_environment.c"; sourceTree = SOURCE_ROOT; };
+		6567ECCB0E3F69040053C51B /* RL_common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RL_common.h; path = "../ai/networking/rl-glue/RL_common.h"; sourceTree = SOURCE_ROOT; };
+		6567ECCC0E3F69040053C51B /* RL_network.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = RL_network.c; path = "../ai/networking/rl-glue/RL_network.c"; sourceTree = SOURCE_ROOT; };
+		6567ECCD0E3F69040053C51B /* RL_network.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RL_network.h; path = "../ai/networking/rl-glue/RL_network.h"; sourceTree = SOURCE_ROOT; };
+		6567ECE10E3F69A20053C51B /* AI_environment.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AI_environment.c; sourceTree = "<group>"; };
+		6567ECF60E3F6B1F0053C51B /* AIGlue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIGlue.h; path = ../ai/networking/AIGlue.h; sourceTree = SOURCE_ROOT; };
+		6567ECF70E3F6B1F0053C51B /* AIGlue.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = AIGlue.cpp; path = ../ai/networking/AIGlue.cpp; sourceTree = SOURCE_ROOT; };
 		657D89C00E3F4FF60025E898 /* AIRewards.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AIRewards.cpp; path = ../ai/AIRewards.cpp; sourceTree = SOURCE_ROOT; };
 		657D89C10E3F4FF60025E898 /* AIRewards.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIRewards.h; path = ../ai/AIRewards.h; sourceTree = SOURCE_ROOT; };
-		657D89C20E3F4FF60025E898 /* AISocket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AISocket.cpp; path = ../ai/AISocket.cpp; sourceTree = SOURCE_ROOT; };
-		657D89C30E3F4FF60025E898 /* AISocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AISocket.h; path = ../ai/AISocket.h; sourceTree = SOURCE_ROOT; };
 		65C141C80D25456600E596D4 /* AIBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AIBase.cpp; path = ../ai/AIBase.cpp; sourceTree = SOURCE_ROOT; };
 		65C141C90D25456600E596D4 /* AIBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIBase.h; path = ../ai/AIBase.h; sourceTree = SOURCE_ROOT; };
-		65C141CA0D25456600E596D4 /* AIComm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AIComm.cpp; path = ../ai/AIComm.cpp; sourceTree = SOURCE_ROOT; };
-		65C141CB0D25456600E596D4 /* AIComm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIComm.h; path = ../ai/AIComm.h; sourceTree = SOURCE_ROOT; };
 		65C141CC0D25456600E596D4 /* AIGlobal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIGlobal.h; path = ../ai/AIGlobal.h; sourceTree = SOURCE_ROOT; };
 		B2F367C504C7ADC700A80002 /* SDLMain.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = SDLMain.nib; sourceTree = "<group>"; };
 		DC47454A09C34BFA00EDDA3A /* BankRomCheat.cxx */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = BankRomCheat.cxx; path = ../cheat/BankRomCheat.cxx; sourceTree = SOURCE_ROOT; };
@@ -1087,17 +1101,41 @@
 			name = yacc;
 			sourceTree = "<group>";
 		};
+		6567EBBE0E3F587B0053C51B /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				6567ECC40E3F689B0053C51B /* RL-Glue */,
+				6567EBC60E3F58D20053C51B /* AISocket.cpp */,
+				6567EBC70E3F58D20053C51B /* AISocket.h */,
+				6567EBC20E3F58AE0053C51B /* AIPlainText.cpp */,
+				6567EBC30E3F58AE0053C51B /* AIPlainText.h */,
+				6567EBCC0E3F59D70053C51B /* AIProtocol.h */,
+				6567ECF60E3F6B1F0053C51B /* AIGlue.h */,
+				6567ECF70E3F6B1F0053C51B /* AIGlue.cpp */,
+			);
+			name = Networking;
+			sourceTree = "<group>";
+		};
+		6567ECC40E3F689B0053C51B /* RL-Glue */ = {
+			isa = PBXGroup;
+			children = (
+				6567ECCA0E3F69040053C51B /* RL_client_environment.c */,
+				6567ECCB0E3F69040053C51B /* RL_common.h */,
+				6567ECCC0E3F69040053C51B /* RL_network.c */,
+				6567ECCD0E3F69040053C51B /* RL_network.h */,
+				6567ECE10E3F69A20053C51B /* AI_environment.c */,
+			);
+			name = "RL-Glue";
+			sourceTree = "<group>";
+		};
 		65A69C9A0CCFDB6200D5599E /* AI */ = {
 			isa = PBXGroup;
 			children = (
+				6567EBBE0E3F587B0053C51B /* Networking */,
 				657D89C00E3F4FF60025E898 /* AIRewards.cpp */,
 				657D89C10E3F4FF60025E898 /* AIRewards.h */,
-				657D89C20E3F4FF60025E898 /* AISocket.cpp */,
-				657D89C30E3F4FF60025E898 /* AISocket.h */,
 				65C141C80D25456600E596D4 /* AIBase.cpp */,
 				65C141C90D25456600E596D4 /* AIBase.h */,
-				65C141CA0D25456600E596D4 /* AIComm.cpp */,
-				65C141CB0D25456600E596D4 /* AIComm.h */,
 				65C141CC0D25456600E596D4 /* AIGlobal.h */,
 			);
 			name = AI;
@@ -1271,10 +1309,12 @@
 				DC8078EB0B4BD697005E9305 /* UIDialog.hxx in Headers */,
 				DCEECE570B5E5E540021D754 /* Cart0840.hxx in Headers */,
 				65C141CE0D25456600E596D4 /* AIBase.h in Headers */,
-				65C141D00D25456600E596D4 /* AIComm.h in Headers */,
 				65C141D10D25456600E596D4 /* AIGlobal.h in Headers */,
 				657D89C50E3F4FF60025E898 /* AIRewards.h in Headers */,
-				657D89C70E3F4FF60025E898 /* AISocket.h in Headers */,
+				6567EBC50E3F58AE0053C51B /* AIPlainText.h in Headers */,
+				6567EBC90E3F58D20053C51B /* AISocket.h in Headers */,
+				6567EBCE0E3F59D70053C51B /* AIProtocol.h in Headers */,
+				6567ECF80E3F6B1F0053C51B /* AIGlue.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1509,9 +1549,13 @@
 				DC8078EA0B4BD697005E9305 /* UIDialog.cxx in Sources */,
 				DCEECE560B5E5E540021D754 /* Cart0840.cxx in Sources */,
 				65C141CD0D25456600E596D4 /* AIBase.cpp in Sources */,
-				65C141CF0D25456600E596D4 /* AIComm.cpp in Sources */,
 				657D89C40E3F4FF60025E898 /* AIRewards.cpp in Sources */,
-				657D89C60E3F4FF60025E898 /* AISocket.cpp in Sources */,
+				6567EBC40E3F58AE0053C51B /* AIPlainText.cpp in Sources */,
+				6567EBC80E3F58D20053C51B /* AISocket.cpp in Sources */,
+				6567ECF90E3F6B1F0053C51B /* AIGlue.cpp in Sources */,
+				657903BC0E409C4C00885466 /* RL_client_environment.c in Sources */,
+				657903BD0E409C4C00885466 /* RL_network.c in Sources */,
+				657903BE0E409C4C00885466 /* AI_environment.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1542,6 +1586,7 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					RL_CLIENT_ENVIRONMENT,
 					MAC_OSX,
 					JOYSTICK_SUPPORT,
 					SOUND_SUPPORT,
@@ -1570,6 +1615,7 @@
 				);
 				INFOPLIST_FILE = "Info-StellaOSX__Upgraded_.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
+				KEEP_PRIVATE_EXTERNS = NO;
 				LIBRARY_SEARCH_PATHS = "$(LIBRARY_SEARCH_PATHS)";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
@@ -1601,6 +1647,7 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					RL_CLIENT_ENVIRONMENT,
 					MAC_OSX,
 					JOYSTICK_SUPPORT,
 					SOUND_SUPPORT,
@@ -1630,6 +1677,7 @@
 				);
 				INFOPLIST_FILE = "Info-StellaOSX__Upgraded_.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
+				KEEP_PRIVATE_EXTERNS = NO;
 				LIBRARY_SEARCH_PATHS = "$(LIBRARY_SEARCH_PATHS)";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
@@ -1658,6 +1706,7 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					RL_CLIENT_ENVIRONMENT,
 					MAC_OSX,
 					JOYSTICK_SUPPORT,
 					SOUND_SUPPORT,
@@ -1687,6 +1736,7 @@
 				);
 				INFOPLIST_FILE = "Info-StellaOSX__Upgraded_.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
+				KEEP_PRIVATE_EXTERNS = NO;
 				LIBRARY_SEARCH_PATHS = .;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
