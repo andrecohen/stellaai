@@ -1,0 +1,5 @@
+ROM:	Pitfall.rom
+SCORE:	d8 d9;
+TIME:	d6 d7;
+ROM:	Centipede.rom
+SCORE:	d8 d9;
