@@ -16,13 +16,15 @@
 #ifndef AIBASE_H
 #define AIBASE_H
 
-#include "AIComm.h"
+#include "AIProtocol.h"
 #include "AIRewards.h"
+#include "AIGlobal.h"
 #include "OSystem.hxx"
 #include "EventHandler.hxx"
 #include "FrameBuffer.hxx"
 
 class AIRewards;
+class AIProtocol;
 
 class AIBase {
 public:
@@ -31,10 +33,12 @@ public:
 	void update();
 	void commands();
 	
-	void sendFullScreen();
-	void sendDiffScreen();
+	Matrix getRam();
+	Matrix getScreen();
+	Matrix getPrevScreen();
 	
-	void sendRam();
+	int getScreenHeight();
+	int getScreenWidth();
 	
 	void saveState();
 	void loadState();
@@ -44,19 +48,16 @@ public:
 	void sendKey(SDLKey,bool);
 	bool getKeys();
 	
-	int getPixel(int,int);
-	
 	OSystem *getOSystem();
 	
 private:
-	Matrix getScreen();
-	int getScreenHeight();
-	int getScreenWidth();
+	int getPixel(int,int);
+	
 	int	saveStack;
 	
 	OSystem *system;
 	
-	AIComm *comm;
+	AIProtocol *comm;
 	AIRewards *rewards;
 	Matrix screen;
 };

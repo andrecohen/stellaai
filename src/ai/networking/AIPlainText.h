@@ -17,14 +17,20 @@
 #include <string>
 #include <vector>
 #include "AISocket.h"
+#include "AIProtocol.h"
+#include "AIBase.h"
 #include "AIGlobal.h"
 
 using namespace std;
 
-class AIComm {
+class AIPlainText : public AIProtocol {
 public:
-	AIComm();
-	~AIComm();
+	AIPlainText();
+	~AIPlainText();
+	
+	virtual bool connect();
+	virtual bool isConnected();
+	virtual void runEventLoop(AIBase *);
 	
 	void sendPacket(string);
 	void sendPacket(int);
@@ -33,7 +39,9 @@ public:
 	string receive();
 
 private:
-	int counter;
+	void sendFullScreen(Matrix,int,int);
+	void sendDiffScreen(Matrix,Matrix);
+	void sendRam(Matrix);
 	
 	int getInt();
 	char getChar();
@@ -43,6 +51,7 @@ private:
 	void sendChar(char);
 	
 	TCPSocket *socket;
+	int counter;
 };
 
 
