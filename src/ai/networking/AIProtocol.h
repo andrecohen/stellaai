@@ -13,7 +13,10 @@
 class AIBase;
 
 class AIProtocol {
+
 public:
+  virtual ~AIProtocol() {} 
+
 	virtual bool connect() = 0;
 	virtual bool isConnected() = 0;
 	virtual void runEventLoop(AIBase *) = 0;
