@@ -19,7 +19,7 @@ using namespace std;
 class OSystem;
 
 
-enum RewardType {Score,Time};
+enum RewardType {rt_Score,rt_Time};
 
 class RewardEntry{
 public:

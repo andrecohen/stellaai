@@ -212,11 +212,7 @@ static void runEnvironmentEventLoop(int theConnection) {
 
     case kEnvStep:
       onEnvStep(theConnection);
-#if defined(RL_CLIENT_ENVIRONMENT) == FALSE
 			break;
-#else
-			return;
-#endif
 
     case kEnvCleanup:
       onEnvCleanup(theConnection);
@@ -252,10 +248,38 @@ static void runEnvironmentEventLoop(int theConnection) {
     };
 
     rlSendBufferData(theConnection, &theBuffer, envState);
+
+#if defined(RLGENV_NOMAINLOOP)
+    break;
+#endif
+
   } while (envState != kRLTerm);
 }
 
-#if defined(RL_CLIENT_ENVIRONMENT) == FALSE
+#if defined(RLGENV_NOMAINLOOP)
+
+static int theConnection;
+
+int rlStartEnvironment(char *host, int port){
+	theConnection = 0;
+	rlBufferCreate(&theBuffer, 4096);
+	theConnection = rlWaitForConnection(host, port, kRetryTimeout);
+	rlBufferClear(&theBuffer);
+	rlSendBufferData(theConnection, &theBuffer, kEnvironmentConnection);
+	return theConnection;
+}
+
+void rlUpdateEnvironment(){
+	runEnvironmentEventLoop(theConnection);
+}
+
+void rlEndEnvironment(){
+	rlClose(theConnection);
+	rlBufferDestroy(&theBuffer);
+}
+
+#else
+
 int main(int argc, char** argv) {
   int theConnection = 0;
 
@@ -319,28 +343,6 @@ int main(int argc, char** argv) {
   rlBufferDestroy(&theBuffer);
 
   return 0;
-}
-
-#else
-
-static int theConnection;
-
-int rlStartEnvironment(char *host, int port){
-	theConnection = 0;
-	rlBufferCreate(&theBuffer, 4096);
-	theConnection = rlWaitForConnection(host, port, kRetryTimeout);
-	rlBufferClear(&theBuffer);
-	rlSendBufferData(theConnection, &theBuffer, kEnvironmentConnection);
-	return theConnection;
-}
-
-void rlUpdateEnvironment(){
-	runEnvironmentEventLoop(theConnection);
-}
-
-void rlEndEnvironment(){
-	rlClose(theConnection);
-	rlBufferDestroy(&theBuffer);
 }
 
 #endif

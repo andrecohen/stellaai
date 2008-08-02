@@ -12,13 +12,10 @@
 
 #include "RL_network.h"
 #include "RL_common.h"
+#include "Environment_common.h"
 #include "AIGlue.h"
+#include "AIProtocol.h"
 
-extern "C" {
-	bool rlStartEnvironment(char *host, int port);
-	void rlUpdateEnvironment();
-	void rlEndEnvironment();
-}
 
 AIGlue::AIGlue(){
 	host = "127.0.0.1";
@@ -45,3 +42,5 @@ bool AIGlue::isConnected(){
 void AIGlue::runEventLoop(AIBase *base){
 	rlUpdateEnvironment();
 }
+
+
