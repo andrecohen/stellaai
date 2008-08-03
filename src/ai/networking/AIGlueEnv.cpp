@@ -1,5 +1,6 @@
 
 #include <string>
+#include <iostream>
 #include <sstream>
 #include <vector>
 
@@ -28,6 +29,7 @@ static AIGlue * aiGlue = NULL;
 static AIBase * aiBase = NULL; 
 static Observation o; 
 static Reward_observation ro; 
+static int timestep; 
 
 /* Helper functions first */
 void applyAction(int action)
@@ -117,9 +119,9 @@ void applyAction(int action)
     default: 
       aiBase->resetKeys(); 
   }
-
-
 }
+
+
 
 /* Now, RLGlue Environment function impl. */
 Task_specification env_init()
@@ -144,53 +146,36 @@ Task_specification env_init()
   return (Task_specification)task_spec.c_str(); 
 }
 
-Observation env_start()
+void fullScreenObservation(Observation & obs)
 {
-  assert(aiBase != NULL);
+  int size = 4 + screen_width*screen_height; 
 
-  aiBase->resetKeys(); 
-  
-  screen_width = aiBase->getScreenWidth();
-  screen_height = aiBase->getScreenHeight(); 
-
-  int size = 2 + screen_width*screen_height; 
-
-  o.numInts = size; 
-  o.intArray = (int*)realloc(o.intArray, size*sizeof(int)); 
+  obs.numInts = size; 
+  obs.intArray = (int*)realloc(obs.intArray, size*sizeof(int)); 
 
   Matrix screen = aiBase->getPrevScreen();  
 
   int index = 0; 
-  o.intArray[index] = screen_height; index++; 
-  o.intArray[index] = screen_width; index++; 
+  obs.intArray[index] = screen_height; index++; 
+  obs.intArray[index] = screen_width; index++; 
 
-	for(int y = 0; y < screen_height; y++)
-		for(int x = 0; x< screen_width; x++)
+  int h = screen.size();
+  int w = screen[0].size();
+
+  obs.intArray[index] = h; index++; 
+  obs.intArray[index] = w; index++;
+  
+	for(int y = 0; y < h; y++)
+		for(int x = 0; x < w; x++)
     {
+      //cout << "env_start setting y,x = " << y << "," << x << endl; 
       o.intArray[index] = screen[y][x]; 
       index++;
     }
-
-  return o; 
 }
 
-Reward_observation env_step(Action a)
+void diffScreenObservation(Observation & obs)
 {
-  assert(a.numInts == 1);
-  int action = a.intArray[0]; 
-
-  aiBase->resetKeys(); 
-
-  // Apply the action
-  applyAction(action); 
-
-  // Get and set the reward
-  ro.r = -1; 
-
-  // check if terminal
-  ro.terminal = 0; 
-
-  // Get observation
   Matrix previous = aiBase->getPrevScreen(); 
   Matrix current = aiBase->getScreen(); 
 
@@ -213,6 +198,50 @@ Reward_observation env_step(Action a)
 
   for (int i = 0; i < size; i++) 
     ro.o.intArray[i] = pixel_diffs[i];
+}
+
+Observation env_start()
+{
+  aiBase = AIGlueEnv::aiBasePtr; 
+  assert(aiBase != NULL);
+
+  aiBase->resetKeys(); 
+  
+  screen_width = aiBase->getScreenWidth();
+  screen_height = aiBase->getScreenHeight(); 
+
+  cout << "Width x Height = " << screen_width << " x " << screen_height << endl; 
+
+  o.numInts = 0; 
+  timestep = 0; 
+
+  return o; 
+}
+
+Reward_observation env_step(Action a)
+{
+  timestep++; 
+  cout << "env_step starting, timestep " << timestep << endl; 
+
+  assert(a.numInts == 1);
+  int action = a.intArray[0]; 
+
+  aiBase->resetKeys(); 
+
+  // Apply the action
+  applyAction(action); 
+
+  // Get and set the reward
+  ro.r = -1; 
+
+  // check if terminal
+  ro.terminal = 0; 
+
+  // Get observation
+  if ((aiBase->getScreen()).size() == 0)
+    fullScreenObservation(ro.o); 
+  else
+    diffScreenObservation(ro.o); 
 
   return ro; 
 }
