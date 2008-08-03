@@ -14,12 +14,14 @@
 #include "RL_common.h"
 #include "Environment_common.h"
 #include "AIGlue.h"
+#include "AIGlueEnv.h"
 #include "AIProtocol.h"
 
 
 AIGlue::AIGlue(){
-	host = "127.0.0.1";
+	host = (char*)"127.0.0.1";
 	port = 4096;
+  AIGlueEnv::aiGluePtr = this; 
 }
 
 AIGlue::~AIGlue(){
@@ -40,6 +42,7 @@ bool AIGlue::isConnected(){
 }
 
 void AIGlue::runEventLoop(AIBase *base){
+  AIGlueEnv::aiBasePtr = base; 
 	rlUpdateEnvironment();
 }
 

@@ -62,7 +62,7 @@ void AIPlainText::runEventLoop(AIBase *base){
 		else if(command == "SPACE")	base->pressKey(SDLK_SPACE);
 		else if(command == "RESET")	base->resetKeys();
 		else if(command == "FULL_SCREEN")	sendFullScreen(base->getPrevScreen(),base->getScreenHeight(),base->getScreenWidth()); 
-		else if(command == "DIFF_SCREEN")	sendDiffScreen(base->getScreen(),base->getScreen());
+		else if(command == "DIFF_SCREEN")	sendDiffScreen(base->getPrevScreen(),base->getScreen());
 		else if(command == "SAVE")	base->saveState();
 		else if(command == "PREV")	base->loadState();
 		else if(command == "DUMP")	sendRam(base->getRam());
@@ -81,25 +81,8 @@ void AIPlainText::sendFullScreen(Matrix current,int h, int w){
 // Sends the difference of pixels from the last full screen sent and now
 void AIPlainText::sendDiffScreen(Matrix previous, Matrix current){
 	Matrix diff;
-	
-	// If the last screen is not available, then we can't do a diff
-	if(current.size()!=previous.size() &&  current[0].size()!=previous[0].size()){
-		return;
-	}
-	
-	// Generate diff matrix
-	for(size_t y=0;y<current.size();y++){
-		for(size_t x=0;x<current[y].size();x++){
-			if(current[y][x] != previous[y][x]){
-				MatrixRow row;
-				row.push_back(x);
-				row.push_back(y);
-				row.push_back(current[y][x]);
-				diff.push_back(row);
-			}
-		}
-	}
-	
+  computeDiff(previous, current, diff);  
+
 	// Send diff matrix
 	sendPacket(diff);
 }

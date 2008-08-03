@@ -120,6 +120,9 @@ distclean: clean
 clean:
 	$(RM) $(OBJS) $(EXECUTABLE)
 
+cleanai:
+	scripts/cleanai
+
 .PHONY: all clean dist distclean
 
 .SUFFIXES: .cxx

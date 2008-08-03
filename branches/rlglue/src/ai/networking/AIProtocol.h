@@ -10,6 +10,7 @@
 #define AI_PROTOCOL_H
 
 #include "AIBase.h"
+#include "AIGlobal.h"
 class AIBase;
 
 class AIProtocol {
@@ -20,6 +21,9 @@ public:
 	virtual bool connect() = 0;
 	virtual bool isConnected() = 0;
 	virtual void runEventLoop(AIBase *) = 0;
+
+  virtual void computeDiff(const Matrix & previous, const Matrix & current, 
+                           Matrix & result); 
 };
 
 #endif
