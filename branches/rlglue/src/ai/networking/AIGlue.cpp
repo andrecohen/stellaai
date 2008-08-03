@@ -7,6 +7,7 @@
  *
  */
 #include <string>
+#include <iostream>
 #include <netdb.h> 
 #include <arpa/inet.h> 
 
@@ -16,6 +17,8 @@
 #include "AIGlue.h"
 #include "AIGlueEnv.h"
 #include "AIProtocol.h"
+
+using namespace std; 
 
 
 AIGlue::AIGlue(){
@@ -42,6 +45,7 @@ bool AIGlue::isConnected(){
 }
 
 void AIGlue::runEventLoop(AIBase *base){
+  //cout << "Running Event loop.." << endl; 
   AIGlueEnv::aiBasePtr = base; 
 	rlUpdateEnvironment();
 }
