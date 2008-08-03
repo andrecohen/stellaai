@@ -34,19 +34,22 @@ using namespace std;
 #include "Event.hxx"
 #include "Debugger.hxx"
 
-#define PLAIN_TEXT	0
-#define	RL_GLUE		1
+#define PROTOCOL_PLAINTEXT	    0
+#define	PROTOCOL_RLGLUE         1
+
+static int enabled_protocol =  PROTOCOL_RLGLUE; 
+
 
 AIBase::AIBase(OSystem *system){
 	// Are we talking doing any sort of AI
 	try{
-#if PLAIN_TEXT
-		comm = new AIPlainText();
+    if (enabled_protocol == PROTOCOL_PLAINTEXT)
+  		comm = new AIPlainText();
+    else if (enabled_protocol == PROTOCOL_RLGLUE)
+		  comm = new AIGlue();
+
 		comm->connect();
-#else
-		comm = new AIGlue();
-		comm->connect();
-#endif
+
 	}catch(exception e){
 		cerr<<"No connection found..."<<endl;
 		comm = NULL;
