@@ -36,6 +36,13 @@ void applyAction(int action)
 {
   switch(action)
   {
+    case RLGACT_NOOP: 
+      break; 
+
+    case RLGACT_FIRE: 
+      aiBase->pressKey(SDLK_SPACE);
+      break; 
+
     case RLGACT_UP: 
       aiBase->pressKey(SDLK_UP);
       break; 
@@ -148,14 +155,15 @@ Task_specification env_init()
 
 void fullScreenObservation(Observation & obs)
 {
-  int size = 4 + screen_width*screen_height; 
+  int size = 1+ 4 + screen_width*screen_height; 
 
   obs.numInts = size; 
   obs.intArray = (int*)realloc(obs.intArray, size*sizeof(int)); 
 
   Matrix screen = aiBase->getPrevScreen();  
 
-  int index = 0; 
+  int index = 0;
+  obs.intArray[index] = 0; index++; // indicate that it's a full screen obs
   obs.intArray[index] = screen_height; index++; 
   obs.intArray[index] = screen_width; index++; 
 
@@ -191,13 +199,17 @@ void diffScreenObservation(Observation & obs)
 		}
 	}
 
-  int size = pixel_diffs.size(); 
-
+  int size = pixel_diffs.size() + 3; 
+  
   ro.o.numInts = size; 
   ro.o.intArray = (int*)realloc(ro.o.intArray, size*sizeof(int)); 
 
-  for (int i = 0; i < size; i++) 
-    ro.o.intArray[i] = pixel_diffs[i];
+  ro.o.intArray[0] = 1; // indicate that it's a diff
+  ro.o.intArray[1] = screen_height; 
+  ro.o.intArray[2] = screen_width; 
+
+  for (int i = 0; i < pixel_diffs.size(); i++) 
+    ro.o.intArray[i+3] = pixel_diffs[i];
 }
 
 Observation env_start()
@@ -209,8 +221,7 @@ Observation env_start()
   
   screen_width = aiBase->getScreenWidth();
   screen_height = aiBase->getScreenHeight(); 
-
-  cout << "Width x Height = " << screen_width << " x " << screen_height << endl; 
+  cout << "Initial screen res, WxH = " << screen_width << " x " << screen_height << endl; 
 
   o.numInts = 0; 
   timestep = 0; 
@@ -222,6 +233,15 @@ Reward_observation env_step(Action a)
 {
   timestep++; 
   cout << "env_step starting, timestep " << timestep << endl; 
+  
+  int sw = aiBase->getScreenWidth();
+  int sh = aiBase->getScreenHeight(); 
+  if (sh != screen_height || sw != screen_width)
+  {
+    screen_width = sw;
+    screen_height = sh; 
+    cout << "Change in screen res, WxH = " << screen_width << " x " << screen_height << endl; 
+  }
 
   assert(a.numInts == 1);
   int action = a.intArray[0]; 
