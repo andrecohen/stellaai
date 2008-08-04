@@ -279,6 +279,8 @@ Reward_observation env_step(Action a)
   // Get observation
   if (timestep < 20)
     fullScreenObservation(ro.o, aiBase->getScreen()); 
+  //else if (timestep > 20 && timestep % 10 == 0)
+  //  fullScreenObservation(ro.o, aiBase->getScreen()); 
   else
     diffScreenObservation(ro.o); 
   
