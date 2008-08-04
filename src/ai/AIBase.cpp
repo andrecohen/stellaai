@@ -73,6 +73,7 @@ void AIBase::update(){
 	if(true){
 		// Update screen (not really needed)
 		system->frameBuffer().refresh();
+
     oldScreen = curScreen;
     curScreen = nextScreen(); 
 		
@@ -111,6 +112,9 @@ Matrix AIBase::getRam(){
 Matrix AIBase::nextScreen(){
 	int h = getScreenHeight();
 	int w = getScreenWidth();
+
+  //cout << "height and width reported as " << h << " " << w << endl; 
+
 	Matrix curscr;
 	
 	for(int y=0;y<h;y++){
