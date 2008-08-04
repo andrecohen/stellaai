@@ -214,7 +214,8 @@ void diffScreenObservation(Observation & obs)
 		}
 	}
 
-  int size = pixel_diffs.size() + 3; 
+  int size = pixel_diffs.size() + 3;
+
   
   obs.numInts = size; 
   int * p = (int*)realloc(obs.intArray, size*sizeof(int)); 
@@ -277,10 +278,8 @@ Reward_observation env_step(Action a)
   ro.terminal = 0; 
 
   // Get observation
-  if (timestep < 20)
+  if (timestep < 10)
     fullScreenObservation(ro.o, aiBase->getScreen()); 
-  //else if (timestep > 20 && timestep % 10 == 0)
-  //  fullScreenObservation(ro.o, aiBase->getScreen()); 
   else
     diffScreenObservation(ro.o); 
   
