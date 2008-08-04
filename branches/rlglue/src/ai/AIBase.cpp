@@ -39,7 +39,7 @@ using namespace std;
 #define PROTOCOL_PLAINTEXT	    1
 #define	PROTOCOL_RLGLUE         2
 
-static int enabled_protocol =  PROTOCOL_NONE; 
+static int enabled_protocol =  PROTOCOL_RLGLUE; 
 
 
 AIBase::AIBase(OSystem *system){
@@ -85,8 +85,8 @@ void AIBase::update(){
     oldScreen = curScreen;
     curScreen = nextScreen(); 
 		
-    int r = rewards->getReward("Pitfall.rom",rt_Score);
-    cout << "Reward = " << r << endl; 
+    //int r = rewards->getReward("Pitfall.rom",rt_Score);
+    //cout << "Reward = " << r << endl; 
 
 		// Get commands for next frame
 		if(comm)

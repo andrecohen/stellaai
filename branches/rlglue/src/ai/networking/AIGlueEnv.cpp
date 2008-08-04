@@ -273,7 +273,7 @@ Reward_observation env_step(Action a)
   applyAction(action); 
 
   // Get and set the reward
-  ro.r = -1; 
+  ro.r = AIGlueEnv::curReward;  
 
   // check if terminal
   ro.terminal = 0; 
