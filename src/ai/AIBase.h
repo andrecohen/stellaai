@@ -33,6 +33,7 @@ public:
 	void update();
 	void commands();
 	
+	Matrix nextScreen();
 	Matrix getRam();
 	Matrix getScreen();
 	Matrix getPrevScreen();
@@ -59,7 +60,9 @@ private:
 	
 	AIProtocol *comm;
 	AIRewards *rewards;
-	Matrix screen;
+
+	Matrix oldScreen;
+	Matrix curScreen;
 };
 
 #endif

@@ -153,14 +153,17 @@ Task_specification env_init()
   return (Task_specification)task_spec.c_str(); 
 }
 
-void fullScreenObservation(Observation & obs)
+void fullScreenObservation(Observation & obs, const Matrix & screen)
 {
+  //cout << "Computing full screen obs" << endl; 
+
   int size = 1+ 4 + screen_width*screen_height; 
 
   obs.numInts = size; 
-  obs.intArray = (int*)realloc(obs.intArray, size*sizeof(int)); 
 
-  Matrix screen = aiBase->getPrevScreen();  
+  int * p = (int*)realloc(obs.intArray, size*sizeof(int)); 
+  assert (p != NULL); 
+  obs.intArray = p; 
 
   int index = 0;
   obs.intArray[index] = 0; index++; // indicate that it's a full screen obs
@@ -176,14 +179,26 @@ void fullScreenObservation(Observation & obs)
 	for(int y = 0; y < h; y++)
 		for(int x = 0; x < w; x++)
     {
-      //cout << "env_start setting y,x = " << y << "," << x << endl; 
-      o.intArray[index] = screen[y][x]; 
+      //cout << "fullscreenobs setting y,x = " << y << "," << x;
+      //cout << ", val = " << screen[y][x] << endl; 
+
+      /*
+      if (screen_width == 640 && screen[y][x] != 0) 
+      {
+        cout << "val != 0!" << endl;
+        exit(-1); 
+      }
+      */
+
+      obs.intArray[index] = screen[y][x]; 
       index++;
     }
 }
 
 void diffScreenObservation(Observation & obs)
 {
+  //cout << "Computing diff screen obs" << endl; 
+
   Matrix previous = aiBase->getPrevScreen(); 
   Matrix current = aiBase->getScreen(); 
 
@@ -201,15 +216,17 @@ void diffScreenObservation(Observation & obs)
 
   int size = pixel_diffs.size() + 3; 
   
-  ro.o.numInts = size; 
-  ro.o.intArray = (int*)realloc(ro.o.intArray, size*sizeof(int)); 
+  obs.numInts = size; 
+  int * p = (int*)realloc(obs.intArray, size*sizeof(int)); 
+  assert (p != NULL); 
+  obs.intArray = p; 
 
-  ro.o.intArray[0] = 1; // indicate that it's a diff
-  ro.o.intArray[1] = screen_height; 
-  ro.o.intArray[2] = screen_width; 
+  obs.intArray[0] = 1; // indicate that it's a diff
+  obs.intArray[1] = screen_height; 
+  obs.intArray[2] = screen_width; 
 
-  for (int i = 0; i < pixel_diffs.size(); i++) 
-    ro.o.intArray[i+3] = pixel_diffs[i];
+  for (unsigned int i = 0; i < pixel_diffs.size(); i++) 
+    obs.intArray[i+3] = pixel_diffs[i];
 }
 
 Observation env_start()
@@ -232,23 +249,25 @@ Observation env_start()
 Reward_observation env_step(Action a)
 {
   timestep++; 
-  cout << "env_step starting, timestep " << timestep << endl; 
+  //cout << "env_step starting, timestep " << timestep << endl; 
+  bool res_change = false; 
   
   int sw = aiBase->getScreenWidth();
   int sh = aiBase->getScreenHeight(); 
   if (sh != screen_height || sw != screen_width)
   {
+    cout << "Change in screen res, old WxH = " << screen_width << " x " << screen_height << endl; 
     screen_width = sw;
     screen_height = sh; 
-    cout << "Change in screen res, WxH = " << screen_width << " x " << screen_height << endl; 
+    cout << "Change in screen res, new WxH = " << screen_width << " x " << screen_height << endl; 
+    res_change = true; 
   }
 
   assert(a.numInts == 1);
   int action = a.intArray[0]; 
 
-  aiBase->resetKeys(); 
-
   // Apply the action
+  aiBase->resetKeys(); 
   applyAction(action); 
 
   // Get and set the reward
@@ -258,10 +277,12 @@ Reward_observation env_step(Action a)
   ro.terminal = 0; 
 
   // Get observation
-  if ((aiBase->getScreen()).size() == 0)
-    fullScreenObservation(ro.o); 
+  if (timestep < 20)
+    fullScreenObservation(ro.o, aiBase->getScreen()); 
   else
     diffScreenObservation(ro.o); 
+  
+  //fullScreenObservation(ro.o, aiBase->getScreen()); 
 
   return ro; 
 }
