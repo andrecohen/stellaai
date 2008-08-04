@@ -73,6 +73,8 @@ void AIBase::update(){
 	if(true){
 		// Update screen (not really needed)
 		system->frameBuffer().refresh();
+    oldScreen = curScreen;
+    curScreen = nextScreen(); 
 		
 		//rewards->getReward("Pitfall.rom",Score);
 		
@@ -106,35 +108,41 @@ Matrix AIBase::getRam(){
 }
 
 // Does the actual getting of the screen from Stella (without scaling)
-Matrix AIBase::getScreen(){
+Matrix AIBase::nextScreen(){
 	int h = getScreenHeight();
 	int w = getScreenWidth();
-	Matrix current;
+	Matrix curscr;
 	
 	for(int y=0;y<h;y++){
 		MatrixRow row;
 		int dx=0,dy=y;
 		system->frameBuffer().translateCoords(dx, dy);
-		if(dy==(int)current.size()){
+		if(dy==(int)curscr.size()){
 			for(int x=0;x<w;x++){
 				dx = x;
 				dy = y;
 				system->frameBuffer().translateCoords(dx, dy);
 				if(dx==(int)row.size())
-					row.push_back(getPixel(x, y));
+        {
+				  int p = getPixel(x,y); 
+          //cout << "pixel " << x << "," << y << " = " << p << endl; 
+          row.push_back(p);
+        }
 			}
-			current.push_back(row);
+			curscr.push_back(row);
 		}
 	}
 	
-	// Save the current screen
-	screen = current;
-	
-	return current;
+	return curscr;
+}
+
+Matrix AIBase::getScreen()
+{
+  return curScreen;
 }
 
 Matrix AIBase::getPrevScreen(){
-	return screen;
+	return oldScreen;
 }
 
 // Saves current game state in a stack

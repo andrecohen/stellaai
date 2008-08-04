@@ -61,7 +61,7 @@ void AIPlainText::runEventLoop(AIBase *base){
 		else if(command == "RIGHT")	base->pressKey(SDLK_RIGHT);
 		else if(command == "SPACE")	base->pressKey(SDLK_SPACE);
 		else if(command == "RESET")	base->resetKeys();
-		else if(command == "FULL_SCREEN")	sendFullScreen(base->getPrevScreen(),base->getScreenHeight(),base->getScreenWidth()); 
+		else if(command == "FULL_SCREEN")	sendFullScreen(base->getScreen(),base->getScreenHeight(),base->getScreenWidth()); 
 		else if(command == "DIFF_SCREEN")	sendDiffScreen(base->getPrevScreen(),base->getScreen());
 		else if(command == "SAVE")	base->saveState();
 		else if(command == "PREV")	base->loadState();
