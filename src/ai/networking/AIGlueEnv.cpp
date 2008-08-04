@@ -19,6 +19,7 @@ using namespace std;
 //
 AIGlue* AIGlueEnv::aiGluePtr = NULL; 
 AIBase* AIGlueEnv::aiBasePtr = NULL; 
+int AIGlueEnv::curReward = 0; 
 
 /* List of variables local to the environment */
 static string msg; 

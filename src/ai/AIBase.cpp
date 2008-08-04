@@ -34,13 +34,18 @@ using namespace std;
 #include "Event.hxx"
 #include "Debugger.hxx"
 
-#define PROTOCOL_PLAINTEXT	    0
-#define	PROTOCOL_RLGLUE         1
+// Use NONE when you want to use Stella directly 
+#define PROTOCOL_NONE           0
+#define PROTOCOL_PLAINTEXT	    1
+#define	PROTOCOL_RLGLUE         2
 
-static int enabled_protocol =  PROTOCOL_RLGLUE; 
+static int enabled_protocol =  PROTOCOL_NONE; 
 
 
 AIBase::AIBase(OSystem *system){
+
+  comm = NULL; 
+
 	// Are we talking doing any sort of AI
 	try{
     if (enabled_protocol == PROTOCOL_PLAINTEXT)
@@ -48,7 +53,8 @@ AIBase::AIBase(OSystem *system){
     else if (enabled_protocol == PROTOCOL_RLGLUE)
 		  comm = new AIGlue();
 
-		comm->connect();
+    if (comm)
+  		comm->connect();
 
 	}catch(exception e){
 		cerr<<"No connection found..."<<endl;
@@ -58,6 +64,8 @@ AIBase::AIBase(OSystem *system){
 	rewards = new AIRewards(system);
 	this->system = system;
 	saveStack = 0;
+
+  if (comm) comm->setRewards(rewards); 
 }
 
 AIBase::~AIBase(){
@@ -77,8 +85,9 @@ void AIBase::update(){
     oldScreen = curScreen;
     curScreen = nextScreen(); 
 		
-		//rewards->getReward("Pitfall.rom",Score);
-		
+    int r = rewards->getReward("Pitfall.rom",rt_Score);
+    cout << "Reward = " << r << endl; 
+
 		// Get commands for next frame
 		if(comm)
 			comm->runEventLoop(this);
