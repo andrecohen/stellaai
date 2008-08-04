@@ -10,13 +10,20 @@
 #define AI_PROTOCOL_H
 
 #include "AIBase.h"
+#include "AIRewards.h"
 #include "AIGlobal.h"
 class AIBase;
+class AIRewards;
 
 class AIProtocol {
+protected: 
+  AIRewards* rewards; 
 
 public:
+  AIProtocol() { rewards = NULL; }
   virtual ~AIProtocol() {} 
+
+  virtual void setRewards(AIRewards* rew) { rewards = rew; }
 
 	virtual bool connect() = 0;
 	virtual bool isConnected() = 0;

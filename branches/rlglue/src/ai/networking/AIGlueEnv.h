@@ -48,6 +48,7 @@ class AIGlueEnv
 public:
   static AIGlue * aiGluePtr;
   static AIBase * aiBasePtr;
+  static int curReward;  
 
 };
 

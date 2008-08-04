@@ -47,6 +47,11 @@ bool AIGlue::isConnected(){
 void AIGlue::runEventLoop(AIBase *base){
   //cout << "Running Event loop.." << endl; 
   AIGlueEnv::aiBasePtr = base; 
+	
+  int r = rewards->getReward("Pitfall.rom",rt_Score);
+  AIGlueEnv::curReward = r; 
+  //cout << "Reward = " << r << endl; 
+		
 	rlUpdateEnvironment();
 }
 
