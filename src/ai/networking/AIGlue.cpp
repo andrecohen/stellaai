@@ -20,7 +20,6 @@
 
 using namespace std; 
 
-
 AIGlue::AIGlue(){
 	host = (char*)"127.0.0.1";
 	port = 4096;
