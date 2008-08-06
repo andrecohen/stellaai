@@ -40,7 +40,7 @@ extern "C" {
 #if defined(RLGENV_NOMAINLOOP)
   /* Hooks for external programs with existing main loops */
 
-  #ifdef MACOSX
+  #ifdef __APPLE__
   extern "C" int rlStartEnvironment(char *host, int port);
   extern "C" void rlUpdateEnvironment();
   extern "C" void rlEndEnvironment();
