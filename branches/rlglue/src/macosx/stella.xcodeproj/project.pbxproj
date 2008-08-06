@@ -272,18 +272,31 @@
 		2D91751409BA90380026E9FF /* SDL.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2D4764C806683C5F00F63D87 /* SDL.framework */; };
 		2D91753809BA91BC0026E9FF /* StellaOSX.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2D91753709BA91BC0026E9FF /* StellaOSX.xcconfig */; };
 		2DEFB40C09C3386F00754289 /* Cart.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2DEFB40B09C3386F00754289 /* Cart.icns */; };
+		654409CB0E49E84F00D20E74 /* RL_client_environment.c in Sources */ = {isa = PBXBuildFile; fileRef = 654409C90E49E84F00D20E74 /* RL_client_environment.c */; };
+		654409CC0E49E84F00D20E74 /* RL_glue.h in Headers */ = {isa = PBXBuildFile; fileRef = 654409CA0E49E84F00D20E74 /* RL_glue.h */; };
+		654409F00E49E9B300D20E74 /* Agent_common.h in Headers */ = {isa = PBXBuildFile; fileRef = 654409EF0E49E9B300D20E74 /* Agent_common.h */; };
 		6567EBC40E3F58AE0053C51B /* AIPlainText.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6567EBC20E3F58AE0053C51B /* AIPlainText.cpp */; };
 		6567EBC50E3F58AE0053C51B /* AIPlainText.h in Headers */ = {isa = PBXBuildFile; fileRef = 6567EBC30E3F58AE0053C51B /* AIPlainText.h */; };
 		6567EBC80E3F58D20053C51B /* AISocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6567EBC60E3F58D20053C51B /* AISocket.cpp */; };
 		6567EBC90E3F58D20053C51B /* AISocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 6567EBC70E3F58D20053C51B /* AISocket.h */; };
 		6567EBCE0E3F59D70053C51B /* AIProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 6567EBCC0E3F59D70053C51B /* AIProtocol.h */; };
 		6567ECF80E3F6B1F0053C51B /* AIGlue.h in Headers */ = {isa = PBXBuildFile; fileRef = 6567ECF60E3F6B1F0053C51B /* AIGlue.h */; };
-		6567ECF90E3F6B1F0053C51B /* AIGlue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6567ECF70E3F6B1F0053C51B /* AIGlue.cpp */; };
-		657903BC0E409C4C00885466 /* RL_client_environment.c in Sources */ = {isa = PBXBuildFile; fileRef = 6567ECCA0E3F69040053C51B /* RL_client_environment.c */; };
-		657903BD0E409C4C00885466 /* RL_network.c in Sources */ = {isa = PBXBuildFile; fileRef = 6567ECCC0E3F69040053C51B /* RL_network.c */; };
-		657903BE0E409C4C00885466 /* AI_environment.c in Sources */ = {isa = PBXBuildFile; fileRef = 6567ECE10E3F69A20053C51B /* AI_environment.c */; };
+		656DB5AF0E47D54600820EC6 /* AIGlue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 656DB5A00E47D54600820EC6 /* AIGlue.cpp */; };
 		657D89C40E3F4FF60025E898 /* AIRewards.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 657D89C00E3F4FF60025E898 /* AIRewards.cpp */; };
 		657D89C50E3F4FF60025E898 /* AIRewards.h in Headers */ = {isa = PBXBuildFile; fileRef = 657D89C10E3F4FF60025E898 /* AIRewards.h */; };
+		659537310E47B0CB00D75047 /* AI_environment.c in Sources */ = {isa = PBXBuildFile; fileRef = 659537260E47B0CB00D75047 /* AI_environment.c */; };
+		659537320E47B0CB00D75047 /* C_TaskSpec_Parser.c in Sources */ = {isa = PBXBuildFile; fileRef = 659537270E47B0CB00D75047 /* C_TaskSpec_Parser.c */; };
+		659537330E47B0CB00D75047 /* C_TaskSpec_Parser.h in Headers */ = {isa = PBXBuildFile; fileRef = 659537280E47B0CB00D75047 /* C_TaskSpec_Parser.h */; };
+		659537340E47B0CB00D75047 /* Environment_common.h in Headers */ = {isa = PBXBuildFile; fileRef = 659537290E47B0CB00D75047 /* Environment_common.h */; };
+		659537350E47B0CB00D75047 /* RL_common.h in Headers */ = {isa = PBXBuildFile; fileRef = 6595372A0E47B0CB00D75047 /* RL_common.h */; };
+		659537380E47B0CB00D75047 /* RL_network.c in Sources */ = {isa = PBXBuildFile; fileRef = 6595372D0E47B0CB00D75047 /* RL_network.c */; };
+		659537390E47B0CB00D75047 /* RL_network.h in Headers */ = {isa = PBXBuildFile; fileRef = 6595372E0E47B0CB00D75047 /* RL_network.h */; };
+		6595373A0E47B0CB00D75047 /* RLStruct_util.c in Sources */ = {isa = PBXBuildFile; fileRef = 6595372F0E47B0CB00D75047 /* RLStruct_util.c */; };
+		6595373B0E47B0CB00D75047 /* RLStruct_util.h in Headers */ = {isa = PBXBuildFile; fileRef = 659537300E47B0CB00D75047 /* RLStruct_util.h */; };
+		659537400E47B0DE00D75047 /* AIGlueEnv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6595373D0E47B0DE00D75047 /* AIGlueEnv.cpp */; };
+		659537410E47B0DE00D75047 /* AIGlueEnv.h in Headers */ = {isa = PBXBuildFile; fileRef = 6595373E0E47B0DE00D75047 /* AIGlueEnv.h */; };
+		659537420E47B0DE00D75047 /* AIProtocol.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6595373F0E47B0DE00D75047 /* AIProtocol.cpp */; };
+		659537550E47B20900D75047 /* RL_network_environment.c in Sources */ = {isa = PBXBuildFile; fileRef = 659537530E47B20900D75047 /* RL_network_environment.c */; };
 		65C141CD0D25456600E596D4 /* AIBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65C141C80D25456600E596D4 /* AIBase.cpp */; };
 		65C141CE0D25456600E596D4 /* AIBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 65C141C90D25456600E596D4 /* AIBase.h */; };
 		65C141D10D25456600E596D4 /* AIGlobal.h in Headers */ = {isa = PBXBuildFile; fileRef = 65C141CC0D25456600E596D4 /* AIGlobal.h */; };
@@ -626,20 +639,31 @@
 		2DF971D70892CEA400F64D23 /* DebuggerSystem.hxx */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.h; name = DebuggerSystem.hxx; path = ../debugger/DebuggerSystem.hxx; sourceTree = SOURCE_ROOT; };
 		2DF971DE0892CEA400F64D23 /* Expression.cxx */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = Expression.cxx; path = ../debugger/Expression.cxx; sourceTree = SOURCE_ROOT; };
 		2DF971DF0892CEA400F64D23 /* Expression.hxx */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.h; name = Expression.hxx; path = ../debugger/Expression.hxx; sourceTree = SOURCE_ROOT; };
+		654409C90E49E84F00D20E74 /* RL_client_environment.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = RL_client_environment.c; path = "../ai/networking/rl-glue/RL_client_environment.c"; sourceTree = SOURCE_ROOT; };
+		654409CA0E49E84F00D20E74 /* RL_glue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RL_glue.h; path = "../ai/networking/rl-glue/RL_glue.h"; sourceTree = SOURCE_ROOT; };
+		654409EF0E49E9B300D20E74 /* Agent_common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Agent_common.h; path = "../ai/networking/rl-glue/Agent_common.h"; sourceTree = SOURCE_ROOT; };
 		6567EBC20E3F58AE0053C51B /* AIPlainText.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AIPlainText.cpp; path = ../ai/networking/AIPlainText.cpp; sourceTree = SOURCE_ROOT; };
 		6567EBC30E3F58AE0053C51B /* AIPlainText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIPlainText.h; path = ../ai/networking/AIPlainText.h; sourceTree = SOURCE_ROOT; };
 		6567EBC60E3F58D20053C51B /* AISocket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AISocket.cpp; path = ../ai/networking/AISocket.cpp; sourceTree = SOURCE_ROOT; };
 		6567EBC70E3F58D20053C51B /* AISocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AISocket.h; path = ../ai/networking/AISocket.h; sourceTree = SOURCE_ROOT; };
 		6567EBCC0E3F59D70053C51B /* AIProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIProtocol.h; path = ../ai/networking/AIProtocol.h; sourceTree = SOURCE_ROOT; };
-		6567ECCA0E3F69040053C51B /* RL_client_environment.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = RL_client_environment.c; path = "../ai/networking/rl-glue/RL_client_environment.c"; sourceTree = SOURCE_ROOT; };
-		6567ECCB0E3F69040053C51B /* RL_common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RL_common.h; path = "../ai/networking/rl-glue/RL_common.h"; sourceTree = SOURCE_ROOT; };
-		6567ECCC0E3F69040053C51B /* RL_network.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = RL_network.c; path = "../ai/networking/rl-glue/RL_network.c"; sourceTree = SOURCE_ROOT; };
-		6567ECCD0E3F69040053C51B /* RL_network.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RL_network.h; path = "../ai/networking/rl-glue/RL_network.h"; sourceTree = SOURCE_ROOT; };
-		6567ECE10E3F69A20053C51B /* AI_environment.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AI_environment.c; sourceTree = "<group>"; };
 		6567ECF60E3F6B1F0053C51B /* AIGlue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIGlue.h; path = ../ai/networking/AIGlue.h; sourceTree = SOURCE_ROOT; };
-		6567ECF70E3F6B1F0053C51B /* AIGlue.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = AIGlue.cpp; path = ../ai/networking/AIGlue.cpp; sourceTree = SOURCE_ROOT; };
+		656DB5A00E47D54600820EC6 /* AIGlue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AIGlue.cpp; path = ../ai/networking/AIGlue.cpp; sourceTree = SOURCE_ROOT; };
 		657D89C00E3F4FF60025E898 /* AIRewards.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AIRewards.cpp; path = ../ai/AIRewards.cpp; sourceTree = SOURCE_ROOT; };
 		657D89C10E3F4FF60025E898 /* AIRewards.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIRewards.h; path = ../ai/AIRewards.h; sourceTree = SOURCE_ROOT; };
+		659537260E47B0CB00D75047 /* AI_environment.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = AI_environment.c; path = "../ai/networking/rl-glue/AI_environment.c"; sourceTree = SOURCE_ROOT; };
+		659537270E47B0CB00D75047 /* C_TaskSpec_Parser.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = C_TaskSpec_Parser.c; path = "../ai/networking/rl-glue/C_TaskSpec_Parser.c"; sourceTree = SOURCE_ROOT; };
+		659537280E47B0CB00D75047 /* C_TaskSpec_Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = C_TaskSpec_Parser.h; path = "../ai/networking/rl-glue/C_TaskSpec_Parser.h"; sourceTree = SOURCE_ROOT; };
+		659537290E47B0CB00D75047 /* Environment_common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Environment_common.h; path = "../ai/networking/rl-glue/Environment_common.h"; sourceTree = SOURCE_ROOT; };
+		6595372A0E47B0CB00D75047 /* RL_common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RL_common.h; path = "../ai/networking/rl-glue/RL_common.h"; sourceTree = SOURCE_ROOT; };
+		6595372D0E47B0CB00D75047 /* RL_network.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = RL_network.c; path = "../ai/networking/rl-glue/RL_network.c"; sourceTree = SOURCE_ROOT; };
+		6595372E0E47B0CB00D75047 /* RL_network.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RL_network.h; path = "../ai/networking/rl-glue/RL_network.h"; sourceTree = SOURCE_ROOT; };
+		6595372F0E47B0CB00D75047 /* RLStruct_util.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = RLStruct_util.c; path = "../ai/networking/rl-glue/RLStruct_util.c"; sourceTree = SOURCE_ROOT; };
+		659537300E47B0CB00D75047 /* RLStruct_util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RLStruct_util.h; path = "../ai/networking/rl-glue/RLStruct_util.h"; sourceTree = SOURCE_ROOT; };
+		6595373D0E47B0DE00D75047 /* AIGlueEnv.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AIGlueEnv.cpp; path = ../ai/networking/AIGlueEnv.cpp; sourceTree = SOURCE_ROOT; };
+		6595373E0E47B0DE00D75047 /* AIGlueEnv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIGlueEnv.h; path = ../ai/networking/AIGlueEnv.h; sourceTree = SOURCE_ROOT; };
+		6595373F0E47B0DE00D75047 /* AIProtocol.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AIProtocol.cpp; path = ../ai/networking/AIProtocol.cpp; sourceTree = SOURCE_ROOT; };
+		659537530E47B20900D75047 /* RL_network_environment.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = RL_network_environment.c; path = "../ai/networking/rl-glue/RL_network_environment.c"; sourceTree = SOURCE_ROOT; };
 		65C141C80D25456600E596D4 /* AIBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AIBase.cpp; path = ../ai/AIBase.cpp; sourceTree = SOURCE_ROOT; };
 		65C141C90D25456600E596D4 /* AIBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIBase.h; path = ../ai/AIBase.h; sourceTree = SOURCE_ROOT; };
 		65C141CC0D25456600E596D4 /* AIGlobal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIGlobal.h; path = ../ai/AIGlobal.h; sourceTree = SOURCE_ROOT; };
@@ -1104,26 +1128,37 @@
 		6567EBBE0E3F587B0053C51B /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				6567ECC40E3F689B0053C51B /* RL-Glue */,
+				659537250E47B09F00D75047 /* RL-Glue */,
+				6595373D0E47B0DE00D75047 /* AIGlueEnv.cpp */,
+				6595373E0E47B0DE00D75047 /* AIGlueEnv.h */,
+				6595373F0E47B0DE00D75047 /* AIProtocol.cpp */,
 				6567EBC60E3F58D20053C51B /* AISocket.cpp */,
 				6567EBC70E3F58D20053C51B /* AISocket.h */,
 				6567EBC20E3F58AE0053C51B /* AIPlainText.cpp */,
 				6567EBC30E3F58AE0053C51B /* AIPlainText.h */,
 				6567EBCC0E3F59D70053C51B /* AIProtocol.h */,
 				6567ECF60E3F6B1F0053C51B /* AIGlue.h */,
-				6567ECF70E3F6B1F0053C51B /* AIGlue.cpp */,
+				656DB5A00E47D54600820EC6 /* AIGlue.cpp */,
 			);
 			name = Networking;
 			sourceTree = "<group>";
 		};
-		6567ECC40E3F689B0053C51B /* RL-Glue */ = {
+		659537250E47B09F00D75047 /* RL-Glue */ = {
 			isa = PBXGroup;
 			children = (
-				6567ECCA0E3F69040053C51B /* RL_client_environment.c */,
-				6567ECCB0E3F69040053C51B /* RL_common.h */,
-				6567ECCC0E3F69040053C51B /* RL_network.c */,
-				6567ECCD0E3F69040053C51B /* RL_network.h */,
-				6567ECE10E3F69A20053C51B /* AI_environment.c */,
+				654409EF0E49E9B300D20E74 /* Agent_common.h */,
+				654409C90E49E84F00D20E74 /* RL_client_environment.c */,
+				654409CA0E49E84F00D20E74 /* RL_glue.h */,
+				659537530E47B20900D75047 /* RL_network_environment.c */,
+				659537260E47B0CB00D75047 /* AI_environment.c */,
+				659537270E47B0CB00D75047 /* C_TaskSpec_Parser.c */,
+				659537280E47B0CB00D75047 /* C_TaskSpec_Parser.h */,
+				659537290E47B0CB00D75047 /* Environment_common.h */,
+				6595372A0E47B0CB00D75047 /* RL_common.h */,
+				6595372D0E47B0CB00D75047 /* RL_network.c */,
+				6595372E0E47B0CB00D75047 /* RL_network.h */,
+				6595372F0E47B0CB00D75047 /* RLStruct_util.c */,
+				659537300E47B0CB00D75047 /* RLStruct_util.h */,
 			);
 			name = "RL-Glue";
 			sourceTree = "<group>";
@@ -1315,6 +1350,14 @@
 				6567EBC90E3F58D20053C51B /* AISocket.h in Headers */,
 				6567EBCE0E3F59D70053C51B /* AIProtocol.h in Headers */,
 				6567ECF80E3F6B1F0053C51B /* AIGlue.h in Headers */,
+				659537330E47B0CB00D75047 /* C_TaskSpec_Parser.h in Headers */,
+				659537340E47B0CB00D75047 /* Environment_common.h in Headers */,
+				659537350E47B0CB00D75047 /* RL_common.h in Headers */,
+				659537390E47B0CB00D75047 /* RL_network.h in Headers */,
+				6595373B0E47B0CB00D75047 /* RLStruct_util.h in Headers */,
+				659537410E47B0DE00D75047 /* AIGlueEnv.h in Headers */,
+				654409CC0E49E84F00D20E74 /* RL_glue.h in Headers */,
+				654409F00E49E9B300D20E74 /* Agent_common.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1552,10 +1595,15 @@
 				657D89C40E3F4FF60025E898 /* AIRewards.cpp in Sources */,
 				6567EBC40E3F58AE0053C51B /* AIPlainText.cpp in Sources */,
 				6567EBC80E3F58D20053C51B /* AISocket.cpp in Sources */,
-				6567ECF90E3F6B1F0053C51B /* AIGlue.cpp in Sources */,
-				657903BC0E409C4C00885466 /* RL_client_environment.c in Sources */,
-				657903BD0E409C4C00885466 /* RL_network.c in Sources */,
-				657903BE0E409C4C00885466 /* AI_environment.c in Sources */,
+				659537310E47B0CB00D75047 /* AI_environment.c in Sources */,
+				659537320E47B0CB00D75047 /* C_TaskSpec_Parser.c in Sources */,
+				659537380E47B0CB00D75047 /* RL_network.c in Sources */,
+				6595373A0E47B0CB00D75047 /* RLStruct_util.c in Sources */,
+				659537400E47B0DE00D75047 /* AIGlueEnv.cpp in Sources */,
+				659537420E47B0DE00D75047 /* AIProtocol.cpp in Sources */,
+				659537550E47B20900D75047 /* RL_network_environment.c in Sources */,
+				656DB5AF0E47D54600820EC6 /* AIGlue.cpp in Sources */,
+				654409CB0E49E84F00D20E74 /* RL_client_environment.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1586,7 +1634,7 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					RL_CLIENT_ENVIRONMENT,
+					RLGENV_NOMAINLOOP,
 					MAC_OSX,
 					JOYSTICK_SUPPORT,
 					SOUND_SUPPORT,
@@ -1647,7 +1695,7 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					RL_CLIENT_ENVIRONMENT,
+					RLGENV_NOMAINLOOP,
 					MAC_OSX,
 					JOYSTICK_SUPPORT,
 					SOUND_SUPPORT,
@@ -1706,7 +1754,7 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					RL_CLIENT_ENVIRONMENT,
+					RLGENV_NOMAINLOOP,
 					MAC_OSX,
 					JOYSTICK_SUPPORT,
 					SOUND_SUPPORT,

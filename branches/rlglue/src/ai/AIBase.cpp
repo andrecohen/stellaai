@@ -39,7 +39,7 @@ using namespace std;
 #define PROTOCOL_PLAINTEXT	    1
 #define	PROTOCOL_RLGLUE         2
 
-static int enabled_protocol =  PROTOCOL_RLGLUE; 
+static int enabled_protocol =  PROTOCOL_NONE; 
 
 
 AIBase::AIBase(OSystem *system){
@@ -48,14 +48,13 @@ AIBase::AIBase(OSystem *system){
 
 	// Are we talking doing any sort of AI
 	try{
-    if (enabled_protocol == PROTOCOL_PLAINTEXT)
-  		comm = new AIPlainText();
-    else if (enabled_protocol == PROTOCOL_RLGLUE)
-		  comm = new AIGlue();
+		if (enabled_protocol == PROTOCOL_PLAINTEXT)
+			comm = new AIPlainText();
+		else if (enabled_protocol == PROTOCOL_RLGLUE)
+			  comm = new AIGlue();
 
-    if (comm)
-  		comm->connect();
-
+		if (comm)
+			comm->connect();
 	}catch(exception e){
 		cerr<<"No connection found..."<<endl;
 		comm = NULL;
