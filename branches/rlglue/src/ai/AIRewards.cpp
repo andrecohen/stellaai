@@ -48,7 +48,6 @@ void AIRewards::loadData(){
 				games.push_back(game);
 			game = new RewardGame();
 			file>>game->filename;
-			
 		}else if(rowType=="TIME:" || rowType=="SCORE:"){
 			RewardEntry entry;
 			bool endEntry = false;
@@ -76,7 +75,7 @@ void AIRewards::loadData(){
 	}
 	if(game)
 		games.push_back(game);
-
+	
 	file.close();
 }
 
@@ -87,15 +86,15 @@ int AIRewards::getReward(string filename, RewardType type){
 	}else{
 		// Find current game and save it for future queries
 		for(size_t i=0;i<games.size() && !currentGame;i++){
-			
 			if(games[i]->filename==filename)
 				currentGame = games[i];
 		}
 		// Make sure rewards are known for the current game
 		if(currentGame)
 			return getReward(type);
-		else
-			cerr<<"Game has no specified rewards!\n";
+		else{
+			//cerr<<"Game has no specified rewards!\n";
+		}
 	}
 	return 0;
 }
@@ -111,9 +110,16 @@ int AIRewards::getReward(RewardType type){
 	
 	// Append each byte together
 	for(size_t i=0;i<currentGame->entries[entry].locations.size();i++){
-		int temp = system->debugger().peek(currentGame->entries[entry].locations[i]);
+		Debugger *db = &system->debugger();
+		if(!db)
+			return -1;
+		int temp = db->peek(currentGame->entries[entry].locations[i]);
 		// Debugger gives a hex value of a dec number -> hex(hex(dec)) = dec
-		reward += Debugger::to_hex_4(temp);
+		string val =  Debugger::to_hex_4(temp);
+		if(val=="0")
+			reward += "00";
+		else
+			reward += val;
 	}
 	
 	// Return integer value
