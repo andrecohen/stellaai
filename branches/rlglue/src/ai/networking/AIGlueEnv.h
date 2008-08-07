@@ -12,6 +12,7 @@
 #include "AIBase.h"
 #include "AIGlue.h"
 #include "AIGlobal.h"
+#include "AIRewards.h"
 
 #define RLGACT_NOOP              0
 #define RLGACT_FIRE              1
@@ -34,6 +35,7 @@
 
 class AIGlue; 
 class AIBase;
+class AIRewards;
 
 class AIGlueEnv 
 {
@@ -46,9 +48,9 @@ class AIGlueEnv
   //
 
 public:
-  static AIGlue * aiGluePtr;
-  static AIBase * aiBasePtr;
-  static int curReward;  
+  static AIGlue* aiGluePtr;
+  static AIBase* aiBasePtr;
+  static AIRewards* aiRewardsPtr;  
 
 };
 
