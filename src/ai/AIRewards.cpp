@@ -116,8 +116,8 @@ int AIRewards::getReward(RewardType type){
 		int temp = db->peek(currentGame->entries[entry].locations[i]);
 		// Debugger gives a hex value of a dec number -> hex(hex(dec)) = dec
 		string val =  Debugger::to_hex_4(temp);
-		if(val=="0")
-			reward += "00";
+		if(val.size()==1)
+			reward += "0"+val;
 		else
 			reward += val;
 	}
