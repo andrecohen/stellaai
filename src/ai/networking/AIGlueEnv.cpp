@@ -32,6 +32,8 @@ static AIRewards * aiRewards = NULL;
 static Observation o; 
 static Reward_observation ro; 
 static int timestep; 
+static int prev_score; 
+static int cur_score; 
 
 /* Helper functions first */
 void applyAction(int action)
@@ -241,6 +243,9 @@ Observation env_start()
   assert(aiRewards != NULL);
 
   aiBase->resetKeys(); 
+
+  prev_score = 0; 
+  cur_score = 0; 
   
   screen_width = aiBase->getScreenWidth();
   screen_height = aiBase->getScreenHeight(); 
@@ -277,7 +282,10 @@ Reward_observation env_step(Action a)
   applyAction(action); 
 
   // Get and set the reward
-  ro.r = -1;  
+  prev_score = cur_score; 
+  cur_score = aiRewards->getReward("Centipede.rom",rt_Score);
+  ro.r = cur_score-prev_score; 
+  if (ro.r != 0) cout << "Rewards, r = " << ro.r << endl; 
 
   // check if terminal
   ro.terminal = 0; 
