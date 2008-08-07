@@ -19,7 +19,7 @@ using namespace std;
 //
 AIGlue* AIGlueEnv::aiGluePtr = NULL; 
 AIBase* AIGlueEnv::aiBasePtr = NULL; 
-int AIGlueEnv::curReward = 0; 
+AIRewards* AIGlueEnv::aiRewardsPtr = NULL; 
 
 /* List of variables local to the environment */
 static string msg; 
@@ -28,6 +28,7 @@ static int screen_width;
 static int screen_height;
 static AIGlue * aiGlue = NULL; 
 static AIBase * aiBase = NULL; 
+static AIRewards * aiRewards = NULL; 
 static Observation o; 
 static Reward_observation ro; 
 static int timestep; 
@@ -131,29 +132,6 @@ void applyAction(int action)
 
 
 
-/* Now, RLGlue Environment function impl. */
-Task_specification env_init()
-{
-  aiGlue = AIGlueEnv::aiGluePtr; 
-  assert(aiGlue != NULL); 
-
-  // There is a standard for this string
-  // http://rlai.cs.ualberta.ca/RLBB/TaskSpecification.html
-  //
-  // Our observation space will vary at each timestep because we'll be 
-  // sending diff_screens. So we won't be able to use the standard algorithms
-  // on this thing anyway, so it's not worth encoding the task_spec string
-  //
-  // We can change our mind about this later if we want.
-  
-  o.intArray = NULL; 
-  ro.o.intArray = NULL; 
-
-  task_spec = ""; 
-
-  return (Task_specification)task_spec.c_str(); 
-}
-
 void fullScreenObservation(Observation & obs, const Matrix & screen)
 {
   //cout << "Computing full screen obs" << endl; 
@@ -231,10 +209,36 @@ void diffScreenObservation(Observation & obs)
     obs.intArray[i+3] = pixel_diffs[i];
 }
 
+/* Now, RLGlue Environment function impl. */
+Task_specification env_init()
+{
+  aiGlue = AIGlueEnv::aiGluePtr; 
+  assert(aiGlue != NULL); 
+
+  // There is a standard for this string
+  // http://rlai.cs.ualberta.ca/RLBB/TaskSpecification.html
+  //
+  // Our observation space will vary at each timestep because we'll be 
+  // sending diff_screens. So we won't be able to use the standard algorithms
+  // on this thing anyway, so it's not worth encoding the task_spec string
+  //
+  // We can change our mind about this later if we want.
+  
+  o.intArray = NULL; 
+  ro.o.intArray = NULL; 
+
+  task_spec = ""; 
+
+  return (Task_specification)task_spec.c_str(); 
+}
+
 Observation env_start()
 {
   aiBase = AIGlueEnv::aiBasePtr; 
   assert(aiBase != NULL);
+  
+  aiRewards = AIGlueEnv::aiRewardsPtr; 
+  assert(aiRewards != NULL);
 
   aiBase->resetKeys(); 
   
@@ -273,7 +277,7 @@ Reward_observation env_step(Action a)
   applyAction(action); 
 
   // Get and set the reward
-  ro.r = AIGlueEnv::curReward;  
+  ro.r = -1;  
 
   // check if terminal
   ro.terminal = 0; 
