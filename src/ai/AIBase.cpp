@@ -83,8 +83,9 @@ void AIBase::update(){
 
     oldScreen = curScreen;
     curScreen = nextScreen(); 
-		
-    int r = rewards->getReward("Pitfall.rom",rt_Score);
+	
+	
+    int r = rewards->getReward("Pitfall.rom",rt_Time);
     cout << "Reward = " << r << endl; 
 
 		// Get commands for next frame
