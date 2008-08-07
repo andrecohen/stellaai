@@ -40,6 +40,11 @@ extern "C" {
 #if defined(RLGENV_NOMAINLOOP)
   /* Hooks for external programs with existing main loops */
 
+  /* 
+   * Maybe this should be ifdef __cplusplus ?
+   * In MacOSX this header is used as part of a C++ compilation
+   * (but then linked using C-style linking? Not sure...)
+   */
   #ifdef __APPLE__
   extern "C" int rlStartEnvironment(char *host, int port);
   extern "C" void rlUpdateEnvironment();
