@@ -16,38 +16,24 @@
 using namespace std;
 
 #include "OSystem.hxx"
+#include "AIScript.h"
+class AIScript;
 class OSystem;
 
 
-enum RewardType {rt_Score,rt_Time,rt_Lives};
+enum RewardType {rt_Score,rt_Time,rt_Lives,rt_Reward};
 
-class RewardEntry{
-public:
-	RewardType type;
-	vector<int> locations;
-};
-
-class RewardGame {
-public:
-	string filename;
-	vector<RewardEntry> entries;
-};
 
 class AIRewards {
 public:
-	AIRewards(OSystem*);
+	AIRewards(OSystem*, string);
 	~AIRewards();
 	
-	void loadData();
-	
-	int getReward(string,RewardType);
-	
-private:
+	void update();
 	int getReward(RewardType);
 	
-	vector<RewardGame *> games;
-	RewardGame *currentGame;
-	
+private:
+	AIScript *script;
 	OSystem *system;
 };
 
