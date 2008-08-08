@@ -27,12 +27,14 @@ using namespace std;
 #include "AIRewards.h"
 #include "AIPlainText.h"
 #include "AIGlue.h"
+#include "AIScript.h"
 
 #include "OSystem.hxx"
 #include "FrameBuffer.hxx"
 #include "EventHandler.hxx"
 #include "Event.hxx"
 #include "Debugger.hxx"
+#include "PropsSet.hxx"
 
 // Use NONE when you want to use Stella directly 
 #define PROTOCOL_NONE           0
@@ -43,9 +45,8 @@ static int enabled_protocol =  PROTOCOL_NONE;
 
 
 AIBase::AIBase(OSystem *system){
-
-  comm = NULL; 
-
+	comm = NULL; 
+	
 	// Are we talking doing any sort of AI
 	try{
 		if (enabled_protocol == PROTOCOL_PLAINTEXT)
@@ -60,11 +61,13 @@ AIBase::AIBase(OSystem *system){
 		comm = NULL;
 	}
 	
-	rewards = new AIRewards(system);
+	rewards = new AIRewards(system,"Pitfall.rom");
+	
 	this->system = system;
 	saveStack = 0;
 
-  if (comm) comm->setRewards(rewards); 
+	if (comm)
+		comm->setRewards(rewards); 
 }
 
 AIBase::~AIBase(){
@@ -81,16 +84,11 @@ void AIBase::update(){
 		// Update screen (not really needed)
 		system->frameBuffer().refresh();
 
-    oldScreen = curScreen;
-    curScreen = nextScreen(); 
-	
-    //int rt = rewards->getReward("Pitfall.rom",rt_Time);
-    //cout << "Rewards, Time = " << rt << ". ";
-    //int rs = rewards->getReward("Pitfall.rom",rt_Score);
-    //cout << "Rewards, Score = " << rs << endl; 
-    //int rs = rewards->getReward("Centipede.rom",rt_Score);
-    //cout << "Rewards, Score = " << rs << endl; 
-
+		oldScreen = curScreen;
+		curScreen = nextScreen(); 
+		
+		rewards->update();
+		cout<<"Reward = "<<rewards->getReward(rt_Time)<<"\n";
 
 		// Get commands for next frame
 		if(comm)
@@ -99,22 +97,17 @@ void AIBase::update(){
 }
 
 Matrix AIBase::getRam(){
-	string ram = system->debugger().dumpRAM();
-	stringstream ss(ram);
-	
 	Matrix dump;
 	MatrixRow row;
 	
-	char c;
-	string tmp;
+	Debugger *db = &system->debugger();
+	if(!db){
+		return dump;
+	}
 	
-	for(int y=0;y<8;y++){
-		// The first block is the address
-		ss>>tmp;
-		for(int x=0;x<8;x++){
-			ss>>c;
-			row.push_back(c);
-		}
+	string tmp;
+	for(int pos = 0x80;pos<0xff;pos++){
+		row.push_back(db->peek(pos));
 	}
 	
 	dump.push_back(row);

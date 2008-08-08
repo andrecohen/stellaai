@@ -19,11 +19,13 @@
 #include "AIProtocol.h"
 #include "AIRewards.h"
 #include "AIGlobal.h"
+#include "AIScript.h"
 #include "OSystem.hxx"
 #include "EventHandler.hxx"
 #include "FrameBuffer.hxx"
 
 class AIRewards;
+class AIScript;
 class AIProtocol;
 
 class AIBase {
