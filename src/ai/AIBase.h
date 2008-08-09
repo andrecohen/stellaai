@@ -16,6 +16,8 @@
 #ifndef AIBASE_H
 #define AIBASE_H
 
+#include <set> 
+
 #include "AIProtocol.h"
 #include "AIRewards.h"
 #include "AIGlobal.h"
@@ -28,6 +30,8 @@ class AIRewards;
 class AIScript;
 class AIProtocol;
 
+typedef std::pair< std::pair<int,int> , int > ptriplet; 
+
 class AIBase {
 public:
 	AIBase(OSystem*);
@@ -39,13 +43,17 @@ public:
 	Matrix getRam();
 	Matrix getScreen();
 	Matrix getPrevScreen();
+
+  void updateUniqueTriplets(); 
+  int getNumberColors(); 
+  void pixelStats(int & min, int & max, double & avg); 
 	
 	int getScreenHeight();
 	int getScreenWidth();
 	
 	void saveState();
 	void loadState();
-	
+
 	void pressKey(SDLKey);
 	void resetKeys();
 	void sendKey(SDLKey,bool);
@@ -55,8 +63,10 @@ public:
 	
 private:
 	int getPixel(int,int);
-	
+
 	int	saveStack;
+  int ticks; 
+  int maxColorsPerScreen; 
 	
 	OSystem *system;
 	
@@ -65,7 +75,9 @@ private:
 
 	Matrix oldScreen;
 	Matrix curScreen;
+  std::set<ptriplet> uniqueTriplets; 
 };
+
 
 #endif
 

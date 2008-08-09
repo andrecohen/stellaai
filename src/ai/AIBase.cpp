@@ -43,8 +43,9 @@ using namespace std;
 
 static int enabled_protocol =  PROTOCOL_NONE;  
 
-
 AIBase::AIBase(OSystem *system){
+  ticks = 0; 
+  maxColorsPerScreen = 0; 
 	comm = NULL; 
 	
 	// Are we talking doing any sort of AI
@@ -86,6 +87,19 @@ void AIBase::update(){
 
 		oldScreen = curScreen;
 		curScreen = nextScreen(); 
+
+    ticks++; 
+    //if (ticks % 5 == 0)
+    //updateUniqueTriplets();
+    //int c = getNumberColors(); 
+    //if (c > maxColorsPerScreen) maxColorsPerScreen = c; 
+    if (ticks % 1000 == 0) { 
+      //cout << "Unique ptriplets = " << uniqueTriplets.size();
+      //int min, max; double avg; 
+      //pixelStats(min, max, avg); 
+      //cout << ", stats (min,max,avg) = " << min << "," << max << "," << avg; 
+      //cout << ", maxcps = " << maxColorsPerScreen << endl; 
+    }
 		
 		rewards->update();
 		//cout<<"Reward = "<<rewards->getReward(rt_Time)<<"\n";
@@ -154,6 +168,72 @@ Matrix AIBase::getScreen()
 Matrix AIBase::getPrevScreen(){
 	return oldScreen;
 }
+
+void AIBase::updateUniqueTriplets()
+{
+	for(size_t y = 0; y < curScreen.size(); y++){
+		for(size_t x = 0; x < curScreen[y].size(); x++){
+      ptriplet pt = make_pair(make_pair(x,y), curScreen[y][x]); 
+      uniqueTriplets.insert(pt); 
+		}
+	}
+}
+  
+void AIBase::pixelStats(int & min, int & max, double & avg)
+{
+  min = 1000000; 
+  max = -1; 
+  avg = 0; 
+  double sum = 0; 
+  int num = 0; 
+	
+  for(size_t y = 0; y < curScreen.size(); y++){
+		for(size_t x = 0; x < curScreen[y].size(); x++){
+
+      cout << "pixelStats x,y = " << x << "," << y << endl; 
+
+      int counts = 0; 
+      set<ptriplet>::iterator iter; 
+
+      for (iter = uniqueTriplets.begin(); 
+           iter != uniqueTriplets.end(); 
+           iter++) 
+      {
+        ptriplet pt = *iter; 
+        int xp = pt.first.first; 
+        int yp = pt.first.second; 
+
+        if ((int)x == xp && (int)y == yp)
+          counts++; 
+      }
+
+      if (counts < min)
+        min = counts; 
+
+      if (counts > max)
+        max = counts; 
+
+      sum += counts; 
+      num++; 
+		}
+	}
+
+  avg = sum/num; 
+}
+
+int AIBase::getNumberColors()
+{
+  set<int> colors; 
+
+	for(size_t y = 0; y < curScreen.size(); y++){
+		for(size_t x = 0; x < curScreen[y].size(); x++){
+      colors.insert(curScreen[y][x]); 
+		}
+	}
+
+  return colors.size(); 
+}
+
 
 // Saves current game state in a stack
 void AIBase::saveState(){
