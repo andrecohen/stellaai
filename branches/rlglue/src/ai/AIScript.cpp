@@ -15,9 +15,11 @@ using namespace std;
 #include "Debugger.hxx"
 
 extern "C" {
-	#include <lua.h>
-	#include <lualib.h>
-	#include <lauxlib.h>
+
+#include <lua.h>
+#include <lualib.h>
+#include <lauxlib.h>
+
 }
 
 OSystem *osystem = NULL;
@@ -28,7 +30,7 @@ int getArgument(lua_State *s,string function){
 		cerr<<"[Script] "<<function<<" needs 1 argument\n";
 		return -1;
 	}
-	return lua_tonumber(s, 1);
+	return (int)lua_tonumber(s, 1);
 }
 
 int log(lua_State *s){
@@ -70,7 +72,8 @@ AIScript::AIScript(OSystem *sys){
 	luaopen_base(state);
 	luaopen_table(state);
 	luaopen_string(state);
-	luaopen_loadlib(state);
+	//luaopen_loadlib(state);
+	luaopen_package(state);
 	
 	lua_register(state, "getRam", getRam);
 	lua_register(state, "log", log);
@@ -114,7 +117,7 @@ int AIScript::call(string function){
 	}
 	
 	// Get return value
-	result = lua_tonumber(state, -1);
+	result = (int)lua_tonumber(state, -1);
 	lua_pop(state,1);
 	return result;
 	

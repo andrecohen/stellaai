@@ -26,10 +26,10 @@
 srcdir      ?= .
 
 DEFINES     := -DRLGENV_NOMAINLOOP
-LDFLAGS     :=
+LDFLAGS     := 
 INCLUDES    := -Isrc/ai -Isrc/macosx -I/usr/include -Isrc/ai/networking \
                -Isrc/ai/networking/rl-glue
-LIBS	    :=
+LIBS	    := 
 OBJS	    :=
 PROF        :=
 
