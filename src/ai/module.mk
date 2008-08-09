@@ -3,6 +3,7 @@ MODULE := src/ai
 MODULE_OBJS := \
 	src/ai/AIBase.o \
 	src/ai/AIRewards.o \
+	src/ai/AIScript.o \
 	src/ai/networking/AIGlue.o \
 	src/ai/networking/AIGlueEnv.o \
 	src/ai/networking/AIProtocol.o \
@@ -16,6 +17,8 @@ MODULE_OBJS := \
 
 MODULE_DIRS += \
 	src/ai
+
+LIBS += -llua
 
 # Include common rules 
 include $(srcdir)/common.rules
