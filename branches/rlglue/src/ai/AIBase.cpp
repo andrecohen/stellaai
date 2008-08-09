@@ -88,7 +88,7 @@ void AIBase::update(){
 		curScreen = nextScreen(); 
 		
 		rewards->update();
-		cout<<"Reward = "<<rewards->getReward(rt_Time)<<"\n";
+		//cout<<"Reward = "<<rewards->getReward(rt_Time)<<"\n";
 
 		// Get commands for next frame
 		if(comm)
