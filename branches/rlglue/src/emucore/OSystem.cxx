@@ -19,6 +19,7 @@
 #include <cassert>
 #include <sstream>
 #include <fstream>
+#include <iostream>
 #include <zlib.h>
 
 #include "MediaFactory.hxx"
@@ -48,6 +49,12 @@
 #include "Widget.hxx"
 
 #define MAX_ROM_SIZE  512 * 1024
+
+#include <time.h>
+#include <sys/time.h>
+static int ticks = 0; 
+static size_t time_start; 
+static size_t time_end; 
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 OSystem::OSystem()
@@ -726,10 +733,25 @@ void OSystem::mainLoop()
 	myTimingInfo.virt += myTimePerFrame;
 
 	if(myTimingInfo.current < myTimingInfo.virt)
-	  SDL_Delay((myTimingInfo.virt - myTimingInfo.current) / 1000);
+  {
+    // Take out the artificial delays
+	  // SDL_Delay((myTimingInfo.virt - myTimingInfo.current) / 1000);
+  }
 
 	myTimingInfo.totalTime += (getTicks() - myTimingInfo.start);
 	myTimingInfo.totalFrames++;
+
+  if (ticks == 0) 
+    time_start = time(NULL); 
+
+  ticks++; 
+  if (ticks % 1000 == 0)
+  {
+    //time_end = time(NULL); 
+    //double avg = ((double)ticks)/(time_end - time_start); 
+    //cout << "Average main loop iterations per sec = " << avg << endl; 
+  }
+
   }
 }
 
