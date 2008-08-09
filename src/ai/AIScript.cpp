@@ -35,8 +35,9 @@ int getArgument(lua_State *s,string function){
 
 int log(lua_State *s){
 	int args = lua_gettop(s);
-	for(int n=1;n<=args;n++)
-		cerr<<"[Script] "<<lua_tostring(s, n)<<endl;
+  // Not sure why this is being printed
+  //for(int n=1;n<=args;n++)
+	//	cerr<<"[Script] "<<lua_tostring(s, n)<<endl;
 	return args>0;
 }
 
@@ -67,13 +68,19 @@ int toBin(lua_State *s){
 
 AIScript::AIScript(OSystem *sys){
 	state = lua_open();
-	
+
+  cout << "Initializing LUA" << endl; 
+
+  /*
 	luaopen_io(state);
 	luaopen_base(state);
 	luaopen_table(state);
 	luaopen_string(state);
 	//luaopen_loadlib(state);
-	luaopen_package(state);
+	luaL_openlibs(state);
+  */
+
+  cout << "Registering lua vars" << endl; 
 	
 	lua_register(state, "getRam", getRam);
 	lua_register(state, "log", log);
