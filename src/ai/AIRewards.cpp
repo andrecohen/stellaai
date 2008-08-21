@@ -52,8 +52,8 @@ void AIRewards::loadData(){
 			RewardEntry entry;
 			bool endEntry = false;
 			
-			if(rowType=="TIME:")	entry.type=Time;
-			if(rowType=="SCORE:")	entry.type=Score;
+			if(rowType=="TIME:")	entry.type=RewardTime;
+			if(rowType=="SCORE:")	entry.type=RewardScore;
 			
 			while(!endEntry && !file.eof()){
 				streampos pos = file.tellg();
