@@ -17,7 +17,7 @@ using namespace std;
 class OSystem;
 
 
-enum RewardType {Score,Time};
+enum RewardType {RewardScore,RewardTime};
 
 class RewardEntry{
 public:
