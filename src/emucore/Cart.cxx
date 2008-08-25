@@ -19,6 +19,8 @@
 #include <cassert>
 #include <sstream>
 
+#include <string.h>
+
 #include "bspf.hxx"
 #include "Cart.hxx"
 #include "Cart0840.hxx"
