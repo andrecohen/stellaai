@@ -91,7 +91,8 @@ MODULES += \
 	src/emucore/m6502 \
 	src/gui \
 	src/common \
-	src/ai
+	src/ai \
+	src/rlglue
 
 ######################################################################
 # The build rules follow - normally you should have no need to
@@ -265,3 +266,4 @@ gp2x-organize:
 # not the one from emacs!
 tags:
 	ctags `find . -name '*.[ch]xx' -o -name '*.c' -o -name '*.y'` || true
+

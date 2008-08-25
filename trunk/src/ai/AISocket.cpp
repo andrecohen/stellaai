@@ -19,6 +19,9 @@
 
 #include "AISocket.h"
 
+#include <stdlib.h>          // For atoi
+#include <string.h>          // For memset and strerror
+
 #ifdef WIN32
 #include <winsock.h>         // For socket(), connect(), send(), and recv()
 typedef int socklen_t;

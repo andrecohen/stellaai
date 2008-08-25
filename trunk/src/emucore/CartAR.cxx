@@ -18,6 +18,8 @@
 
 #include <cassert>
 
+#include <string.h>
+
 #include "M6502Hi.hxx"
 #include "Random.hxx"
 #include "System.hxx"
