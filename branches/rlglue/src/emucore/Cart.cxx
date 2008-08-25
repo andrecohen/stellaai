@@ -16,6 +16,8 @@
 // $Id: Cart.cxx,v 1.34 2007/06/14 13:47:50 stephena Exp $
 //============================================================================
 
+#include <string.h>
+
 #include <cassert>
 #include <sstream>
 
