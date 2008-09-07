@@ -107,6 +107,7 @@ bool AIScript::loadGame(string rom){
 	
 	if(result!=0){
 		cerr<<"[Script] This game does not have a script associated with it!\n";
+		return false;
 	}else{
 		cerr<<"Script "<<path<<" loaded\n";
 	}	
@@ -114,7 +115,7 @@ bool AIScript::loadGame(string rom){
 	// Read/execute script file
 	lua_pcall(state,0,0,0);
 	
-	return result==0;
+	return true;
 }
 
 int AIScript::call(string function){
