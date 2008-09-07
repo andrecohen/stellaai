@@ -1,10 +1,16 @@
 /*
- *  AIRewards.cpp
- *  stella
+ * StellaAI is the legal property of its developers.
  *
- *  Created by Andre Cohen on 7/22/08.
- *  Copyright 2008 __MyCompanyName__. All rights reserved.
+ * This program is free software; you can redistribute it and/or modify it under the terms of the GNU
+ * General Public License as published by the Free Software Foundation; either version 2 of the License,
+ * or (at your option) any later version.
  *
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+ * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General
+ * Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with this program; if not,
+ * write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
 #include <iostream>
@@ -23,17 +29,34 @@ using namespace std;
 
 AIRewards::AIRewards(OSystem *system, string rom){
 	script = new AIScript(system);
-	script->loadGame(rom);
+	if(rom!=""){
+		setRom(rom);
+	}
+	else
+		loadedRom = "";
 }
+
 AIRewards::~AIRewards(){
 	delete script;
 }
 
+void AIRewards::setRom(string rom) {
+	loadedRom = rom;
+	script->loadGame(rom);
+}
+bool AIRewards::isRomSet() {
+	return loadedRom != "";
+}
+
 void AIRewards::update(){
-	script->call("update");
+	if(isRomSet())
+		script->call("update");
 }
 
 int AIRewards::getReward(RewardType type){
+	if(!isRomSet())
+		return 0;
+	
 	switch(type){
 		case rt_Score:
 			return script->call("score");
@@ -44,5 +67,6 @@ int AIRewards::getReward(RewardType type){
 		case rt_Reward:
 			return script->call("reward");
 	};
+	
 	return 0;
 }
