@@ -42,7 +42,8 @@ AIRewards::~AIRewards(){
 
 void AIRewards::setRom(string rom) {
 	loadedRom = rom;
-	script->loadGame(rom);
+	if(script->loadGame(rom)==false)
+		loadedRom = "";
 }
 bool AIRewards::isRomSet() {
 	return loadedRom != "";
