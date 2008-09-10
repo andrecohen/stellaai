@@ -15,7 +15,8 @@ You must choose which protocol to use with StellaAI. To do so you must edit the 
 
 === Linux ===
 
-Simple type {{{make}}} from the root directory to create the executable. 
+  # Run {{{./configure}}}
+  # If successful you are ready to {{{make}}}
 
 === Mac OSX === 
 
