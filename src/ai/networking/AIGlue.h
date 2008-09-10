@@ -13,40 +13,24 @@
  * write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef AIFINDSCORE_H
-#define AIFINDSCORE_H
+#ifndef AI_GLUE_H
+#define AI_GLUE_H
 
-#include <vector>
-#include <string>
-#include <time.h>
-#include <ctime>
-using namespace std;
+#include "AIBase.h"
 
-#include "OSystem.hxx"
-#include "AIScript.h"
-class AIScript;
-class OSystem;
-
-
-enum RewardType {rt_Score,rt_Time,rt_Lives,rt_Reward};
-
-
-class AIRewards {
+class AIGlue : public AIProtocol {
 public:
-	AIRewards(OSystem*, string);
-	~AIRewards();
+	AIGlue();
+	~AIGlue();
 	
-	void setRom(string);
-	bool isRomSet();
-	
-	void update();
-	int getReward(RewardType);
+	virtual bool connect();
+	virtual bool isConnected();
+	virtual void runEventLoop(AIBase *);
 	
 private:
-	AIScript *script;
-	OSystem *system;
-	string loadedRom;
+	char *host;
+	int port;
+	int connection;
 };
 
 #endif
-

@@ -13,40 +13,29 @@
  * write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef AIFINDSCORE_H
-#define AIFINDSCORE_H
+#ifndef _AISCRIPT_H_
+#define _AISCRIPT_H_
 
-#include <vector>
 #include <string>
-#include <time.h>
-#include <ctime>
 using namespace std;
+extern "C" {
+#include <lua.h>
+}
+
 
 #include "OSystem.hxx"
-#include "AIScript.h"
-class AIScript;
 class OSystem;
 
-
-enum RewardType {rt_Score,rt_Time,rt_Lives,rt_Reward};
-
-
-class AIRewards {
+class AIScript {
 public:
-	AIRewards(OSystem*, string);
-	~AIRewards();
+	AIScript(OSystem *);
+	~AIScript();
 	
-	void setRom(string);
-	bool isRomSet();
-	
-	void update();
-	int getReward(RewardType);
-	
+	bool loadGame(string);
+	int call(string);
 private:
-	AIScript *script;
-	OSystem *system;
-	string loadedRom;
+	
+	lua_State *state;
 };
 
 #endif
-

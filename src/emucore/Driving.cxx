@@ -44,7 +44,7 @@ bool Driving::read(DigitalPin pin)
   static const uInt8 counterclockwise[] = { 0x03, 0x02, 0x00, 0x01 };
 
   // Delay used for moving through the gray code tables
-  const uInt32 delay = 20;
+	const uInt32 delay = 20;
 
   switch(pin)
   {

@@ -17,7 +17,9 @@
 #include <string>
 #include <vector>
 
-#include "AIComm.h"
+#include "AIProtocol.h"
+#include "AIPlainText.h"
+#include "AIBase.h"
 
 using namespace std;
 
@@ -26,32 +28,85 @@ using namespace std;
 #define AI_PORT		1985
 
 // Establishes connection with Server
-AIComm::AIComm(){
-	socket = new TCPSocket(AI_SERVER,AI_PORT);
+AIPlainText::AIPlainText(){
 	counter = 0;
 }
 
 // Closes network connections and also sends message to server that it is quitting
-AIComm::~AIComm(){
+AIPlainText::~AIPlainText(){
+	if(socket)
+		delete socket;
 
 }
 
+bool AIPlainText::connect(){
+	socket = new TCPSocket(AI_SERVER,AI_PORT);
+	return socket!=NULL;
+}
+
+bool AIPlainText::isConnected(){
+	return socket!=NULL;
+}
+
+// Called once per game cycle, interprets commands until the NEXT command is received
+void AIPlainText::runEventLoop(AIBase *base){
+	while(isConnected()){
+		string command = receive();
+		
+		if(command == "NEXT")		return;
+		else if(command == "QUIT")	exit(0);
+		else if(command == "UP")	base->pressKey(SDLK_UP);
+		else if(command == "DOWN")	base->pressKey(SDLK_DOWN);
+		else if(command == "LEFT")	base->pressKey(SDLK_LEFT);
+		else if(command == "RIGHT")	base->pressKey(SDLK_RIGHT);
+		else if(command == "SPACE")	base->pressKey(SDLK_SPACE);
+		else if(command == "RESET")	base->resetKeys();
+		else if(command == "FULL_SCREEN")	sendFullScreen(base->getScreen(),base->getScreenHeight(),base->getScreenWidth()); 
+		else if(command == "DIFF_SCREEN")	sendDiffScreen(base->getPrevScreen(),base->getScreen());
+		else if(command == "SAVE")	base->saveState();
+		else if(command == "PREV")	base->loadState();
+		else if(command == "DUMP")	sendRam(base->getRam());
+		else
+			printf("Command '%s' not understood\n",command.c_str());
+	}
+}
+
+// Sends entire screen
+void AIPlainText::sendFullScreen(Matrix current,int h, int w){
+	sendPacket(h);
+	sendPacket(w);
+	sendPacket(current);	
+}
+
+// Sends the difference of pixels from the last full screen sent and now
+void AIPlainText::sendDiffScreen(Matrix previous, Matrix current){
+	Matrix diff;
+  computeDiff(previous, current, diff);  
+
+	// Send diff matrix
+	sendPacket(diff);
+}
+
+// Sends RAM as an 1x64 integer matrix
+void AIPlainText::sendRam(Matrix ram){
+	sendPacket(ram);
+	
+}
+
 // Recieves string of data
-string AIComm::receive(){
+string AIPlainText::receive(){
 	int id = getInt();
 	
 	if(counter+1!=id){
 		cerr<<"Packet lost from ["<<counter<<"-"<<id<<"]"<<endl;
 	}
 	counter = id;
-	cerr<<"Counter: "<<hex<<id<<endl;
 	
 	char type = getChar();
-	cerr<<"Type: "<<hex<<type<<endl;
+	if(type!='s')
+		cerr<<"Packet must be of type string!\n";
 	
 	int size = getInt();
-	cerr<<"Size: "<<hex<<size<<endl;
-	
 	string data = getString(size);
 	
 	sendPacket(id);
@@ -60,7 +115,7 @@ string AIComm::receive(){
 }
 
 // Sends string packet
-void AIComm::sendPacket(string line){
+void AIPlainText::sendPacket(string line){
 	sendInt(counter);
 	sendChar('s');
 	sendInt(line.length());
@@ -69,7 +124,7 @@ void AIComm::sendPacket(string line){
 }
 
 // Sends integer packet
-void AIComm::sendPacket(int num){
+void AIPlainText::sendPacket(int num){
 	sendInt(counter);
 	sendChar('i');
 	sendInt(sizeof(int));
@@ -77,7 +132,7 @@ void AIComm::sendPacket(int num){
 }
  
 // Sends integer matrix packet
-void AIComm::sendPacket(Matrix array){
+void AIPlainText::sendPacket(Matrix array){
 	if(array.size()<0)
 		return;
 	
@@ -94,18 +149,18 @@ void AIComm::sendPacket(Matrix array){
 }
 
 // Sends 1 integer - not to be used directly
-void AIComm::sendInt(int num){
+void AIPlainText::sendInt(int num){
 	num = (num>>24) | (num << 8 & 0x00FF0000) | (num >> 8 & 0x000FF00) | (num<<24);
 	return socket->send(&num,sizeof(num));
 }
 		
 // Sends 1 character - not to be used directly
-void AIComm::sendChar(char ch){
+void AIPlainText::sendChar(char ch){
 	socket->send(&ch,sizeof(char));
 }
 
 // Gets integer 
-int AIComm::getInt(){
+int AIPlainText::getInt(){
 	int temp=0;
 	socket->recv(&temp, sizeof(int));
 	temp = (temp>>24) | (temp << 8 & 0x00FF0000) | (temp >> 8 & 0x000FF00) | (temp<<24);
@@ -113,7 +168,7 @@ int AIComm::getInt(){
 }
 
 // Gets character
-char AIComm::getChar(){
+char AIPlainText::getChar(){
 	int temp=0;
 	socket->recv(&temp, 2);
 	temp = temp>>8 | temp<<8;
@@ -121,7 +176,7 @@ char AIComm::getChar(){
 }
 
 // Gets string packet of size s
-string AIComm::getString(int s){
+string AIPlainText::getString(int s){
 	char ch;
 	string str = "";
 
