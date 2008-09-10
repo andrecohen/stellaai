@@ -25,25 +25,50 @@ using namespace std;
 #include "AIGlobal.h"
 #include "AIBase.h"
 #include "AIRewards.h"
+#include "AIPlainText.h"
+#include "AIGlue.h"
+#include "AIScript.h"
 
 #include "OSystem.hxx"
 #include "FrameBuffer.hxx"
 #include "EventHandler.hxx"
 #include "Event.hxx"
 #include "Debugger.hxx"
+#include "PropsSet.hxx"
+
+// Use NONE when you want to use Stella directly 
+#define PROTOCOL_NONE           0
+#define PROTOCOL_PLAINTEXT	    1
+#define	PROTOCOL_RLGLUE         2
+
+static int enabled_protocol =  PROTOCOL_PLAINTEXT;  
 
 AIBase::AIBase(OSystem *system){
+	ticks = 0; 
+	maxColorsPerScreen = 0; 
+	comm = NULL; 
+	
 	// Are we talking doing any sort of AI
 	try{
-		comm = new AIComm();
+		if (enabled_protocol == PROTOCOL_PLAINTEXT)
+			comm = new AIPlainText();
+		else if (enabled_protocol == PROTOCOL_RLGLUE)
+			comm = new AIGlue();
+		
+		if (comm)
+			comm->connect();
 	}catch(exception e){
 		cerr<<"No connection found..."<<endl;
 		comm = NULL;
 	}
 	
-	rewards = new AIRewards(system);
+	rewards = new AIRewards(system,"");
+	
 	this->system = system;
 	saveStack = 0;
+	
+	if (comm)
+		comm->setRewards(rewards); 
 }
 
 AIBase::~AIBase(){
@@ -55,137 +80,169 @@ AIBase::~AIBase(){
 
 // Called at every frame
 void AIBase::update(){
+	
+	if(rewards->isRomSet()==false && system->romFile()!=""){
+		string fullPath = system->romFile();
+		fullPath = fullPath.substr(fullPath.find_last_of("/")+1);
+		rewards->setRom(fullPath);
+	}
+	
 	// Check if there is anything on the screen 
-	if(true){//getPixel(200,200)){
+	if(true){
 		// Update screen (not really needed)
 		system->frameBuffer().refresh();
 		
-		//rewards->getReward("Pitfall.rom",Score);
+		oldScreen = curScreen;
+		curScreen = nextScreen(); 
+		
+		/*
+		ticks++; 
+		if (ticks % 5 == 0)
+		updateUniqueTriplets();
+		int c = getNumberColors(); 
+		if (c > maxColorsPerScreen) maxColorsPerScreen = c; 
+		if (ticks % 1000 == 0) { 
+			cout << "Unique ptriplets = " << uniqueTriplets.size();
+			int min, max; double avg; 
+			pixelStats(min, max, avg); 
+			cout << ", stats (min,max,avg) = " << min << "," << max << "," << avg; 
+			cout << ", maxcps = " << maxColorsPerScreen << endl; 
+		}
+		*/
+		
+		rewards->update();
 		
 		// Get commands for next frame
 		if(comm)
-			commands();
+			comm->runEventLoop(this);
 	}
 }
 
-// Called once per game cycle, interprets commands until the NEXT command is received
-void AIBase::commands() {
-	while(comm){
-		string command = comm->receive();
-		cerr<<"Command: "<<command<<endl;
-		
-		if(command == "NEXT")		return;
-		else if(command == "QUIT")	exit(0);
-		else if(command == "UP")	pressKey(SDLK_UP);
-		else if(command == "DOWN")	pressKey(SDLK_DOWN);
-		else if(command == "LEFT")	pressKey(SDLK_LEFT);
-		else if(command == "RIGHT")	pressKey(SDLK_RIGHT);
-		else if(command == "SPACE")	pressKey(SDLK_SPACE);
-		else if(command == "RESET")	resetKeys();
-		else if(command == "FULL_SCREEN")	sendFullScreen(); 
-		else if(command == "DIFF_SCREEN")	sendDiffScreen();
-		else if(command == "SAVE")	saveState();
-		else if(command == "PREV")	loadState();
-		else if(command == "DUMP")	sendRam();
-		else
-			printf("Command '%s' not understood\n",command.c_str());
-	}
-}
-
-// Sends entire screen
-void AIBase::sendFullScreen(){
-	int h = getScreenHeight();
-	int w = getScreenWidth();
+Matrix AIBase::getRam(){
+	Matrix dump;
+	MatrixRow row;
 	
-	comm->sendPacket(h);
-	comm->sendPacket(w);
-	
-	Matrix current = getScreen();
-	
-	comm->sendPacket(current);	
-	screen = current;
-}
-
-// Sends the difference of pixels from the last full screen sent and now
-void AIBase::sendDiffScreen(){
-	Matrix current = getScreen();
-	Matrix diff;
-	
-	// If the last screen is not available, then we can't do a diff
-	if(current.size()!=screen.size() &&  current[0].size()!=screen[0].size()){
-		screen = current;
-		return;
+	Debugger *db = &system->debugger();
+	if(!db){
+		return dump;
 	}
 	
-	// Generate diff matrix
-	for(size_t y=0;y<current.size();y++){
-		for(size_t x=0;x<current[y].size();x++){
-			if(current[y][x] != screen[y][x]){
-				MatrixRow row;
-				row.push_back(x);
-				row.push_back(y);
-				row.push_back(current[y][x]);
-				diff.push_back(row);
-			}
-		}
+	string tmp;
+	for(int pos = 0x80;pos<0xff;pos++){
+		row.push_back(db->peek(pos));
 	}
 	
-	// Send diff matrix
-	comm->sendPacket(diff);
-	
-	// Saves new the current screen for next time
-	screen = current;
+	dump.push_back(row);
+	return dump;
 }
 
 // Does the actual getting of the screen from Stella (without scaling)
-Matrix AIBase::getScreen(){
+Matrix AIBase::nextScreen(){
 	int h = getScreenHeight();
 	int w = getScreenWidth();
-	Matrix current;
+
+	//cout << "height and width reported as " << h << " " << w << endl; 
+
+	Matrix curscr;
 	
 	for(int y=0;y<h;y++){
 		MatrixRow row;
 		int dx=0,dy=y;
 		system->frameBuffer().translateCoords(dx, dy);
-		if(dy==(int)current.size()){
+		if(dy==(int)curscr.size()){
 			for(int x=0;x<w;x++){
 				dx = x;
 				dy = y;
 				system->frameBuffer().translateCoords(dx, dy);
 				if(dx==(int)row.size())
-					row.push_back(getPixel(x, y));
+        {
+				  int p = getPixel(x,y); 
+          //cout << "pixel " << x << "," << y << " = " << p << endl; 
+          row.push_back(p);
+        }
 			}
-			current.push_back(row);
+			curscr.push_back(row);
 		}
 	}
 	
-	return current;
+	return curscr;
 }
 
-// Sends RAM as an 1x64 integer matrix
-void AIBase::sendRam(){
-	string ram = system->debugger().dumpRAM();
-	stringstream ss(ram);
+Matrix AIBase::getScreen()
+{
+  return curScreen;
+}
+
+Matrix AIBase::getPrevScreen(){
+	return oldScreen;
+}
+
+void AIBase::updateUniqueTriplets()
+{
+	for(size_t y = 0; y < curScreen.size(); y++){
+		for(size_t x = 0; x < curScreen[y].size(); x++){
+			ptriplet pt = make_pair(make_pair(x,y), curScreen[y][x]); 
+			uniqueTriplets.insert(pt); 
+		}
+	}
+}
+
+void AIBase::pixelStats(int & min, int & max, double & avg)
+{
+	min = 1000000; 
+	max = -1; 
+	avg = 0; 
+	double sum = 0; 
+	int num = 0; 
 	
-	Matrix dump;
-	MatrixRow row;
-	
-	char c;
-	string tmp;
-	
-	for(int y=0;y<8;y++){
-		// The first block is the address
-		ss>>tmp;
-		for(int x=0;x<8;x++){
-			ss>>c;
-			row.push_back(c);
+	for(size_t y = 0; y < curScreen.size(); y++){
+		for(size_t x = 0; x < curScreen[y].size(); x++){
+			
+			cout << "pixelStats x,y = " << x << "," << y << endl; 
+			
+			int counts = 0; 
+			set<ptriplet>::iterator iter; 
+			
+			for (iter = uniqueTriplets.begin(); 
+				 iter != uniqueTriplets.end(); 
+				 iter++) 
+			{
+				ptriplet pt = *iter; 
+				int xp = pt.first.first; 
+				int yp = pt.first.second; 
+				
+				if ((int)x == xp && (int)y == yp)
+					counts++; 
+			}
+			
+			if (counts < min)
+				min = counts; 
+			
+			if (counts > max)
+				max = counts; 
+			
+			sum += counts; 
+			num++; 
 		}
 	}
 	
-	dump.push_back(row);
-	comm->sendPacket(dump);
-	
+	avg = sum/num; 
 }
+
+// Gets the number found in screen
+int AIBase::getNumberColors()
+{
+	set<int> colors; 
+	
+	for(size_t y = 0; y < curScreen.size(); y++){
+		for(size_t x = 0; x < curScreen[y].size(); x++){
+			colors.insert(curScreen[y][x]); 
+		}
+	}
+	
+	return colors.size(); 
+}
+
 
 // Saves current game state in a stack
 void AIBase::saveState(){

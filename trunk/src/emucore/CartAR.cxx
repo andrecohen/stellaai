@@ -16,9 +16,9 @@
 // $Id: CartAR.cxx,v 1.18 2007/01/14 16:17:53 stephena Exp $
 //============================================================================
 
-#include <cassert>
-
 #include <string.h>
+
+#include <cassert>
 
 #include "M6502Hi.hxx"
 #include "Random.hxx"

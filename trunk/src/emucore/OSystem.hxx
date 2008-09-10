@@ -27,6 +27,7 @@ class Launcher;
 class Debugger;
 class CheatManager;
 class VideoDialog;
+class AIBase;
 
 #include "AIBase.h"
 #include "Array.hxx"

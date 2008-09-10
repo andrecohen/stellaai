@@ -13,36 +13,31 @@
  * write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include <iostream>
-#include <string>
-#include <vector>
-#include "AISocket.h"
+#ifndef AI_PROTOCOL_H
+#define AI_PROTOCOL_H
+
+#include "AIBase.h"
+#include "AIRewards.h"
 #include "AIGlobal.h"
+class AIBase;
+class AIRewards;
 
-using namespace std;
+class AIProtocol {
+protected: 
+  AIRewards* rewards; 
 
-class AIComm {
 public:
-	AIComm();
-	~AIComm();
-	
-	void sendPacket(string);
-	void sendPacket(int);
-	void sendPacket(Matrix);
-	
-	string receive();
+  AIProtocol() { rewards = NULL; }
+  virtual ~AIProtocol() {} 
 
-private:
-	int counter;
-	
-	int getInt();
-	char getChar();
-	string getString(int);
-	
-	void sendInt(int);
-	void sendChar(char);
-	
-	TCPSocket *socket;
+  virtual void setRewards(AIRewards* rew) { rewards = rew; }
+
+	virtual bool connect() = 0;
+	virtual bool isConnected() = 0;
+	virtual void runEventLoop(AIBase *) = 0;
+
+  virtual void computeDiff(const Matrix & previous, const Matrix & current, 
+                           Matrix & result); 
 };
 
-
+#endif

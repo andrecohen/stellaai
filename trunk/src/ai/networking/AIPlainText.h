@@ -13,40 +13,45 @@
  * write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef AIFINDSCORE_H
-#define AIFINDSCORE_H
-
-#include <vector>
+#include <iostream>
 #include <string>
-#include <time.h>
-#include <ctime>
+#include <vector>
+#include "AISocket.h"
+#include "AIProtocol.h"
+#include "AIBase.h"
+#include "AIGlobal.h"
+
 using namespace std;
 
-#include "OSystem.hxx"
-#include "AIScript.h"
-class AIScript;
-class OSystem;
-
-
-enum RewardType {rt_Score,rt_Time,rt_Lives,rt_Reward};
-
-
-class AIRewards {
+class AIPlainText : public AIProtocol {
 public:
-	AIRewards(OSystem*, string);
-	~AIRewards();
+	AIPlainText();
+	~AIPlainText();
 	
-	void setRom(string);
-	bool isRomSet();
+	virtual bool connect();
+	virtual bool isConnected();
+	virtual void runEventLoop(AIBase *);
 	
-	void update();
-	int getReward(RewardType);
+	void sendPacket(string);
+	void sendPacket(int);
+	void sendPacket(Matrix);
 	
+	string receive();
+
 private:
-	AIScript *script;
-	OSystem *system;
-	string loadedRom;
+	void sendFullScreen(Matrix,int,int);
+	void sendDiffScreen(Matrix,Matrix);
+	void sendRam(Matrix);
+	
+	int getInt();
+	char getChar();
+	string getString(int);
+	
+	void sendInt(int);
+	void sendChar(char);
+	
+	TCPSocket *socket;
+	int counter;
 };
 
-#endif
 
