@@ -27,6 +27,7 @@ using namespace std;
 #include "AIRewards.h"
 #include "AIPlainText.h"
 #include "AIGlue.h"
+#include "AISettings.h"
 #include "AIScript.h"
 
 #include "OSystem.hxx"
@@ -41,7 +42,9 @@ using namespace std;
 #define PROTOCOL_PLAINTEXT	    1
 #define	PROTOCOL_RLGLUE         2
 
-static int enabled_protocol =  PROTOCOL_PLAINTEXT;  
+//static int enabled_protocol = PROTOCOL_NONE;
+static int enabled_protocol = AISettings::get_int_setting("enabled_protocol"); 
+
 
 AIBase::AIBase(OSystem *system){
 	ticks = 0; 
@@ -94,21 +97,22 @@ void AIBase::update(){
 		
 		oldScreen = curScreen;
 		curScreen = nextScreen(); 
-		
-		/*
+	
+    /*
 		ticks++; 
-		if (ticks % 5 == 0)
-		updateUniqueTriplets();
+		//if (ticks % 5 == 0)
+		//updateUniqueTriplets();
+    updateUniquePatterns(3,3); 
 		int c = getNumberColors(); 
 		if (c > maxColorsPerScreen) maxColorsPerScreen = c; 
-		if (ticks % 1000 == 0) { 
-			cout << "Unique ptriplets = " << uniqueTriplets.size();
-			int min, max; double avg; 
-			pixelStats(min, max, avg); 
-			cout << ", stats (min,max,avg) = " << min << "," << max << "," << avg; 
+		if (ticks % 100 == 0) { 
+			cout << "Unique ptriplets = " << uniqueTriplets.size() << ", patterns = " << uniquePatterns.size();  
+			//int min, max; double avg; 
+			//pixelStats(min, max, avg); 
+			//cout << ", stats (min,max,avg) = " << min << "," << max << "," << avg; 
 			cout << ", maxcps = " << maxColorsPerScreen << endl; 
 		}
-		*/
+    */
 		
 		rewards->update();
 		
@@ -181,8 +185,35 @@ void AIBase::updateUniqueTriplets()
 {
 	for(size_t y = 0; y < curScreen.size(); y++){
 		for(size_t x = 0; x < curScreen[y].size(); x++){
+      // y indexes the row, x the column
 			ptriplet pt = make_pair(make_pair(x,y), curScreen[y][x]); 
 			uniqueTriplets.insert(pt); 
+		}
+	}
+}
+
+void AIBase::updateUniquePatterns(int rows, int cols)
+{
+  int row_inc = rows, col_inc = cols; 
+  //int row_inc = 1, col_inc = 1; 
+
+	for(size_t r = 0; r < curScreen.size(); r += row_inc){
+		for(size_t c = 0; c < curScreen[r].size(); c += col_inc){
+      //cout << curScreen.size() << " " << curScreen[y].size() << endl; 
+      // --> Gives 210 320,
+      
+      vector<int> p;
+      p.push_back(r); 
+      p.push_back(c); 
+
+      int maxrp = MIN(r+rows-1,curScreen.size()-1);  
+      int maxcp = MIN(c+cols-1,curScreen[r].size()-1);  
+
+      for (int rp = r; rp <= maxrp; rp++)
+        for (int cp = c; cp <= maxcp; cp++)
+          p.push_back(curScreen[rp][cp]); 
+
+      uniquePatterns.insert(p); 
 		}
 	}
 }
