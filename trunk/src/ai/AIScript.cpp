@@ -29,6 +29,7 @@ extern "C" {
 }
 
 OSystem *osystem = NULL;
+static bool printed_noscript_error = false; 
 
 int getArgument(lua_State *s,string function){
 	int argc = lua_gettop(s);
@@ -106,7 +107,12 @@ bool AIScript::loadGame(string rom){
 	int result = luaL_loadfile(state,path.c_str());
 	
 	if(result!=0){
-		cerr<<"[Script] This game does not have a script associated with it!\n";
+    if (!printed_noscript_error) 
+    {
+  		cerr<<"[Script] This game does not have a script associated with it!\n";
+      printed_noscript_error = true; 
+    }
+
 		return false;
 	}else{
 		cerr<<"Script "<<path<<" loaded\n";

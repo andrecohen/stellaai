@@ -140,6 +140,7 @@
 		2D91746D09BA90380026E9FF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		2D91746E09BA90380026E9FF /* SDLMain.nib in Resources */ = {isa = PBXBuildFile; fileRef = B2F367C504C7ADC700A80002 /* SDLMain.nib */; };
 		2D91746F09BA90380026E9FF /* Stella.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2D16A8E106324136005DF364 /* Stella.icns */; };
+		2D91747009BA90380026E9FF /* Credits.html in Resources */ = {isa = PBXBuildFile; fileRef = 2D7B4F6C063B513200579B93 /* Credits.html */; };
 		2D91747209BA90380026E9FF /* AboutBox.nib in Resources */ = {isa = PBXBuildFile; fileRef = 2D1A6CD808513610007CDBA8 /* AboutBox.nib */; };
 		2D91747409BA90380026E9FF /* SDLMain.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A47A9E01A0483001D3D55B /* SDLMain.m */; };
 		2D91747509BA90380026E9FF /* Booster.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 2DE2DF100627AE07006BEC99 /* Booster.cxx */; };
@@ -273,6 +274,10 @@
 		654409CB0E49E84F00D20E74 /* RL_client_environment.c in Sources */ = {isa = PBXBuildFile; fileRef = 654409C90E49E84F00D20E74 /* RL_client_environment.c */; };
 		654409CC0E49E84F00D20E74 /* RL_glue.h in Headers */ = {isa = PBXBuildFile; fileRef = 654409CA0E49E84F00D20E74 /* RL_glue.h */; };
 		654409F00E49E9B300D20E74 /* Agent_common.h in Headers */ = {isa = PBXBuildFile; fileRef = 654409EF0E49E9B300D20E74 /* Agent_common.h */; };
+		65665FDC0E79B546007BACC3 /* AIPattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65665FD80E79B546007BACC3 /* AIPattern.cpp */; };
+		65665FDD0E79B546007BACC3 /* AIPattern.h in Headers */ = {isa = PBXBuildFile; fileRef = 65665FD90E79B546007BACC3 /* AIPattern.h */; };
+		65665FDE0E79B546007BACC3 /* AISettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65665FDA0E79B546007BACC3 /* AISettings.cpp */; };
+		65665FDF0E79B546007BACC3 /* AISettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 65665FDB0E79B546007BACC3 /* AISettings.h */; };
 		6567EBC40E3F58AE0053C51B /* AIPlainText.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6567EBC20E3F58AE0053C51B /* AIPlainText.cpp */; };
 		6567EBC50E3F58AE0053C51B /* AIPlainText.h in Headers */ = {isa = PBXBuildFile; fileRef = 6567EBC30E3F58AE0053C51B /* AIPlainText.h */; };
 		6567EBC80E3F58D20053C51B /* AISocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6567EBC60E3F58D20053C51B /* AISocket.cpp */; };
@@ -641,6 +646,10 @@
 		654409C90E49E84F00D20E74 /* RL_client_environment.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = RL_client_environment.c; path = "../ai/networking/rl-glue/RL_client_environment.c"; sourceTree = SOURCE_ROOT; };
 		654409CA0E49E84F00D20E74 /* RL_glue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RL_glue.h; path = "../ai/networking/rl-glue/RL_glue.h"; sourceTree = SOURCE_ROOT; };
 		654409EF0E49E9B300D20E74 /* Agent_common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Agent_common.h; path = "../ai/networking/rl-glue/Agent_common.h"; sourceTree = SOURCE_ROOT; };
+		65665FD80E79B546007BACC3 /* AIPattern.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AIPattern.cpp; path = ../ai/AIPattern.cpp; sourceTree = SOURCE_ROOT; };
+		65665FD90E79B546007BACC3 /* AIPattern.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIPattern.h; path = ../ai/AIPattern.h; sourceTree = SOURCE_ROOT; };
+		65665FDA0E79B546007BACC3 /* AISettings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AISettings.cpp; path = ../ai/AISettings.cpp; sourceTree = SOURCE_ROOT; };
+		65665FDB0E79B546007BACC3 /* AISettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AISettings.h; path = ../ai/AISettings.h; sourceTree = SOURCE_ROOT; };
 		6567EBC20E3F58AE0053C51B /* AIPlainText.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AIPlainText.cpp; path = ../ai/networking/AIPlainText.cpp; sourceTree = SOURCE_ROOT; };
 		6567EBC30E3F58AE0053C51B /* AIPlainText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIPlainText.h; path = ../ai/networking/AIPlainText.h; sourceTree = SOURCE_ROOT; };
 		6567EBC60E3F58D20053C51B /* AISocket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AISocket.cpp; path = ../ai/networking/AISocket.cpp; sourceTree = SOURCE_ROOT; };
@@ -1167,6 +1176,10 @@
 		65A69C9A0CCFDB6200D5599E /* AI */ = {
 			isa = PBXGroup;
 			children = (
+				65665FD80E79B546007BACC3 /* AIPattern.cpp */,
+				65665FD90E79B546007BACC3 /* AIPattern.h */,
+				65665FDA0E79B546007BACC3 /* AISettings.cpp */,
+				65665FDB0E79B546007BACC3 /* AISettings.h */,
 				6567EBBE0E3F587B0053C51B /* Networking */,
 				657D89C00E3F4FF60025E898 /* AIRewards.cpp */,
 				657D89C10E3F4FF60025E898 /* AIRewards.h */,
@@ -1362,6 +1375,8 @@
 				654409CC0E49E84F00D20E74 /* RL_glue.h in Headers */,
 				654409F00E49E9B300D20E74 /* Agent_common.h in Headers */,
 				6582B1730E4C71C7002DF7BA /* AIScript.h in Headers */,
+				65665FDD0E79B546007BACC3 /* AIPattern.h in Headers */,
+				65665FDF0E79B546007BACC3 /* AISettings.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1419,6 +1434,7 @@
 				2D91746D09BA90380026E9FF /* InfoPlist.strings in Resources */,
 				2D91746E09BA90380026E9FF /* SDLMain.nib in Resources */,
 				2D91746F09BA90380026E9FF /* Stella.icns in Resources */,
+				2D91747009BA90380026E9FF /* Credits.html in Resources */,
 				2D91747209BA90380026E9FF /* AboutBox.nib in Resources */,
 				2D91753809BA91BC0026E9FF /* StellaOSX.xcconfig in Resources */,
 				2DEFB40C09C3386F00754289 /* Cart.icns in Resources */,
@@ -1606,6 +1622,8 @@
 				656DB5AF0E47D54600820EC6 /* AIGlue.cpp in Sources */,
 				654409CB0E49E84F00D20E74 /* RL_client_environment.c in Sources */,
 				6582B1720E4C71C7002DF7BA /* AIScript.cpp in Sources */,
+				65665FDC0E79B546007BACC3 /* AIPattern.cpp in Sources */,
+				65665FDE0E79B546007BACC3 /* AISettings.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

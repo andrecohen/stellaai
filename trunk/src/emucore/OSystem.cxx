@@ -732,11 +732,14 @@ void OSystem::mainLoop()
 	myTimingInfo.current = getTicks();
 	myTimingInfo.virt += myTimePerFrame;
 
-	if(myTimingInfo.current < myTimingInfo.virt)
+  // Take out the artificial delays
+
+	/*
+  if(myTimingInfo.current < myTimingInfo.virt)
   {
-    // Take out the artificial delays
-	  // SDL_Delay((myTimingInfo.virt - myTimingInfo.current) / 1000);
+	  SDL_Delay((myTimingInfo.virt - myTimingInfo.current) / 1000);
   }
+  */
 
 	myTimingInfo.totalTime += (getTicks() - myTimingInfo.start);
 	myTimingInfo.totalFrames++;
