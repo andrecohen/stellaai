@@ -42,9 +42,7 @@ using namespace std;
 #define PROTOCOL_PLAINTEXT	    1
 #define	PROTOCOL_RLGLUE         2
 
-//static int enabled_protocol = PROTOCOL_NONE;
-static int enabled_protocol = AISettings::get_int_setting("enabled_protocol"); 
-
+static int enabled_protocol = AISettings::getInstance()->get_int_setting("enabled_protocol"); 
 
 AIBase::AIBase(OSystem *system){
 	ticks = 0; 

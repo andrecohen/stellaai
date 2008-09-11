@@ -5,21 +5,24 @@
 #include <string>
 #include <fstream>
 
+using namespace std;
 
-class AISettings
-{
-  static std::string settings_file; 
-  static std::ifstream input;  
-
-  static void open_file(); 
-
-  static bool get_setting(const std::string & key, std::string & value); 
-
-  static std::string get_default(const std::string & key); 
-
+class AISettings {
 public:
-  
-  static int get_int_setting(const std::string & key); 
+	static AISettings *getInstance();
+	
+	int get_int_setting(const std::string & key); 
+	
+private:
+	AISettings();
+	
+	void open_file(); 
+	bool get_setting(const std::string & key, std::string & value); 
+	string get_default(const std::string & key); 
+
+	string settings_file; 
+	ifstream input;  
+	static AISettings *instance;
 }; 
 
 #endif
