@@ -21,12 +21,10 @@
 #include <RL_common.h>
 
 
-#ifdef __cplusplus
+#ifdef __APPLE__
 extern "C" {
 #endif
 
-
-	/* Environment Interface */
 	Task_specification env_init();
 	Observation env_start();
 	Reward_observation env_step(Action a);
@@ -36,28 +34,12 @@ extern "C" {
 	State_key env_get_state();
 	Random_seed_key env_get_random_seed();
 	Message env_message(const Message message);
+	
+	int rlStartEnvironment(char *host, int port);
+	void rlUpdateEnvironment();
+	void rlEndEnvironment();
 
-#if defined(RLGENV_NOMAINLOOP)
-  /* Hooks for external programs with existing main loops */
-
-  /* 
-   * Maybe this should be ifdef __cplusplus ?
-   * In MacOSX this header is used as part of a C++ compilation
-   * (but then linked using C-style linking? Not sure...)
-   */
-  #ifdef __APPLE__
-  extern "C" int rlStartEnvironment(char *host, int port);
-  extern "C" void rlUpdateEnvironment();
-  extern "C" void rlEndEnvironment();
-  #else
-  int rlStartEnvironment(char *host, int port);
-  void rlUpdateEnvironment();
-  void rlEndEnvironment();
-  #endif
-
-#endif
-
-#ifdef __cplusplus
+#ifdef __APPLE__
 }
 #endif
 
