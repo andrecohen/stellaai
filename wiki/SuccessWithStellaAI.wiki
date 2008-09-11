@@ -1,0 +1,9 @@
+StellaAI can be problematic at times. The original code was designed to be run on just about every machine invented and ironically due to this compiling on any machine can be a bit of a headache. Bellow are the suggested steps for succeeding at using StellaAI.
+
+  # GettingStellaAI 
+  # SelectingTheProtocol
+    # PlainTextProtocol
+    # RL-Glue
+  # UnderstandingTheOutput
+  # Rewards
+  
