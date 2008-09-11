@@ -27,6 +27,7 @@ using namespace std;
 #include "AIRewards.h"
 #include "AIPlainText.h"
 #include "AIGlue.h"
+#include "AISettings.h"
 #include "AIScript.h"
 
 #include "OSystem.hxx"
@@ -41,7 +42,9 @@ using namespace std;
 #define PROTOCOL_PLAINTEXT	    1
 #define	PROTOCOL_RLGLUE         2
 
-static int enabled_protocol =  PROTOCOL_PLAINTEXT;  
+//static int enabled_protocol = PROTOCOL_NONE;
+static int enabled_protocol = AISettings::get_int_setting("enabled_protocol"); 
+
 
 AIBase::AIBase(OSystem *system){
 	ticks = 0; 
@@ -94,8 +97,8 @@ void AIBase::update(){
 		
 		oldScreen = curScreen;
 		curScreen = nextScreen(); 
-		
-		/*
+	
+    /*
 		ticks++; 
 		if (ticks % 5 == 0)
 		updateUniqueTriplets();
@@ -104,11 +107,11 @@ void AIBase::update(){
 		if (ticks % 1000 == 0) { 
 			cout << "Unique ptriplets = " << uniqueTriplets.size();
 			int min, max; double avg; 
-			pixelStats(min, max, avg); 
-			cout << ", stats (min,max,avg) = " << min << "," << max << "," << avg; 
+			//pixelStats(min, max, avg); 
+			//cout << ", stats (min,max,avg) = " << min << "," << max << "," << avg; 
 			cout << ", maxcps = " << maxColorsPerScreen << endl; 
 		}
-		*/
+    */
 		
 		rewards->update();
 		
