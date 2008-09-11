@@ -2,9 +2,10 @@ MODULE := src/ai
 
 MODULE_OBJS := \
 	src/ai/AIBase.o \
+	src/ai/AIPattern.o \
 	src/ai/AIRewards.o \
-	src/ai/AISettings.o \
 	src/ai/AIScript.o \
+	src/ai/AISettings.o \
 	src/ai/networking/AIGlue.o \
 	src/ai/networking/AIGlueEnv.o \
 	src/ai/networking/AIProtocol.o \
