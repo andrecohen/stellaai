@@ -21,16 +21,17 @@
 #include "AIProtocol.h"
 #include "AIRewards.h"
 #include "AIGlobal.h"
+#include "AIPattern.h"
 #include "AIScript.h"
 #include "OSystem.hxx"
 #include "EventHandler.hxx"
 #include "FrameBuffer.hxx"
 
+#define  MIN(a,b)            ((a) < (b) ? (a) : (b))
+
 class AIRewards;
 class AIScript;
 class AIProtocol;
-
-typedef std::pair< std::pair<int,int> , int > ptriplet; 
 
 class AIBase {
 public:
@@ -45,6 +46,7 @@ public:
 	Matrix getPrevScreen();
 
   void updateUniqueTriplets(); 
+  void updateUniquePatterns(int rows, int cols); 
   int getNumberColors(); 
   void pixelStats(int & min, int & max, double & avg); 
 	
@@ -76,6 +78,7 @@ private:
 	Matrix oldScreen;
 	Matrix curScreen;
   std::set<ptriplet> uniqueTriplets; 
+  std::set< vector<int> > uniquePatterns; 
 };
 
 
