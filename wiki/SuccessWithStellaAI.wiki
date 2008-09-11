@@ -5,5 +5,5 @@ StellaAI can be problematic at times. The original code was designed to be run o
     # PlainTextProtocol
     # RL-Glue
   # UnderstandingTheOutput
-  # Rewards
+  # [Rewards]
   
