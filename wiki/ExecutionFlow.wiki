@@ -7,19 +7,19 @@ After some combination of calls, Stella enters its main loop `OSystem::mainLoop`
 {{{
   for(;;)
   {
-  aiBase->update();
+    aiBase->update();
 
-  myTimingInfo.start = getTicks();
-  myEventHandler->poll(myTimingInfo.start);
-  if(myQuitLoop) break;  // Exit if the user wants to quit
-  myFrameBuffer->update();
-  myTimingInfo.current = getTicks();
-  myTimingInfo.virt += myTimePerFrame;
+    myTimingInfo.start = getTicks();
+    myEventHandler->poll(myTimingInfo.start);
+    if(myQuitLoop) break;  // Exit if the user wants to quit
+    myFrameBuffer->update();
+    myTimingInfo.current = getTicks();
+    myTimingInfo.virt += myTimePerFrame;
 
-  if(myTimingInfo.current < myTimingInfo.virt)
-    SDL_Delay((myTimingInfo.virt - myTimingInfo.current) / 1000);
+    //if(myTimingInfo.current < myTimingInfo.virt)
+    //  SDL_Delay((myTimingInfo.virt - myTimingInfo.current) / 1000);
 
-  myTimingInfo.totalTime += (getTicks() - myTimingInfo.start);
-  myTimingInfo.totalFrames++;
+    myTimingInfo.totalTime += (getTicks() - myTimingInfo.start);
+    myTimingInfo.totalFrames++;
   }
 }}}
