@@ -1,18 +1,6 @@
-(This page is still in construction)
 
-Test image
-http://code.google.com/images/code_sm.png
+Once you've successfully compiled StellaAI, you will probably want to know how it works. This page describes the flow of execution of the program. 
 
-#summary One-sentence summary of this page.
+First, the entry point of the program `main()` is found in `src/common/mainSDL.cxx`. 
 
-= Introduction =
-
-Add your content here.
-
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+After some combination of calls, Stella enters its main loop `OSystem::mainLoop` in `src/emucore/OSystem.cxx`. 
