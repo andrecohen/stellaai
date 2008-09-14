@@ -1,6 +1,25 @@
-
 Once you've successfully compiled StellaAI, you will probably want to know how it works. This page describes the flow of execution of the program. 
 
 First, the entry point of the program `main()` is found in `src/common/mainSDL.cxx`. 
 
-After some combination of calls, Stella enters its main loop `OSystem::mainLoop` in `src/emucore/OSystem.cxx`. 
+After some combination of calls, Stella enters its main loop `OSystem::mainLoop` in `src/emucore/OSystem.cxx`. The main loop code is small, and starts with the hook into the AI module: 
+
+{{{
+  for(;;)
+  {
+  aiBase->update();
+
+  myTimingInfo.start = getTicks();
+  myEventHandler->poll(myTimingInfo.start);
+  if(myQuitLoop) break;  // Exit if the user wants to quit
+  myFrameBuffer->update();
+  myTimingInfo.current = getTicks();
+  myTimingInfo.virt += myTimePerFrame;
+
+  if(myTimingInfo.current < myTimingInfo.virt)
+    SDL_Delay((myTimingInfo.virt - myTimingInfo.current) / 1000);
+
+  myTimingInfo.totalTime += (getTicks() - myTimingInfo.start);
+  myTimingInfo.totalFrames++;
+  }
+}}}
