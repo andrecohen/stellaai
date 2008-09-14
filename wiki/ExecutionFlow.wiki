@@ -5,6 +5,8 @@ First, the entry point of the program `main()` is found in `src/common/mainSDL.c
 After some combination of calls, Stella enters its main loop `OSystem::mainLoop` in `src/emucore/OSystem.cxx`. The main loop code is small, and starts with the hook into the AI module: 
 
 {{{
+mainloop()
+{
   for(;;)
   {
     aiBase->update();
@@ -22,4 +24,9 @@ After some combination of calls, Stella enters its main loop `OSystem::mainLoop`
     myTimingInfo.totalTime += (getTicks() - myTimingInfo.start);
     myTimingInfo.totalFrames++;
   }
+}
 }}}
+
+`AIBase::update` gets the current state of the screen, and uses its AIProtocol object to communicate with an external decision-maker. Currently, two protocols are implemented: a plain text protocol, and an RL-Glue protocol. 
+
+The decision-maker inspects the current state, sends back its decision of what to do (SDL joystick keys) which then gets fed into the appropriate Stella keyboard-handling objects, and the main loop continues. 
