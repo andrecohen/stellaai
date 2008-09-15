@@ -1,16 +1,19 @@
 
-(This page is still in construction)
+[http://rlai.cs.ualberta.ca/RLBB/top.html RL-Glue] is a software framework for reinforcement learning. 
 
-#summary One-sentence summary of this page.
+A project that uses RL-Glue must use RL-Glue's four main components:
+  * the environment
+  * the experiment
+  * the agent
+  * the glue
 
-= Introduction =
+The environment is the implementation of the "reinforcement learning problem" (eg. Mountain Car), the agent is the implementation of the "algorithm" or the decision-maker (eg. Sarsa), the experiment describes how many times to run the learning algorithm, and the glue binds them altogether. 
 
-Add your content here.
+In StellaAI, the `AIGlue` object implements the RL-Glue AIProtocol used by Stella to make decisions. The actual implementation of the environment (the `env_` functions) is is `src/ai/AIGlueEnv.cpp`. To enable the RL-Glue environment, set enabled_protocol to the value of PROTOCOL_RLGLUE. 
 
+The implementations of RL-Glue agents for StellaAI are kept separately at the moment. If you would like them please contact Marc Lanctot. 
 
-= Details =
+The experiment and RL-Glue are used from the main RL-Glue distribution. 
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+To start an experiment using RL-Glue, load all four RL-Glue component executables. Note that when StellaAI's enabled protocol is set to PROTOCOL_RLGLUE, it will act as the RL-Glue environment. 
+
