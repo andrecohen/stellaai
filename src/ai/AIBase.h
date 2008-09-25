@@ -17,6 +17,7 @@
 #define AIBASE_H
 
 #include <set> 
+#include <map>
 
 #include "AIProtocol.h"
 #include "AIRewards.h"
@@ -44,11 +45,6 @@ public:
 	Matrix getRam();
 	Matrix getScreen();
 	Matrix getPrevScreen();
-
-  void updateUniqueTriplets(); 
-  void updateUniquePatterns(int rows, int cols); 
-  int getNumberColors(); 
-  void pixelStats(int & min, int & max, double & avg); 
 	
 	int getScreenHeight();
 	int getScreenWidth();
@@ -62,7 +58,7 @@ public:
 	bool getKeys();
 	
 	OSystem *getOSystem();
-	
+ 
 private:
 	int getPixel(int,int);
 
@@ -77,8 +73,33 @@ private:
 
 	Matrix oldScreen;
 	Matrix curScreen;
+
+  /* 
+   * 
+   * The stuff below is just used for collecting stats needed
+   * by the UofA researchers. 
+   *
+   * It will soon be moved to the RL-Glue agents. 
+   *
+   */
+  
+  void init_stats(); 
+  void update_stats(); 
+  
+  void updateUniqueTriplets(); 
+  void updateUniqueCrossTriplets(); 
+  void updateUniquePatterns(int rows, int cols); 
+  int getNumberColors(); 
+  void pixelStats(int & min, int & max, double & avg); 
+	
   std::set<ptriplet> uniqueTriplets; 
-  std::set< vector<int> > uniquePatterns; 
+  //std::set<pcrosstriplet> uniqueCrossTriplets;
+  //ct2boolmap uniqueCrossTriplets; 
+  std::set< vector<int> > uniquePatterns;   
+  std::map<int,int> color2indexmap; 
+  map< pair<int,int> , bool > **** colstatsarr;
+  int color_index; 
+
 };
 
 
