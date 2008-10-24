@@ -18,9 +18,9 @@
 #include <netdb.h> 
 #include <arpa/inet.h> 
 
-#include "RL_network.h"
-#include "RL_common.h"
-#include "Environment_common.h"
+#include <rlglue/Environment_common.h>
+
+#include "RLglue_codec.h"
 #include "AIGlue.h"
 #include "AIGlueEnv.h"
 #include "AIProtocol.h"

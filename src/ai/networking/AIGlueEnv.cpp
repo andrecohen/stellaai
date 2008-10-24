@@ -18,10 +18,11 @@
 #include <sstream>
 #include <vector>
 
+#include <rlglue/Environment_common.h>
+#include <rlglue/legacy_types.h>
+
 #include "AIGlueEnv.h"
 #include "AIBase.h"
-#include "RL_common.h"
-#include "Environment_common.h"
 
 using namespace std; 
 
