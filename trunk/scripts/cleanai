@@ -1,0 +1,6 @@
+#!/bin/sh
+objs=`find src/ai -name *.o`
+#echo -n "rm -f "
+#echo $objs
+echo "Removing all AI objects.."
+rm -f $objs
