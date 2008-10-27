@@ -19,7 +19,7 @@
 #include <vector>
 
 #include <rlglue/Environment_common.h>
-#include <rlglue/legacy_types.h>
+//#include <rlglue/legacy_types.h>
 
 #include "AIGlueEnv.h"
 #include "AIBase.h"
@@ -44,11 +44,14 @@ static int screen_height;
 static AIGlue * aiGlue = NULL; 
 static AIBase * aiBase = NULL; 
 static AIRewards * aiRewards = NULL; 
-static Observation o; 
-static Reward_observation ro; 
+static observation_t o; 
+static reward_observation_t ro; 
 static int timestep; 
 static int prev_score; 
 static int cur_score; 
+
+static state_key_t sk; 
+static random_seed_key_t rsk; 
 
 /* Helper functions first */
 void applyAction(int action)
@@ -149,7 +152,7 @@ void applyAction(int action)
 
 
 
-void fullScreenObservation(Observation & obs, const Matrix & screen)
+void fullScreenObservation(observation_t & obs, const Matrix & screen)
 {
 	//cout << "Computing full screen obs" << endl; 
 	
@@ -191,7 +194,7 @@ void fullScreenObservation(Observation & obs, const Matrix & screen)
 		}
 }
 
-void diffScreenObservation(Observation & obs)
+void diffScreenObservation(observation_t & obs)
 {
 	//cout << "Computing diff screen obs" << endl; 
 	
@@ -227,7 +230,7 @@ void diffScreenObservation(Observation & obs)
 }
 
 /* Now, RLGlue Environment function impl. */
-Task_specification env_init()
+const char * env_init()
 {
 	aiGlue = AIGlueEnv::aiGluePtr; 
 	assert(aiGlue != NULL); 
@@ -242,14 +245,13 @@ Task_specification env_init()
 	// We can change our mind about this later if we want.
 	
 	o.intArray = NULL; 
-	ro.o.intArray = NULL; 
 	
 	task_spec = ""; 
 	
-	return (Task_specification)task_spec.c_str(); 
+	return (const char *)task_spec.c_str(); 
 }
 
-Observation env_start()
+const observation_t* env_start()
 {
 	aiBase = AIGlueEnv::aiBasePtr; 
 	assert(aiBase != NULL);
@@ -269,10 +271,10 @@ Observation env_start()
 	o.numInts = 0; 
 	timestep = 0; 
 	
-	return o; 
+	return &o; 
 }
 
-Reward_observation env_step(Action a)
+const reward_observation_t* env_step(const action_t* a)
 {
 	timestep++; 
 	//cout << "env_step starting, timestep " << timestep << endl; 
@@ -289,8 +291,8 @@ Reward_observation env_step(Action a)
 		res_change = true; 
 	}
 	
-	assert(a.numInts == 1);
-	int action = a.intArray[0]; 
+	assert(a->numInts == 1);
+	int action = a->intArray[0]; 
 	
 	// Apply the action
 	aiBase->resetKeys(); 
@@ -299,56 +301,59 @@ Reward_observation env_step(Action a)
 	// Get and set the reward
 	prev_score = cur_score; 
 	cur_score = aiRewards->getReward(rt_Score);
-	ro.r = cur_score-prev_score; 
-	if (ro.r != 0) cout << "Rewards, r = " << ro.r << endl; 
+	ro.reward = cur_score-prev_score; 
+	if (ro.reward != 0) cout << "Rewards, r = " << ro.reward << endl; 
 	
 	// check if terminal
 	ro.terminal = 0; 
 	
 	// Get observation
 	if (timestep < 10)
-		fullScreenObservation(ro.o, aiBase->getScreen()); 
+		fullScreenObservation(o, aiBase->getScreen()); 
 	else
-		diffScreenObservation(ro.o); 
+		diffScreenObservation(o);
+
+  ro.observation = &o; 
 	
 	//fullScreenObservation(ro.o, aiBase->getScreen()); 
 	
-	return ro; 
+	return &ro; 
 }
 
 void env_cleanup()
 {
 	if (o.intArray != NULL)
 		free(o.intArray); 
-	
-	if (ro.o.intArray != NULL)
-		free(o.intArray); 
 }
 
-void env_set_state(State_key sk)
+void env_set_state(const state_key_t * stateKey)
 {
+  // use  rl_abstract_type_t *duplicateRLStructToPointer(const rl_abstract_type_t *src);
+  // in RLStruct_util.h
+  fprintf(stderr, "env_set_state not implemented!\n"); 
 }
 
-void env_set_random_seed(Random_seed_key rsk)
+void env_set_random_seed(const random_seed_key_t * randomKey)
 {
+  // use  rl_abstract_type_t *duplicateRLStructToPointer(const rl_abstract_type_t *src);
+  // in RLStruct_util.h
+  fprintf(stderr, "env_set_random_seed not implemented!\n"); 
 }
 
-State_key env_get_state()
+const state_key_t* env_get_state()
 {
-	State_key sk; 
-	return sk; 
+	return &sk; 
 }
 
-Random_seed_key env_get_random_seed()
+const random_seed_key_t* env_get_random_seed()
 {
-	Random_seed_key rsk; 
-	return rsk; 
+	return &rsk; 
 }
 
-Message env_message(const Message message)
+const char* env_message(const char * message)
 {
 	msg = "This environment does not respond to messages"; 
-	return (Message)msg.c_str(); 
+	return (char*)msg.c_str(); 
 }
 
 
