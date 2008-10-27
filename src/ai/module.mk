@@ -20,7 +20,7 @@ MODULE_OBJS := \
 MODULE_DIRS += \
 	src/ai
 
-LIBS += -llua -lrlgluenetdev 
+LIBS += -llua -lrlgluenetdev
 
 # Include common rules 
 include $(srcdir)/common.rules
