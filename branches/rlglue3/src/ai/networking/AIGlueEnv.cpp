@@ -290,9 +290,13 @@ const reward_observation_t* env_step(const action_t* a)
 		cout << "Change in screen res, new WxH = " << screen_width << " x " << screen_height << endl; 
 		res_change = true; 
 	}
-	
-	assert(a->numInts == 1);
-	int action = a->intArray[0]; 
+
+	assert(a->numInts <= 1);
+  int action = 0; 
+  if (a->numInts > 0)
+    action = a->intArray[0]; 
+  else
+    cerr << "Warning: a->numInts == 0" << endl;
 	
 	// Apply the action
 	aiBase->resetKeys(); 
