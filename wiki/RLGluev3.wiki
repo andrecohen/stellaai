@@ -102,7 +102,7 @@ Building in support for multiple episodes won't be trivial in the case of Atari 
 
 === 7. Run all four required RL-Glue components. ===
 
-The order with which you start these should not matter. I'm presenting you with the order I use: 
+The order with which you start these should not matter. I'm presenting you with the order I use. In four different terminals,
 
   * Start the main RL-Glue executable: `rl_glue`
   * Start the experiment program. 
