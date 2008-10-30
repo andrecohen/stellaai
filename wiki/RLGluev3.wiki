@@ -2,12 +2,16 @@
 
 There are several steps you need to do to get StellaAI running using RL-Glue 3 with an RL-Glue 3 compatible agent. This document describes how to do so. 
 
-  # Download the required packages. You'll need: 
+=== 1. Download the required packages ===
+
+You'll need: 
     * RL-Glue 3. Get a stable package from [http://code.google.com/p/rl-glue/ RL-Glue project page]
     * RL-Glue extensions (C codec). Get a stable package from [http://code.google.com/p/rl-glue-ext/ RL-Glue extensions page]
     * StellaAI RL-Glue 3 branch source code. Detailed instructions below. 
     * An RL-Glue 3 compatible random agent, [http://www.cs.ualberta.ca/~lanctot/files/atari_random_rlglue3.tar.gz atari_random_rlglue3.tar.gz] 
-  # Install RL-Glue 3.
+
+=== 2. Install RL-Glue 3 ===
+
 If you downloaded RC2 and want to install it as root: 
 {{{
 tar -xzvf rlglue-3.0-RC2.tar.gz
@@ -26,8 +30,10 @@ make
 make check
 make install
 }}}
-  # Install RL-Glue C codec. 
-If you downloaded revision 338 and want to install it as root:
+
+=== 3. Install RL-Glue C codec. ===
+
+If you downloaded version 2.0 of the codec and want to install it as root:
 {{{
 tar -xzvf c-codec-2.0-RC2.tar.gz
 cd c-codec-2.0
@@ -44,3 +50,4 @@ make
 make install
 }}}
 
+=== 4. ===
