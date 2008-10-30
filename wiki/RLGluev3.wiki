@@ -82,7 +82,9 @@ This will produce the ./RL_agent executable.
 
 === 6. Compile an Experiment program. === 
 
-There is an example skeleton experiment file in `rlglue-3.0-RC2/examples/skeleton`. Before you build it, read the next paragraph. You can use this as a starting point. Note, you may need to run make like so: 
+There is an example skeleton experiment file in `rlglue-3.0-RC2/examples/skeleton`. Before you build it, read the next few paragraphs. 
+
+You can use this experiment program as a starting point. Note, you may need to run make like so: 
 
 {{{
 CFLAGS=-I/usr/local/include LDFLAGS=-L/usr/local/lib make
