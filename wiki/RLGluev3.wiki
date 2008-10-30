@@ -10,7 +10,7 @@ You'll need:
     * StellaAI RL-Glue 3 branch source code. Detailed instructions below. 
     * An RL-Glue 3 compatible random agent, [http://www.cs.ualberta.ca/~lanctot/files/atari_random_rlglue3.tar.gz atari_random_rlglue3.tar.gz] 
 
-=== 2. Install RL-Glue 3 ===
+=== 2. Install RL-Glue 3. ===
 
 If you downloaded RC2 and want to install it as root: 
 {{{
@@ -21,6 +21,7 @@ make
 make check
 sudo make install
 }}}
+
 Or, as a regular user with prefix /home/username:
 {{{
 tar -xzvf rlglue-3.0-RC2.tar.gz
@@ -41,6 +42,7 @@ cd c-codec-2.0
 make
 sudo make install
 }}}
+
 Or, as a regular user with prefix /home/username:
 {{{
 tar -xzvf c-codec-2.0-RC2.tar.gz
@@ -50,4 +52,8 @@ make
 make install
 }}}
 
-=== 4. ===
+=== 4. Get RL-Glue 3 enabled StellaAI ===
+
+At the moment this is in a branch. Maybe later when RL-Glue 3 is officially release it will be merged into the trunk. 
+
+svn co 
