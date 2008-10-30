@@ -2,9 +2,9 @@
 
 There are several steps you need to do to get StellaAI running using RL-Glue 3 with an RL-Glue 3 compatible agent. This document describes how to do so. 
 
-# Download the required packages. You'll need: 
-  * RL-Glue 3. Get a stable package from [http://code.google.com/p/rl-glue/ RL-Glue project page]
-  * RL-Glue extensions. Get a stable package from [http://code.google.com/p/rl-glue-ext/ RL-Glue extensions page]
-  * An RL-Glue 3 compatible random agent, [http://www.cs.ualberta.ca/~lanctot/files/atari_random_rlglue3.tar.gz atari_random_rlglue3.tar.gz]
-
-# Install RL-Glue 3. 
+  # Download the required packages. You'll need: 
+    * RL-Glue 3. Get a stable package from [http://code.google.com/p/rl-glue/ RL-Glue project page]
+    * RL-Glue extensions. Get a stable package from [http://code.google.com/p/rl-glue-ext/ RL-Glue extensions page]
+    * An RL-Glue 3 compatible random agent, [http://www.cs.ualberta.ca/~lanctot/files/atari_random_rlglue3.tar.gz atari_random_rlglue3.tar.gz]
+ 
+  # Install RL-Glue 3. 
