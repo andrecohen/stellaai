@@ -94,7 +94,7 @@ or
 CFLAGS=-I/home/username/include LDFLAGS=-L/home/username/lib make
 }}}
 
-The Atari environment/agent does not support multiple episodes yet. So in SkeletonAgent you have to remove all the runEpisode statements except the last one runEpisode(0); which has no limit. This means there will be one episode that runs indefinitely. 
+The Atari environment/agent does not support multiple episodes yet. So in `SkeletonAgent` you have to remove all the runEpisode statements except the last one runEpisode(0); which has no limit. This means there will be one episode that runs indefinitely. 
 
 Building in support for multiple episodes won't be trivial in the case of Atari because you may have to completely restart the emulator. If not, you'll have to figure out how to "re-initialize it" to its initial state before running a game, and call that function from within the environment when RL-Glue requests a new env_start(). This may be fixed sooner or later by Chris Rayner. 
 
