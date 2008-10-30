@@ -102,7 +102,7 @@ Building in support for multiple episodes won't be trivial in the case of Atari 
 
 The order with which you start these should not matter. I'm presenting you with the order I use: 
 
-# Start the main RL-Glue executable: `rl_glue`
-# Start the experiment program. 
-# Start the agent `RL_agent`. 
-# Start StellaAI _with a ROM as the argument_ (otherwise the random agent will happily navigate your filesystem for a ROM to load!): `./stellaai ~/Pitfall.bin` . 
+  * Start the main RL-Glue executable: `rl_glue`
+  * Start the experiment program. 
+  * Start the agent `RL_agent`. 
+  * Start StellaAI _with a ROM as the argument_ (otherwise the random agent will happily navigate your filesystem for a ROM to load!): `./stellaai ~/Pitfall.bin` . 
