@@ -67,3 +67,42 @@ svn checkout http://stellaai.googlecode.com/svn/branches/rlglue3 stellaai
 }}}
 
 `***` Note: right now, for some reason, the read/write copy doesn't seem available to anybody other than the person who created the branch (Marc Lanctot). We're looking into this. 
+
+Build it as normal to produce the `stellaai` executable. 
+
+=== 5. Compile the Agent. ===
+
+{{{
+tar -xzvf atari_random_rlglue3.tar.gz
+cd atari_random_rlglue3
+make
+}}}
+
+This will produce the ./RL_agent executable. 
+
+=== 6. Compile an Experiment program. === 
+
+There is an example skeleton experiment file in `rlglue-3.0-RC2/examples/skeleton`. Before you build it, read the next paragraph. You can use this as a starting point. Note, you may need to run make like so: 
+
+{{{
+CFLAGS=-I/usr/local/include LDFLAGS=-L/usr/local/lib make
+}}}
+
+or
+
+{{{
+CFLAGS=-I/home/username/include LDFLAGS=-L/home/username/lib make
+}}}
+
+The Atari environment/agent does not support multiple episodes yet. So in SkeletonAgent you have to remove all the runEpisode statements except the last one runEpisode(0); which has no limit. This means there will be one episode that runs indefinitely. 
+
+Building in support for multiple episodes won't be trivial in the case of Atari because you may have to completely restart the emulator. If not, you'll have to figure out how to "re-initialize it" to its initial state before running a game, and call that function from within the environment when RL-Glue requests a new env_start(). This may be fixed sooner or later by Chris Rayner. 
+
+=== 7. Run all four required RL-Glue components. ===
+
+The order with which you start these should not matter. I'm presenting you with the order I use: 
+
+# Start the main RL-Glue executable: `rl_glue`
+# Start the experiment program. 
+# Start the agent `RL_agent`. 
+# Start StellaAI _with a ROM as the argument_ (otherwise the random agent will happily navigate your filesystem for a ROM to load!): `./stellaai ~/Pitfall.bin` . 
