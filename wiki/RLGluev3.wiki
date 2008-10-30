@@ -56,7 +56,7 @@ make install
 
 At the moment this is in a branch. Maybe later when RL-Glue 3 is officially release it will be merged into the trunk. 
 
-To get a read/write copy^*^*^*:
+To get a read/write copy^*:
 {{{
 svn checkout https://stellaai.googlecode.com/svn/branches/rlglue3 stellaai --username your.username
 }}}
@@ -66,4 +66,4 @@ To get a read-only copy:
 svn checkout http://stellaai.googlecode.com/svn/branches/rlglue3 stellaai
 }}}
 
-^*^*^* Note: right now, for some reason, the read/write copy doesn't seem available to anybody other than the person who created the branch (Marc Lanctot). We're looking into this. 
+^* Note: right now, for some reason, the read/write copy doesn't seem available to anybody other than the person who created the branch (Marc Lanctot). We're looking into this. 
