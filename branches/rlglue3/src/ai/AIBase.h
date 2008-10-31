@@ -51,6 +51,8 @@ public:
 	
 	void saveState();
 	void loadState();
+	
+	void restartEmulation();
 
 	void pressKey(SDLKey);
 	void resetKeys();
