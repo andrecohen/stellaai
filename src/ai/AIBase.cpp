@@ -177,6 +177,12 @@ void AIBase::loadState(){
 	system->debugger().loadState(--saveStack);
 }
 
+// Reloads emulator with current ROM
+void AIBase::restartEmulation() {
+	system->deleteConsole();
+	system->createConsole();
+}
+
 // Gets the screen height without scaling
 int AIBase::getScreenHeight(){
 	return system->frameBuffer().baseHeight()*2;
