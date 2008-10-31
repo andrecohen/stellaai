@@ -17,6 +17,9 @@
 #define AIBASE_H
 
 #include <set> 
+#include <vector>
+
+using namespace std;
 
 #include "AIProtocol.h"
 #include "AIRewards.h"
@@ -27,7 +30,7 @@
 #include "EventHandler.hxx"
 #include "FrameBuffer.hxx"
 
-#define  MIN(a,b)            ((a) < (b) ? (a) : (b))
+
 
 class AIRewards;
 class AIScript;
@@ -44,17 +47,14 @@ public:
 	Matrix getRam();
 	Matrix getScreen();
 	Matrix getPrevScreen();
-
-  void updateUniqueTriplets(); 
-  void updateUniquePatterns(int rows, int cols); 
-  int getNumberColors(); 
-  void pixelStats(int & min, int & max, double & avg); 
 	
 	int getScreenHeight();
 	int getScreenWidth();
 	
 	void saveState();
 	void loadState();
+	
+	void restartEmulation();
 
 	void pressKey(SDLKey);
 	void resetKeys();
@@ -65,20 +65,17 @@ public:
 	
 private:
 	int getPixel(int,int);
-
-	int	saveStack;
-  int ticks; 
-  int maxColorsPerScreen; 
+	vector<unsigned char> compress(Matrix);
 	
 	OSystem *system;
+	
+	int saveStack;
 	
 	AIProtocol *comm;
 	AIRewards *rewards;
 
 	Matrix oldScreen;
 	Matrix curScreen;
-  std::set<ptriplet> uniqueTriplets; 
-  std::set< vector<int> > uniquePatterns; 
 };
 
 
