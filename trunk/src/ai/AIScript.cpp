@@ -42,9 +42,8 @@ int getArgument(lua_State *s,string function){
 
 int log(lua_State *s){
 	int args = lua_gettop(s);
-  // Not sure why this is being printed
-  //for(int n=1;n<=args;n++)
-	//	cerr<<"[Script] "<<lua_tostring(s, n)<<endl;
+	for(int n=1;n<=args;n++)
+		cerr<<"[Script] "<<lua_tostring(s, n)<<endl;
 	return args>0;
 }
 
@@ -73,26 +72,30 @@ int toBin(lua_State *s){
 	return 1;
 }
 
+int getBit(lua_State *s){
+	int val = lua_tonumber(s, 1);
+	int bit = lua_tonumber(s, 2);
+	lua_pushnumber(s, (val & (0x0001<<bit))>>bit);
+	return 1;
+}
+
+int restartEmulation(lua_State *s){
+	osystem->deleteConsole();
+	osystem->createConsole();
+	return 0;
+}
+
 AIScript::AIScript(OSystem *sys){
 	state = lua_open();
 
-  cout << "Initializing LUA" << endl; 
-
-  /*
-	luaopen_io(state);
-	luaopen_base(state);
-	luaopen_table(state);
-	luaopen_string(state);
-	//luaopen_loadlib(state);
-	luaL_openlibs(state);
-  */
-
-  cout << "Registering lua vars" << endl; 
+	cout << "Initializing LUA" << endl; 
 	
 	lua_register(state, "getRam", getRam);
 	lua_register(state, "log", log);
 	lua_register(state, "toHex", toHex);
 	lua_register(state, "toBin", toHex);
+	lua_register(state, "getBit", getBit);
+	lua_register(state, "restartEmulation", restartEmulation);
 	
 	osystem = sys;
 }

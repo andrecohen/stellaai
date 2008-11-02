@@ -18,17 +18,19 @@
 
 #include <set> 
 #include <map>
+#include <vector>
+
+using namespace std;
 
 #include "AIProtocol.h"
 #include "AIRewards.h"
 #include "AIGlobal.h"
-#include "AIPattern.h"
 #include "AIScript.h"
 #include "OSystem.hxx"
 #include "EventHandler.hxx"
 #include "FrameBuffer.hxx"
 
-#define  MIN(a,b)            ((a) < (b) ? (a) : (b))
+
 
 class AIRewards;
 class AIScript;
@@ -51,6 +53,8 @@ public:
 	
 	void saveState();
 	void loadState();
+	
+	void restartEmulation();
 
 	void pressKey(SDLKey);
 	void resetKeys();
@@ -61,10 +65,9 @@ public:
  
 private:
 	int getPixel(int,int);
+	vector<unsigned char> compress(Matrix);
 
-	int	saveStack;
-  int ticks; 
-  int maxColorsPerScreen; 
+	int saveStack;
 	
 	OSystem *system;
 	
@@ -73,33 +76,6 @@ private:
 
 	Matrix oldScreen;
 	Matrix curScreen;
-
-  /* 
-   * 
-   * The stuff below is just used for collecting stats needed
-   * by the UofA researchers. 
-   *
-   * It will soon be moved to the RL-Glue agents. 
-   *
-   */
-  
-  void init_stats(); 
-  void update_stats(); 
-  
-  void updateUniqueTriplets(); 
-  void updateUniqueCrossTriplets(); 
-  void updateUniquePatterns(int rows, int cols); 
-  int getNumberColors(); 
-  void pixelStats(int & min, int & max, double & avg); 
-	
-  std::set<ptriplet> uniqueTriplets; 
-  //std::set<pcrosstriplet> uniqueCrossTriplets;
-  //ct2boolmap uniqueCrossTriplets; 
-  std::set< vector<int> > uniquePatterns;   
-  std::map<int,int> color2indexmap; 
-  map< pair<int,int> , bool > **** colstatsarr;
-  int color_index; 
-
 };
 
 

@@ -20,26 +20,6 @@
 #include <vector>
 using namespace std;
 
-class Centroid;
-class AIBase;
-class AIKmeans;
-
-// Old, but still used
-enum ObjectType {
-	Any			= 0,
-	Undefined	= 1,
-	Man			= 2,
-	Log			= 3,
-	Wall		= 4,
-	Ladder		= 5,
-	Scorpion	= 6,
-	Croc		= 7,	
-	Water		= 8,
-	Sand		= 9,
-	Hole		= 10,
-	Vine		= 11
-};
-
 /*******************************************************************
 	Basic Structures
 *******************************************************************/
@@ -52,16 +32,8 @@ struct Rect {
 	Point min,max;
 };
  
-struct Object {
-	Rect dimension;
-	ObjectType type;
-};
-
 typedef vector<int> MatrixRow;
 typedef vector< MatrixRow > Matrix;
-
-typedef std::vector<Centroid *> Centroids;
-typedef std::vector<Object *> Objects;
 
 /*******************************************************************
 	Some simple macros 

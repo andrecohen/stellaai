@@ -26,10 +26,11 @@
 srcdir      ?= .
 
 DEFINES     := -DRLGENV_NOMAINLOOP
-LDFLAGS     := 
+LDFLAGS     := -L$(HOME)/lib -L/usr/local/lib
 INCLUDES    := -Isrc/ai -Isrc/macosx -I/usr/include -Isrc/ai/networking \
-               -Isrc/ai/networking/rl-glue
-LIBS	    := 
+               -Isrc/ai/networking/rl-glue -I$(HOME)/include -I/usr/local/include \
+			   -I/usr/include/lua5.1
+LIBS	    :=  
 OBJS	    :=
 PROF        :=
 

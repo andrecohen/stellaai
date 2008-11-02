@@ -18,12 +18,15 @@
 #include <netdb.h> 
 #include <arpa/inet.h> 
 
-#include "RL_network.h"
-#include "RL_common.h"
-#include "Environment_common.h"
+#include <rlglue/network/RL_network.h>
+#include <rlglue/RL_common.h>
+#include <rlglue/Environment_common.h>
+
 #include "AIGlue.h"
 #include "AIGlueEnv.h"
 #include "AIProtocol.h"
+
+#include "RLglue_codec.h"
 
 using namespace std; 
 

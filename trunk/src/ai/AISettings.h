@@ -7,22 +7,21 @@
 
 using namespace std;
 
-class AISettings {
+class AISettings
+{
 public:
-	static AISettings *getInstance();
-	
-	int get_int_setting(const std::string & key); 
-	
-private:
 	AISettings();
 	
+	int get_int_setting(const std::string & key); 
+private:
 	void open_file(); 
 	bool get_setting(const std::string & key, std::string & value); 
-	string get_default(const std::string & key); 
-
+	string get_default(const std::string & key);
+	
 	string settings_file; 
 	ifstream input;  
-	static AISettings *instance;
+	
+	AISettings *instance;
 }; 
 
 #endif
