@@ -88,7 +88,7 @@ int restartEmulation(lua_State *s){
 AIScript::AIScript(OSystem *sys){
 	state = lua_open();
 
-	cout << "Registering LUA vars" << endl; 
+	cout << "Initializing LUA" << endl; 
 	
 	lua_register(state, "getRam", getRam);
 	lua_register(state, "log", log);
