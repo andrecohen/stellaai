@@ -762,9 +762,6 @@
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				2D91751A09BA90380026E9FF /* Info-StellaOSX__Upgraded_.plist */,
 				2D91753709BA91BC0026E9FF /* StellaOSX.xcconfig */,
-				65DE68470EBE17C600D12B50 /* librlutils-3:0:0.3.dylib */,
-				65DE68490EBE17CC00D12B50 /* librlgluenetdev-0:0:0.0.0.0.dylib */,
-				65DE684B0EBE17CF00D12B50 /* librlglue-3:0:0.3.0.0.dylib */,
 			);
 			name = "«PROJECTNAMEASXML»";
 			sourceTree = "<group>";
@@ -801,6 +798,9 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				65DE68470EBE17C600D12B50 /* librlutils-3:0:0.3.dylib */,
+				65DE68490EBE17CC00D12B50 /* librlgluenetdev-0:0:0.0.0.0.dylib */,
+				65DE684B0EBE17CF00D12B50 /* librlglue-3:0:0.3.0.0.dylib */,
 				6582B1980E4C7897002DF7BA /* liblua.a */,
 				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
 				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
