@@ -52,9 +52,7 @@
 
 #include <time.h>
 #include <sys/time.h>
-static int ticks = 0; 
-static size_t time_start; 
-static size_t time_end; 
+
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 OSystem::OSystem()
@@ -732,28 +730,17 @@ void OSystem::mainLoop()
 	myTimingInfo.current = getTicks();
 	myTimingInfo.virt += myTimePerFrame;
 
-  // Take out the artificial delays
+	// Take out the artificial delays
 
 	/*
-  if(myTimingInfo.current < myTimingInfo.virt)
-  {
-	  SDL_Delay((myTimingInfo.virt - myTimingInfo.current) / 1000);
-  }
-  */
+	   if(myTimingInfo.current < myTimingInfo.virt)
+	   {
+			SDL_Delay((myTimingInfo.virt - myTimingInfo.current) / 1000);
+	   }
+	*/
 
 	myTimingInfo.totalTime += (getTicks() - myTimingInfo.start);
 	myTimingInfo.totalFrames++;
-
-  if (ticks == 0) 
-    time_start = time(NULL); 
-
-  ticks++; 
-  if (ticks % 1000 == 0)
-  {
-    //time_end = time(NULL); 
-    //double avg = ((double)ticks)/(time_end - time_start); 
-    //cout << "Average main loop iterations per sec = " << avg << endl; 
-  }
 
   }
 }

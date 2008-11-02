@@ -16,10 +16,11 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
-#include <time.h>
+#include <time.h> 
 #include <ctime>
 #include <math.h>
 #include <SDL/SDL_events.h>
+#include <zlib.h>
 using namespace std;
 
 #include "AIGlobal.h"
@@ -42,14 +43,15 @@ using namespace std;
 #define PROTOCOL_PLAINTEXT	    1
 #define	PROTOCOL_RLGLUE         2
 
-static int enabled_protocol = AISettings::getInstance()->get_int_setting("enabled_protocol"); 
-static bool enable_stats = false;
+
+static int enabled_protocol;
 
 AIBase::AIBase(OSystem *system){
 
 	comm = NULL; 
-
-  if (enable_stats) init_stats(); 
+	
+	AISettings *settings = new AISettings();
+	enabled_protocol = settings->get_int_setting("enabled_protocol"); 
 	
 	// Are we talking doing any sort of AI
 	try{
@@ -84,22 +86,22 @@ AIBase::~AIBase(){
 // Called at every frame
 void AIBase::update(){
 	
+	// Detect rom being played for loading script file
 	if(rewards->isRomSet()==false && system->romFile()!=""){
 		string fullPath = system->romFile();
 		fullPath = fullPath.substr(fullPath.find_last_of("/")+1);
 		rewards->setRom(fullPath);
 	}
 	
-	// Check if there is anything on the screen 
 	if(true){
 		// Update screen (not really needed)
-		system->frameBuffer().refresh();
+		//system->frameBuffer().refresh();
 		
 		oldScreen = curScreen;
 		curScreen = nextScreen(); 
-
-    if (enable_stats) update_stats(); 
-    
+	
+		//compress(curScreen);
+		
 		rewards->update();
 		
 		// Get commands for next frame
@@ -131,8 +133,6 @@ Matrix AIBase::nextScreen(){
 	int h = getScreenHeight();
 	int w = getScreenWidth();
 
-	//cout << "height and width reported as " << h << " " << w << endl; 
-
 	Matrix curscr;
 	
 	for(int y=0;y<h;y++){
@@ -145,11 +145,10 @@ Matrix AIBase::nextScreen(){
 				dy = y;
 				system->frameBuffer().translateCoords(dx, dy);
 				if(dx==(int)row.size())
-        {
-				  int p = getPixel(x,y); 
-          //cout << "pixel " << x << "," << y << " = " << p << endl; 
-          row.push_back(p);
-        }
+				{
+					int p = getPixel(x,y); 
+					row.push_back(p);
+				}
 			}
 			curscr.push_back(row);
 		}
@@ -158,42 +157,47 @@ Matrix AIBase::nextScreen(){
 	return curscr;
 }
 
-Matrix AIBase::getScreen()
-{
+Matrix AIBase::getScreen() {
   return curScreen;
 }
 
-Matrix AIBase::getPrevScreen(){
+Matrix AIBase::getPrevScreen() {
 	return oldScreen;
 }
 
 // Saves current game state in a stack
-void AIBase::saveState(){
+void AIBase::saveState() {
 	system->debugger().saveState(saveStack++);
 }
 
 // Loads current game from the stack
-void AIBase::loadState(){
+void AIBase::loadState() {
 	system->debugger().loadState(--saveStack);
 }
 
+// Reloads emulator with current ROM
+void AIBase::restartEmulation() {
+	system->deleteConsole();
+	system->createConsole();
+}
+
 // Gets the screen height without scaling
-int AIBase::getScreenHeight(){
+int AIBase::getScreenHeight() {
 	return system->frameBuffer().baseHeight()*2;
 }
 
 // Gets the screen width without scaling
-int AIBase::getScreenWidth(){
+int AIBase::getScreenWidth() {
 	return system->frameBuffer().baseWidth()*2;
 }
 
 // Wrapper for pressing key down
-void AIBase::pressKey(SDLKey key){
+void AIBase::pressKey(SDLKey key) {
 	sendKey(key,true);
 }
 
 // Unpresses all keys
-void AIBase::resetKeys(){
+void AIBase::resetKeys() {
 	sendKey(SDLK_UP,false);
 	sendKey(SDLK_DOWN,false);
 	sendKey(SDLK_RIGHT,false);
@@ -252,9 +256,6 @@ bool AIBase::getKeys(){
 		
 	}
 	
-	// Send current keys
-	//printf("action %d%d%d%d%d\n",down,up,left,right,space);
-	
 	return count>0;
 }
 
@@ -290,237 +291,31 @@ int AIBase::getPixel(int x, int y) {
     }
 }
 
-/** Stats computations... soon to be moved to agent-side **/
-
-void AIBase::init_stats()
-{
-	ticks = 0; 
-	maxColorsPerScreen = 0; 
-  color_index = 0; 
-  colstatsarr = NULL; 
-}
-
-
-void AIBase::update_stats()
-{
-  ticks++; 
-  //if (ticks % 5 == 0)
-  //updateUniqueTriplets();
-  //if (ticks % 100 == 0)
-  //updateUniqueCrossTriplets();
-  updateUniquePatterns(3,3); 
-  int c = getNumberColors(); 
-  if (c > maxColorsPerScreen) maxColorsPerScreen = c; 
-  if (ticks % 100 == 0) { 
-    cout << "Unique ptriplets = " << uniqueTriplets.size() << ", patterns = " << uniquePatterns.size();  
-    //int min, max; double avg; 
-    //pixelStats(min, max, avg); 
-    //cout << ", stats (min,max,avg) = " << min << "," << max << "," << avg; 
-    cout << ", maxcps = " << maxColorsPerScreen << endl; 
-  }
-}
-
-
-void AIBase::updateUniqueTriplets()
-{
-	for(size_t y = 0; y < curScreen.size(); y++){
-		for(size_t x = 0; x < curScreen[y].size(); x++){
-      // y indexes the row, x the column
-			ptriplet pt = make_pair(make_pair(x,y), curScreen[y][x]); 
-			uniqueTriplets.insert(pt); 
-		}
-	}
-}
-
-void AIBase::updateUniqueCrossTriplets()
-{
-// CROSSTRIPLETS defined in AIPattern.h .. uses GNU extension hash maps
-// --> may not work on Mac, therefore disabled by default. 
-//
-#if CROSSTRIPLETS
-  cout << "Updating cross triplets. " << endl; 
-
-  if (colstatsarr == NULL)
-  {
-    cout << "Allocating memory.." << endl; 
-    colstatsarr = new map<pair<int,int>, bool>*** [54];
-    for (int i1 = 0; i1 < 54; i1++)
-    {
-      colstatsarr[i1] = new map<pair<int,int>, bool>** [36]; 
-      for (int j1 = 0; j1 < 36; j1++)
-      {
-        colstatsarr[i1][j1] = new map<pair<int,int>, bool>* [54]; 
-        for (int i2 = 0; i2 < 54; i2++)
-        {
-          colstatsarr[i1][j1][i2] = new map<pair<int,int>, bool> [36]; 
-        }
-      }
-    }
-  }
-
-
-	for(size_t y = 0; y < curScreen.size(); y++){
-
-    cout << y << " "; 
-    fflush(stdout); 
-
-		for(size_t x = 0; x < curScreen[y].size(); x++){
-
-      // y indexes the row, x the column
-			pair<int,int> first_pair = make_pair(x,y); 
-
-      //cout << "UnCrTr: x,y = " << x << "," << y << endl; 
+vector<unsigned char> AIBase::compress(Matrix vdata) {
+	uLong length = vdata.size()*vdata[0].size();
+	int *from = (int *)calloc(length,sizeof(int));
+	int *to = (int *)calloc(ceil(length*1.01)+12,sizeof(int));
 	
-      for(size_t yp = 0; yp < curScreen.size(); yp++){
-    		for(size_t xp = 0; xp < curScreen[yp].size(); xp++){
-
-         
-          if (x == xp && y == yp)
-            continue; 
-
-          // y indexes the row, x the column
-          //pair<int,int> second_pair = make_pair(xp,yp); 
-         
-          //pcrosstriplet pct = make_pair(make_pair(first_pair, second_pair), curScreen[y][x]);
-          //pcrosstriplet pct = make_pair(make_pair(first_pair, second_pair), curScreen[y][x]);
-          //uniqueCrossTriplets.insert(pct);
-         
-          if (x % 6 == 0 && y % 6 == 0 && xp % 6 == 0 && yp % 6 == 0)
-          {
-            /*crosstriplet ct; 
-            ct.x1 = x; ct.y1 = y; 
-            ct.x2 = xp; ct.y2 = yp; 
-            ct.color1 = curScreen[y][x]; ct.color2 = curScreen[yp][xp]; 
-
-            uniqueCrossTriplets[ct] = true;
-            */
-
-            int color1 = curScreen[y][x];
-            int color2 = curScreen[yp][xp];
-
-            int c1index = color2indexmap[color1]; 
-            int c2index = color2indexmap[color2]; 
-
-            if (c1index == 0)
-            {
-              color_index++; 
-              color2indexmap[color1] = c1index = color_index; 
-            }
-            
-            if (c2index == 0)
-            {
-              color_index++; 
-              color2indexmap[color2] = c2index = color_index; 
-            }
-
-            pair<int,int> cpair = make_pair(c1index,c2index); 
-
-            (colstatsarr[x/6][y/6][xp/6][yp/6])[cpair] = true; 
-          }
-
-        }
-      }
-		}
-	}
-
-  cout << " .. Done. Computing num ... "; 
-  fflush(stdout); 
-
-  int num = 0; 
-
-  for (int i1 = 0; i1 < 54; i1++)
-    for (int i2 = 0; i2 < 54; i2++)
-      for (int j1 = 0; j1 < 36; j1++)
-        for (int j2 = 0; j2 < 36; j2++)
-          num += colstatsarr[i1][j1][i2][j2].size();
-
-  cout << "num = " << num << endl; 
-#endif
-}
-
-void AIBase::updateUniquePatterns(int rows, int cols)
-{
-  // For overlapping, make row_inc = col_inc = 1 
-
-  //int row_inc = rows, col_inc = cols; 
-  int row_inc = 1, col_inc = 1; 
-
-	for(size_t r = 0; r < curScreen.size(); r += row_inc){
-		for(size_t c = 0; c < curScreen[r].size(); c += col_inc){
-      //cout << curScreen.size() << " " << curScreen[y].size() << endl; 
-      // --> Gives 210 320,
-      
-      vector<int> p;
-      p.push_back(r); 
-      p.push_back(c); 
-
-      int maxrp = MIN(r+rows-1,curScreen.size()-1);  
-      int maxcp = MIN(c+cols-1,curScreen[r].size()-1);  
-
-      for (int rp = r; rp <= maxrp; rp++)
-        for (int cp = c; cp <= maxcp; cp++)
-          p.push_back(curScreen[rp][cp]); 
-
-      uniquePatterns.insert(p); 
-		}
-	}
-}
-
-void AIBase::pixelStats(int & min, int & max, double & avg)
-{
-	min = 1000000; 
-	max = -1; 
-	avg = 0; 
-	double sum = 0; 
-	int num = 0; 
+	// Copy to a byte array 
+	for(uint y=0;y<vdata.size();y++)
+		for(uint x=0;x<vdata[y].size();x++)
+			from[y*vdata[y].size()+x] = vdata[y][x];
 	
-	for(size_t y = 0; y < curScreen.size(); y++){
-		for(size_t x = 0; x < curScreen[y].size(); x++){
-			
-			cout << "pixelStats x,y = " << x << "," << y << endl; 
-			
-			int counts = 0; 
-			set<ptriplet>::iterator iter; 
-			
-			for (iter = uniqueTriplets.begin(); 
-				 iter != uniqueTriplets.end(); 
-				 iter++) 
-			{
-				ptriplet pt = *iter; 
-				int xp = pt.first.first; 
-				int yp = pt.first.second; 
-				
-				if ((int)x == xp && (int)y == yp)
-					counts++; 
-			}
-			
-			if (counts < min)
-				min = counts; 
-			
-			if (counts > max)
-				max = counts; 
-			
-			sum += counts; 
-			num++; 
-		}
-	}
+	// Compress
+	uLong resultLength = length*2;
+	compress2((Bytef *)to, &resultLength, (Bytef *)from, length*2, 9);
 	
-	avg = sum/num; 
+	// Pass compressed data into vector
+	vector<unsigned char> result;
+	for(uLong n=0;n<resultLength;n++)
+		result.push_back(to[n]);
+		
+	//cout<<"From: "<<length<<" to "<<resultLength<<endl;
+	
+	// Free byte array
+	free(from);
+	free(to);
+
+	return result;
 }
-
-// Gets the number found in screen
-int AIBase::getNumberColors()
-{
-	set<int> colors; 
-	
-	for(size_t y = 0; y < curScreen.size(); y++){
-		for(size_t x = 0; x < curScreen[y].size(); x++){
-			colors.insert(curScreen[y][x]); 
-		}
-	}
-	
-	return colors.size(); 
-}
-
-
 

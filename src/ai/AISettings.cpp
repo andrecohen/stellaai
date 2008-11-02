@@ -9,18 +9,10 @@
 
 using namespace std; 
 
-// Reset singleton
-AISettings * AISettings::instance = NULL;
-
 AISettings::AISettings(){
 	settings_file  = "aisettings.txt";
 }
 
-AISettings *AISettings::getInstance(){
-	if(instance!=NULL)
-		return instance;
-	return (instance = new AISettings());
-}
 
 void AISettings::open_file()
 {
@@ -30,9 +22,6 @@ void AISettings::open_file()
 		cerr << "Error opening settings file " << settings_file << endl; 
 		cerr << "Please create it in the current directory and add the required settings." << endl; 
 		cerr << "eg., enabled_protocol=<int>      (see top of AIBase.cpp)"  << endl; 
-		cerr << "" << endl; 
-		
-		exit(-1); 
 	}
 }
 
