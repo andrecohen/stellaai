@@ -1,4 +1,4 @@
-# Building StellaAI in Linux
+#Building StellaAI in Linux
 
 = Building StellaAI in Linux =
 
@@ -21,7 +21,7 @@ If you can't find a standard package using the paclage managers, you should be a
 
 Lua is another standard package available from most Linux distributions as well. You will also need its development package. 
 
-Installing RL-Glue and the C codec is documented in [RLGlue3] wiki page. 
+Installing RL-Glue and the C codec is documented in [RLGluev3] wiki page. 
 
 === Installation === 
 
