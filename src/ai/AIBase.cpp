@@ -56,8 +56,7 @@ AIBase::AIBase(OSystem *system){
 void AIBase::init(OSystem *system) {
 	comm = NULL; 
 	
-	AISettings *settings = new AISettings();
-	enabled_protocol = settings->get_int_setting("enabled_protocol"); 
+	enabled_protocol = AISettings::getInstance()->get_int_setting("enabled_protocol"); 
 	
 	// Are we talking doing any sort of AI
 	try{

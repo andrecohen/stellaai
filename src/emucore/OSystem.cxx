@@ -48,6 +48,12 @@
 #include "OSystem.hxx"
 #include "Widget.hxx"
 
+#include "AISettings.h"
+#include "AIBaseStat.h"
+
+#define BASE_DEFAULT	0
+#define BASE_STATS		1
+
 #define MAX_ROM_SIZE  512 * 1024
 
 #include <time.h>
@@ -195,7 +201,11 @@ bool OSystem::create()
   // that only have a single sound device (no hardware mixing)
   createSound();
   
-  aiBase = new AIBase(this);
+int mode = AISettings::getInstance()->get_int_setting("base_mode");
+if( mode == BASE_STATS)
+	aiBase = new AIBaseStat(this);
+else
+	aiBase = new AIBase(this);
 
   return true;
 }
