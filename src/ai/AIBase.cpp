@@ -46,8 +46,14 @@ using namespace std;
 
 static int enabled_protocol;
 
-AIBase::AIBase(OSystem *system){
+AIBase::AIBase() {
+}
 
+AIBase::AIBase(OSystem *system){
+	init(system);
+}
+
+void AIBase::init(OSystem *system) {
 	comm = NULL; 
 	
 	AISettings *settings = new AISettings();
@@ -73,7 +79,7 @@ AIBase::AIBase(OSystem *system){
 	saveStack = 0;
 	
 	if (comm)
-		comm->setRewards(rewards); 
+		comm->setRewards(rewards); 	
 }
 
 AIBase::~AIBase(){

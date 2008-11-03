@@ -285,6 +285,8 @@
 		6582B1720E4C71C7002DF7BA /* AIScript.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6582B1700E4C71C7002DF7BA /* AIScript.cpp */; };
 		6582B1730E4C71C7002DF7BA /* AIScript.h in Headers */ = {isa = PBXBuildFile; fileRef = 6582B1710E4C71C7002DF7BA /* AIScript.h */; };
 		6582B1990E4C7898002DF7BA /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6582B1980E4C7897002DF7BA /* liblua.a */; };
+		659531B50EBF673200241CB7 /* AIBaseStat.h in Headers */ = {isa = PBXBuildFile; fileRef = 659531B30EBF673200241CB7 /* AIBaseStat.h */; };
+		659531B60EBF673200241CB7 /* AIBaseStat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 659531B40EBF673200241CB7 /* AIBaseStat.cpp */; };
 		659537400E47B0DE00D75047 /* AIGlueEnv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6595373D0E47B0DE00D75047 /* AIGlueEnv.cpp */; };
 		659537410E47B0DE00D75047 /* AIGlueEnv.h in Headers */ = {isa = PBXBuildFile; fileRef = 6595373E0E47B0DE00D75047 /* AIGlueEnv.h */; };
 		659537420E47B0DE00D75047 /* AIProtocol.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6595373F0E47B0DE00D75047 /* AIProtocol.cpp */; };
@@ -648,6 +650,8 @@
 		6582B1700E4C71C7002DF7BA /* AIScript.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AIScript.cpp; path = ../ai/AIScript.cpp; sourceTree = SOURCE_ROOT; };
 		6582B1710E4C71C7002DF7BA /* AIScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIScript.h; path = ../ai/AIScript.h; sourceTree = SOURCE_ROOT; };
 		6582B1980E4C7897002DF7BA /* liblua.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblua.a; path = /usr/local/lib/liblua.a; sourceTree = "<absolute>"; };
+		659531B30EBF673200241CB7 /* AIBaseStat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIBaseStat.h; path = ../ai/AIBaseStat.h; sourceTree = SOURCE_ROOT; };
+		659531B40EBF673200241CB7 /* AIBaseStat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AIBaseStat.cpp; path = ../ai/AIBaseStat.cpp; sourceTree = SOURCE_ROOT; };
 		6595373D0E47B0DE00D75047 /* AIGlueEnv.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AIGlueEnv.cpp; path = ../ai/networking/AIGlueEnv.cpp; sourceTree = SOURCE_ROOT; };
 		6595373E0E47B0DE00D75047 /* AIGlueEnv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIGlueEnv.h; path = ../ai/networking/AIGlueEnv.h; sourceTree = SOURCE_ROOT; };
 		6595373F0E47B0DE00D75047 /* AIProtocol.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AIProtocol.cpp; path = ../ai/networking/AIProtocol.cpp; sourceTree = SOURCE_ROOT; };
@@ -1164,6 +1168,8 @@
 				65C141CC0D25456600E596D4 /* AIGlobal.h */,
 				6582B1700E4C71C7002DF7BA /* AIScript.cpp */,
 				6582B1710E4C71C7002DF7BA /* AIScript.h */,
+				659531B30EBF673200241CB7 /* AIBaseStat.h */,
+				659531B40EBF673200241CB7 /* AIBaseStat.cpp */,
 			);
 			name = AI;
 			sourceTree = "<group>";
@@ -1346,6 +1352,7 @@
 				6582B1730E4C71C7002DF7BA /* AIScript.h in Headers */,
 				651168400EB4A9A8005C0A89 /* AISettings.h in Headers */,
 				65DE68EA0EBE579500D12B50 /* RLglue_codec.h in Headers */,
+				659531B50EBF673200241CB7 /* AIBaseStat.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1588,6 +1595,7 @@
 				6582B1720E4C71C7002DF7BA /* AIScript.cpp in Sources */,
 				6511683F0EB4A9A8005C0A89 /* AISettings.cpp in Sources */,
 				65DE68E90EBE579500D12B50 /* RLglue_codec.c in Sources */,
+				659531B60EBF673200241CB7 /* AIBaseStat.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1676,6 +1684,7 @@
 					.,
 					"$(HOME)/Library/Frameworks",
 				);
+				GCC_ENABLE_CPP_RTTI = YES;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = 3;

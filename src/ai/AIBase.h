@@ -30,17 +30,16 @@ using namespace std;
 #include "EventHandler.hxx"
 #include "FrameBuffer.hxx"
 
-
-
 class AIRewards;
 class AIScript;
 class AIProtocol;
 
 class AIBase {
 public:
+	AIBase();
 	AIBase(OSystem*);
-	~AIBase();
-	void update();
+	virtual ~AIBase();
+	virtual void update();
 	void commands();
 	
 	Matrix nextScreen();
@@ -63,7 +62,9 @@ public:
 	
 	OSystem *getOSystem();
  
-private:
+protected:
+	void init(OSystem *);
+		
 	int getPixel(int,int);
 	vector<unsigned char> compress(Matrix);
 
