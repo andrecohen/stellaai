@@ -1,4 +1,4 @@
-#Building StellaAI in Linux
+#summary Building StellaAI in Linux
 
 = Building StellaAI in Linux =
 
