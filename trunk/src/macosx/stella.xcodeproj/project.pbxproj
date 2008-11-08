@@ -273,6 +273,19 @@
 		2DEFB40C09C3386F00754289 /* Cart.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2DEFB40B09C3386F00754289 /* Cart.icns */; };
 		6511683F0EB4A9A8005C0A89 /* AISettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6511683D0EB4A9A8005C0A89 /* AISettings.cpp */; };
 		651168400EB4A9A8005C0A89 /* AISettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 6511683E0EB4A9A8005C0A89 /* AISettings.h */; };
+		6547AAA40EC517DF001E0FE8 /* Detection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6547AA980EC517DF001E0FE8 /* Detection.cpp */; };
+		6547AAA50EC517DF001E0FE8 /* Detection.h in Headers */ = {isa = PBXBuildFile; fileRef = 6547AA990EC517DF001E0FE8 /* Detection.h */; };
+		6547AAA60EC517DF001E0FE8 /* Grouping.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6547AA9A0EC517DF001E0FE8 /* Grouping.cpp */; };
+		6547AAA70EC517DF001E0FE8 /* Grouping.h in Headers */ = {isa = PBXBuildFile; fileRef = 6547AA9B0EC517DF001E0FE8 /* Grouping.h */; };
+		6547AAA80EC517DF001E0FE8 /* Matching.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6547AA9C0EC517DF001E0FE8 /* Matching.cpp */; };
+		6547AAA90EC517DF001E0FE8 /* Matching.h in Headers */ = {isa = PBXBuildFile; fileRef = 6547AA9D0EC517DF001E0FE8 /* Matching.h */; };
+		6547AAAA0EC517DF001E0FE8 /* Object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6547AA9E0EC517DF001E0FE8 /* Object.cpp */; };
+		6547AAAB0EC517DF001E0FE8 /* Object.h in Headers */ = {isa = PBXBuildFile; fileRef = 6547AA9F0EC517DF001E0FE8 /* Object.h */; };
+		6547AAAC0EC517DF001E0FE8 /* Scripting.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6547AAA00EC517DF001E0FE8 /* Scripting.cpp */; };
+		6547AAAD0EC517DF001E0FE8 /* Scripting.h in Headers */ = {isa = PBXBuildFile; fileRef = 6547AAA10EC517DF001E0FE8 /* Scripting.h */; };
+		6547AAAE0EC517DF001E0FE8 /* Tracking.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6547AAA20EC517DF001E0FE8 /* Tracking.cpp */; };
+		6547AAAF0EC517DF001E0FE8 /* Tracking.h in Headers */ = {isa = PBXBuildFile; fileRef = 6547AAA30EC517DF001E0FE8 /* Tracking.h */; };
+		6547AAB20EC517F9001E0FE8 /* SDL_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6547AAB10EC517F9001E0FE8 /* SDL_image.framework */; };
 		6567EBC40E3F58AE0053C51B /* AIPlainText.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6567EBC20E3F58AE0053C51B /* AIPlainText.cpp */; };
 		6567EBC50E3F58AE0053C51B /* AIPlainText.h in Headers */ = {isa = PBXBuildFile; fileRef = 6567EBC30E3F58AE0053C51B /* AIPlainText.h */; };
 		6567EBC80E3F58D20053C51B /* AISocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6567EBC60E3F58D20053C51B /* AISocket.cpp */; };
@@ -284,7 +297,6 @@
 		657D89C50E3F4FF60025E898 /* AIRewards.h in Headers */ = {isa = PBXBuildFile; fileRef = 657D89C10E3F4FF60025E898 /* AIRewards.h */; };
 		6582B1720E4C71C7002DF7BA /* AIScript.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6582B1700E4C71C7002DF7BA /* AIScript.cpp */; };
 		6582B1730E4C71C7002DF7BA /* AIScript.h in Headers */ = {isa = PBXBuildFile; fileRef = 6582B1710E4C71C7002DF7BA /* AIScript.h */; };
-		6582B1990E4C7898002DF7BA /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6582B1980E4C7897002DF7BA /* liblua.a */; };
 		659531B50EBF673200241CB7 /* AIBaseStat.h in Headers */ = {isa = PBXBuildFile; fileRef = 659531B30EBF673200241CB7 /* AIBaseStat.h */; };
 		659531B60EBF673200241CB7 /* AIBaseStat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 659531B40EBF673200241CB7 /* AIBaseStat.cpp */; };
 		659537400E47B0DE00D75047 /* AIGlueEnv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6595373D0E47B0DE00D75047 /* AIGlueEnv.cpp */; };
@@ -638,6 +650,19 @@
 		2DF971DF0892CEA400F64D23 /* Expression.hxx */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.h; name = Expression.hxx; path = ../debugger/Expression.hxx; sourceTree = SOURCE_ROOT; };
 		6511683D0EB4A9A8005C0A89 /* AISettings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AISettings.cpp; path = ../ai/AISettings.cpp; sourceTree = SOURCE_ROOT; };
 		6511683E0EB4A9A8005C0A89 /* AISettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AISettings.h; path = ../ai/AISettings.h; sourceTree = SOURCE_ROOT; };
+		6547AA980EC517DF001E0FE8 /* Detection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Detection.cpp; path = ../ai/tracking/Detection.cpp; sourceTree = SOURCE_ROOT; };
+		6547AA990EC517DF001E0FE8 /* Detection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Detection.h; path = ../ai/tracking/Detection.h; sourceTree = SOURCE_ROOT; };
+		6547AA9A0EC517DF001E0FE8 /* Grouping.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Grouping.cpp; path = ../ai/tracking/Grouping.cpp; sourceTree = SOURCE_ROOT; };
+		6547AA9B0EC517DF001E0FE8 /* Grouping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Grouping.h; path = ../ai/tracking/Grouping.h; sourceTree = SOURCE_ROOT; };
+		6547AA9C0EC517DF001E0FE8 /* Matching.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Matching.cpp; path = ../ai/tracking/Matching.cpp; sourceTree = SOURCE_ROOT; };
+		6547AA9D0EC517DF001E0FE8 /* Matching.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Matching.h; path = ../ai/tracking/Matching.h; sourceTree = SOURCE_ROOT; };
+		6547AA9E0EC517DF001E0FE8 /* Object.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Object.cpp; path = ../ai/tracking/Object.cpp; sourceTree = SOURCE_ROOT; };
+		6547AA9F0EC517DF001E0FE8 /* Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Object.h; path = ../ai/tracking/Object.h; sourceTree = SOURCE_ROOT; };
+		6547AAA00EC517DF001E0FE8 /* Scripting.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Scripting.cpp; path = ../ai/tracking/Scripting.cpp; sourceTree = SOURCE_ROOT; };
+		6547AAA10EC517DF001E0FE8 /* Scripting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Scripting.h; path = ../ai/tracking/Scripting.h; sourceTree = SOURCE_ROOT; };
+		6547AAA20EC517DF001E0FE8 /* Tracking.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Tracking.cpp; path = ../ai/tracking/Tracking.cpp; sourceTree = SOURCE_ROOT; };
+		6547AAA30EC517DF001E0FE8 /* Tracking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tracking.h; path = ../ai/tracking/Tracking.h; sourceTree = SOURCE_ROOT; };
+		6547AAB10EC517F9001E0FE8 /* SDL_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL_image.framework; path = Library/Frameworks/SDL_image.framework; sourceTree = SDKROOT; };
 		6567EBC20E3F58AE0053C51B /* AIPlainText.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AIPlainText.cpp; path = ../ai/networking/AIPlainText.cpp; sourceTree = SOURCE_ROOT; };
 		6567EBC30E3F58AE0053C51B /* AIPlainText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIPlainText.h; path = ../ai/networking/AIPlainText.h; sourceTree = SOURCE_ROOT; };
 		6567EBC60E3F58D20053C51B /* AISocket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AISocket.cpp; path = ../ai/networking/AISocket.cpp; sourceTree = SOURCE_ROOT; };
@@ -699,10 +724,10 @@
 				2D91751009BA90380026E9FF /* OpenGL.framework in Frameworks */,
 				2D91751109BA90380026E9FF /* SDL.framework in Frameworks */,
 				2D91751209BA90380026E9FF /* ApplicationServices.framework in Frameworks */,
-				6582B1990E4C7898002DF7BA /* liblua.a in Frameworks */,
 				65DE69060EBE5BAE00D12B50 /* librlglue.dylib in Frameworks */,
 				65DE69080EBE5BAE00D12B50 /* librlutils.dylib in Frameworks */,
 				65DE690A0EBE5BBC00D12B50 /* librlgluenetdev-0:0:0.0.0.0.dylib in Frameworks */,
+				6547AAB20EC517F9001E0FE8 /* SDL_image.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -762,6 +787,7 @@
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				2D91751A09BA90380026E9FF /* Info-StellaOSX__Upgraded_.plist */,
 				2D91753709BA91BC0026E9FF /* StellaOSX.xcconfig */,
+				6547AAB10EC517F9001E0FE8 /* SDL_image.framework */,
 			);
 			name = "«PROJECTNAMEASXML»";
 			sourceTree = "<group>";
@@ -1128,6 +1154,25 @@
 			name = yacc;
 			sourceTree = "<group>";
 		};
+		6547AA970EC517D1001E0FE8 /* Tracker */ = {
+			isa = PBXGroup;
+			children = (
+				6547AA980EC517DF001E0FE8 /* Detection.cpp */,
+				6547AA990EC517DF001E0FE8 /* Detection.h */,
+				6547AA9A0EC517DF001E0FE8 /* Grouping.cpp */,
+				6547AA9B0EC517DF001E0FE8 /* Grouping.h */,
+				6547AA9C0EC517DF001E0FE8 /* Matching.cpp */,
+				6547AA9D0EC517DF001E0FE8 /* Matching.h */,
+				6547AA9E0EC517DF001E0FE8 /* Object.cpp */,
+				6547AA9F0EC517DF001E0FE8 /* Object.h */,
+				6547AAA00EC517DF001E0FE8 /* Scripting.cpp */,
+				6547AAA10EC517DF001E0FE8 /* Scripting.h */,
+				6547AAA20EC517DF001E0FE8 /* Tracking.cpp */,
+				6547AAA30EC517DF001E0FE8 /* Tracking.h */,
+			);
+			name = Tracker;
+			sourceTree = "<group>";
+		};
 		6567EBBE0E3F587B0053C51B /* Networking */ = {
 			isa = PBXGroup;
 			children = (
@@ -1158,6 +1203,7 @@
 		65A69C9A0CCFDB6200D5599E /* AI */ = {
 			isa = PBXGroup;
 			children = (
+				6547AA970EC517D1001E0FE8 /* Tracker */,
 				6511683D0EB4A9A8005C0A89 /* AISettings.cpp */,
 				6511683E0EB4A9A8005C0A89 /* AISettings.h */,
 				6567EBBE0E3F587B0053C51B /* Networking */,
@@ -1353,6 +1399,12 @@
 				651168400EB4A9A8005C0A89 /* AISettings.h in Headers */,
 				65DE68EA0EBE579500D12B50 /* RLglue_codec.h in Headers */,
 				659531B50EBF673200241CB7 /* AIBaseStat.h in Headers */,
+				6547AAA50EC517DF001E0FE8 /* Detection.h in Headers */,
+				6547AAA70EC517DF001E0FE8 /* Grouping.h in Headers */,
+				6547AAA90EC517DF001E0FE8 /* Matching.h in Headers */,
+				6547AAAB0EC517DF001E0FE8 /* Object.h in Headers */,
+				6547AAAD0EC517DF001E0FE8 /* Scripting.h in Headers */,
+				6547AAAF0EC517DF001E0FE8 /* Tracking.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1596,6 +1648,12 @@
 				6511683F0EB4A9A8005C0A89 /* AISettings.cpp in Sources */,
 				65DE68E90EBE579500D12B50 /* RLglue_codec.c in Sources */,
 				659531B60EBF673200241CB7 /* AIBaseStat.cpp in Sources */,
+				6547AAA40EC517DF001E0FE8 /* Detection.cpp in Sources */,
+				6547AAA60EC517DF001E0FE8 /* Grouping.cpp in Sources */,
+				6547AAA80EC517DF001E0FE8 /* Matching.cpp in Sources */,
+				6547AAAA0EC517DF001E0FE8 /* Object.cpp in Sources */,
+				6547AAAC0EC517DF001E0FE8 /* Scripting.cpp in Sources */,
+				6547AAAE0EC517DF001E0FE8 /* Tracking.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1666,7 +1724,7 @@
 				);
 				PRODUCT_NAME = StellaOSX;
 				SECTORDER_FLAGS = "";
-				USER_HEADER_SEARCH_PATHS = "";
+				USER_HEADER_SEARCH_PATHS = "/sw/usr/include /sw/include";
 				WARNING_CFLAGS = (
 					"-Wmost",
 					"-Wno-four-char-constants",
@@ -1722,7 +1780,10 @@
 				INFOPLIST_FILE = "Info-StellaOSX__Upgraded_.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				KEEP_PRIVATE_EXTERNS = NO;
-				LIBRARY_SEARCH_PATHS = "$(LIBRARY_SEARCH_PATHS)";
+				LIBRARY_SEARCH_PATHS = (
+					/sw/lib,
+					"$(LIBRARY_SEARCH_PATHS)",
+				);
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -1733,6 +1794,7 @@
 				);
 				PRODUCT_NAME = StellaOSX;
 				SECTORDER_FLAGS = "";
+				USER_HEADER_SEARCH_PATHS = "/usr/local/include /sw/include /Library/Frameworks/SDL.framework/Headers";
 				WARNING_CFLAGS = (
 					"-Wmost",
 					"-Wno-four-char-constants",
