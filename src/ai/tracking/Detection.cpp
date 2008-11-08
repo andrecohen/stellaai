@@ -1,11 +1,18 @@
 /*
- *  Detection.cpp
- *  ObjectTracker
+ * StellaAI is the legal property of its developers.
  *
- *  Created by Andre Cohen on 11/1/08.
- *  Copyright 2008 __MyCompanyName__. All rights reserved.
+ * This program is free software; you can redistribute it and/or modify it under the terms of the GNU
+ * General Public License as published by the Free Software Foundation; either version 2 of the License,
+ * or (at your option) any later version.
  *
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+ * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General
+ * Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with this program; if not,
+ * write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
+
 #include <iostream>
 #include <SDL/SDL.h>
 #include <SDL_image/SDL_image.h>
@@ -20,6 +27,10 @@ Uint32 getPixel(SDL_Surface *surface, int x, int y);
 
 #define GROUP_DISTANCE	15
 
+Detection::Detection(Grouping *_group) {
+	group = _group;
+}
+
 Detection::Detection(SDL_Surface *screen, char *filename) {
 	// Open file
 	frame = IMG_Load(filename);
@@ -33,17 +44,24 @@ Detection::Detection(SDL_Surface *screen, char *filename) {
 	SDL_Flip(screen);
 	
 	// Do detection
+	update(frame);
+	
+	for(size_t i=0; i<objects.size(); i++)
+		objects[i]->describe();
+}
+
+Objects Detection::update(SDL_Surface *_frame) {
+	frame = _frame;
 	clock_t t = clock();
 	groupPixels();
 	int change;
-	while((change = groupLines())>0){
+	int max = 0;
+	while((change = groupLines())>0 && max++<5){
 		// Keep grouping until no more changes are made
 	}
 	cout<<"Time: "<<(clock() - t)/(CLOCKS_PER_SEC/100)<<"ms"<<endl;
-
 	
-	for(int i=0; i<objects.size(); i++)
-		objects[i]->describe();
+	return objects;
 }
 
 void Detection::groupPixels() {
@@ -55,13 +73,13 @@ void Detection::groupPixels() {
 	}
 	
 	// Link 2 lines together
-	for(int l=0; l+1<lines.size(); l++) {
+	for(size_t l=0; l+1<lines.size(); l++) {
 		// For each object in line 1
-		for(int o=0; o<lines[l].size(); o++) {
+		for(size_t o=0; o<lines[l].size(); o++) {
 			Object *curr = lines[l][o];
 	
 			bool stop = 0;
-			for(int o2=0; o2<lines[l+1].size() && !stop; o2++) {
+			for(size_t o2=0; o2<lines[l+1].size() && !stop; o2++) {
 				// If the objects touch and are of the same color
 				if(curr->touches(lines[l+1][o2]) && curr->color==lines[l+1][o2]->color) {
 					// If the object has not been linked before
@@ -78,8 +96,8 @@ void Detection::groupPixels() {
 
 	
 	// Build object from links
-	for(int l=0; l<lines.size(); l++) {
-		for(int o=0;o<lines[l].size(); o++) {
+	for(size_t l=0; l<lines.size(); l++) {
+		for(size_t o=0;o<lines[l].size(); o++) {
 			if(lines[l][o]->parent==NULL) {
 					objects.push_back(lines[l][o]->buildFromLink());
 			}
@@ -87,8 +105,8 @@ void Detection::groupPixels() {
 	}
 	
 	// Release old memory
-	for(int l=0; l<lines.size(); l++)
-		for(int o=0; o<lines[l].size(); o++)
+	for(size_t l=0; l<lines.size(); l++)
+		for(size_t o=0; o<lines[l].size(); o++)
 			delete lines[l][o];
 	
 }
@@ -122,7 +140,6 @@ Objects Detection::updateLine(int x, int y, int dx, int dy) {
 
 // Attempts to group every object with every other object (yes.. unfortunately this is exponential)
 int Detection::groupLines() {
-	Grouping *group = new Grouping("/Users/andre/ObjectTracker/ObjectTracker/scripts/Pitfall.Grouping.lua");	
 	Objects updated;
 
 	int change = objects.size();
@@ -153,7 +170,6 @@ int Detection::groupLines() {
 
 	
 	objects = updated;
-	delete group;
 	
 	return change - updated.size();
 }
@@ -162,7 +178,7 @@ int Detection::groupLines() {
 vector<int> Detection::aroundObject(Object *object, int distance) {
 	vector<int> list;
 	
-	for(int i=0; i<objects.size(); i++) {
+	for(size_t i=0; i<objects.size(); i++) {
 		if(object!=objects[i]) {
 			double d = object->distance(objects[i]);	
 			if(d<distance || object->touches(objects[i])){
