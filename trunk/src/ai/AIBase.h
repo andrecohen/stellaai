@@ -20,15 +20,17 @@
 #include <map>
 #include <vector>
 
-using namespace std;
+#include "OSystem.hxx"
+#include "EventHandler.hxx"
+#include "FrameBuffer.hxx"
 
 #include "AIProtocol.h"
 #include "AIRewards.h"
 #include "AIGlobal.h"
 #include "AIScript.h"
-#include "OSystem.hxx"
-#include "EventHandler.hxx"
-#include "FrameBuffer.hxx"
+#include "Tracker.h"
+
+using namespace std;
 
 class AIRewards;
 class AIScript;
@@ -74,6 +76,7 @@ protected:
 	
 	AIProtocol *comm;
 	AIRewards *rewards;
+	Tracker *tracker;
 
 	Matrix oldScreen;
 	Matrix curScreen;

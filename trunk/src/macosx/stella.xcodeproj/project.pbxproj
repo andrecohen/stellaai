@@ -286,6 +286,8 @@
 		6547AAAE0EC517DF001E0FE8 /* Tracking.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6547AAA20EC517DF001E0FE8 /* Tracking.cpp */; };
 		6547AAAF0EC517DF001E0FE8 /* Tracking.h in Headers */ = {isa = PBXBuildFile; fileRef = 6547AAA30EC517DF001E0FE8 /* Tracking.h */; };
 		6547AAB20EC517F9001E0FE8 /* SDL_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6547AAB10EC517F9001E0FE8 /* SDL_image.framework */; };
+		6547AAC40EC51BED001E0FE8 /* Tracker.h in Headers */ = {isa = PBXBuildFile; fileRef = 6547AAC20EC51BED001E0FE8 /* Tracker.h */; };
+		6547AAC50EC51BED001E0FE8 /* Tracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6547AAC30EC51BED001E0FE8 /* Tracker.cpp */; };
 		6567EBC40E3F58AE0053C51B /* AIPlainText.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6567EBC20E3F58AE0053C51B /* AIPlainText.cpp */; };
 		6567EBC50E3F58AE0053C51B /* AIPlainText.h in Headers */ = {isa = PBXBuildFile; fileRef = 6567EBC30E3F58AE0053C51B /* AIPlainText.h */; };
 		6567EBC80E3F58D20053C51B /* AISocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6567EBC60E3F58D20053C51B /* AISocket.cpp */; };
@@ -663,6 +665,8 @@
 		6547AAA20EC517DF001E0FE8 /* Tracking.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Tracking.cpp; path = ../ai/tracking/Tracking.cpp; sourceTree = SOURCE_ROOT; };
 		6547AAA30EC517DF001E0FE8 /* Tracking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tracking.h; path = ../ai/tracking/Tracking.h; sourceTree = SOURCE_ROOT; };
 		6547AAB10EC517F9001E0FE8 /* SDL_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL_image.framework; path = Library/Frameworks/SDL_image.framework; sourceTree = SDKROOT; };
+		6547AAC20EC51BED001E0FE8 /* Tracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tracker.h; path = ../ai/tracking/Tracker.h; sourceTree = SOURCE_ROOT; };
+		6547AAC30EC51BED001E0FE8 /* Tracker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Tracker.cpp; path = ../ai/tracking/Tracker.cpp; sourceTree = SOURCE_ROOT; };
 		6567EBC20E3F58AE0053C51B /* AIPlainText.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AIPlainText.cpp; path = ../ai/networking/AIPlainText.cpp; sourceTree = SOURCE_ROOT; };
 		6567EBC30E3F58AE0053C51B /* AIPlainText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIPlainText.h; path = ../ai/networking/AIPlainText.h; sourceTree = SOURCE_ROOT; };
 		6567EBC60E3F58D20053C51B /* AISocket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AISocket.cpp; path = ../ai/networking/AISocket.cpp; sourceTree = SOURCE_ROOT; };
@@ -1169,6 +1173,8 @@
 				6547AAA10EC517DF001E0FE8 /* Scripting.h */,
 				6547AAA20EC517DF001E0FE8 /* Tracking.cpp */,
 				6547AAA30EC517DF001E0FE8 /* Tracking.h */,
+				6547AAC20EC51BED001E0FE8 /* Tracker.h */,
+				6547AAC30EC51BED001E0FE8 /* Tracker.cpp */,
 			);
 			name = Tracker;
 			sourceTree = "<group>";
@@ -1405,6 +1411,7 @@
 				6547AAAB0EC517DF001E0FE8 /* Object.h in Headers */,
 				6547AAAD0EC517DF001E0FE8 /* Scripting.h in Headers */,
 				6547AAAF0EC517DF001E0FE8 /* Tracking.h in Headers */,
+				6547AAC40EC51BED001E0FE8 /* Tracker.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1654,6 +1661,7 @@
 				6547AAAA0EC517DF001E0FE8 /* Object.cpp in Sources */,
 				6547AAAC0EC517DF001E0FE8 /* Scripting.cpp in Sources */,
 				6547AAAE0EC517DF001E0FE8 /* Tracking.cpp in Sources */,
+				6547AAC50EC51BED001E0FE8 /* Tracker.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

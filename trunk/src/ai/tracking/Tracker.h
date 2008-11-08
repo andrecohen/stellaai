@@ -13,38 +13,30 @@
  * write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef DETECTION_H
-#define DETECTION_H
 
-#include <SDL/SDL.h>
+#ifndef TRACKER_H
+#define TRACKER_H
 
-#include "Scripting.h"
-#include "Object.h"
+#include <string>
+#include <SDL.h>
+
+#include "Matching.h"
 #include "Grouping.h"
+#include "Object.h"
 
-class Detection {
-public:
-	Detection(Grouping *);
-	Detection(SDL_Surface *, char *);
-	
+using namespace std;
+
+class Tracker {
+public: 
+	Tracker(string);
 	Objects update(SDL_Surface *);
 	
-	void groupPixels();
-	
-	int groupLines();
-	
-	Objects getObjects() { return objects; }
-
 private:
+	Objects previous;
 	
-	Objects updateLine(int, int, int, int);
-	void linkLines(int, int);
+	Matching *matcher;
+	Grouping *grouper;
 	
-	vector<int> aroundObject(Object *, int);
-	
-	Grouping *group;
-	SDL_Surface *frame;
-	Objects objects;
 };
 
 

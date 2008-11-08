@@ -30,6 +30,7 @@ using namespace std;
 #include "AIGlue.h"
 #include "AISettings.h"
 #include "AIScript.h"
+#include "Tracker.h"
 
 #include "OSystem.hxx"
 #include "FrameBuffer.hxx"
@@ -95,17 +96,31 @@ void AIBase::update(){
 	if(rewards->isRomSet()==false && system->romFile()!=""){
 		string fullPath = system->romFile();
 		fullPath = fullPath.substr(fullPath.find_last_of("/")+1);
+		
+		// Set rewards
 		rewards->setRom(fullPath);
+		
+		// Set tracker
+		tracker = new Tracker(fullPath);
+		
+		// Set appropriate window size
+		system->frameBuffer().changeVidMode(-1);
 	}
 	
-	if(true){
+	
+	
+	static int wait = 0;
+	
+	if(wait++>3){
 		// Update screen (not really needed)
 		//system->frameBuffer().refresh();
 		
 		oldScreen = curScreen;
 		curScreen = nextScreen(); 
 	
-		//compress(curScreen);
+		if(AISettings::getInstance()->get_int_setting("tracking")==1) {
+			tracker->update(system->frameBuffer().getCurrentScreen());
+		}
 		
 		rewards->update();
 		

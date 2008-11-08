@@ -16,23 +16,35 @@
 #include <iostream>
 #include <string>
 
-#include "Matching.h"
+#include "Tracker.h"
+#include "Detection.h"
+#include "Tracking.h"
 
 using namespace std;
 
-Matching::Matching(const char *filename) {
-	loadFile(filename);
+Tracker::Tracker(string rom) {
+	string name = rom.substr(0, rom.find(".bin"));
+	grouper = new Grouping(("tracker/"+name+".Grouping.lua").c_str());
+	matcher = new Matching(("tracker/"+name+".Matching.lua").c_str());	
 }
 
 
-double Matching::match(Object *A, Object *B) {
-	Objects array;
-	array.push_back(A);
-	array.push_back(B);
-	setObjects(array);
+Objects Tracker::update(SDL_Surface *screen) {
+	Detection detection(grouper);
+	Objects current = detection.update(screen);
+	cout<<"Detected: "<<current.size();
 	
-	call("match");
-	passInt(0);
-	passInt(1);
-	return i_executeCall();
+	for(int i=0; i<current.size(); i++)
+		if(current[i]->name.size()==0)
+			current[i]->describe();
+	
+	if(previous.size()>0) {
+		Tracking tracking(previous, current, matcher);
+		current = tracking.update();
+		cout<<"Tracked: "<<current.size()<<endl;
+	}
+	
+	previous = current;
+	
+	return current;
 }
