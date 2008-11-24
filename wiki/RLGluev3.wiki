@@ -68,7 +68,7 @@ svn checkout http://stellaai.googlecode.com/svn/branches/rlglue3 stellaai
 
 `***` Note: right now, for some reason, the read/write copy doesn't seem available to anybody other than the person who created the branch (Marc Lanctot). We're looking into this. 
 
-Build it as normal to produce the `stellaai` executable. 
+Build it as normal to produce the `stella` executable. 
 
 === 5. Compile the Agent. ===
 
@@ -107,4 +107,4 @@ The order with which you start these should not matter. I'm presenting you with 
   * Start the main RL-Glue executable: `rl_glue`
   * Start the experiment program. 
   * Start the agent `RL_agent`. 
-  * Start StellaAI _with a ROM as the argument_ (otherwise the random agent will happily navigate your filesystem for a ROM to load!): `./stellaai ~/Pitfall.bin` . 
+  * Start StellaAI _with a ROM as the argument_ (otherwise the random agent will happily navigate your filesystem for a ROM to load!): `./stella ~/Pitfall.bin` . 
