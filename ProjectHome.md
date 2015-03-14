@@ -1,0 +1,1 @@
+StellaAI is a modified version of the Stella Atari Emulator. It contains an AI module that lets artificially intelligent agent programs control the user/joystick commands. The project is currently being used for experiments in reinforcement learning; the goal is to design algorithms that learn how to play Atari games.
